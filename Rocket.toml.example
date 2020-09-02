@@ -1,0 +1,2 @@
+[global.databases]
+mainDb = { url = "postgres://postgres:password@localhost"}
