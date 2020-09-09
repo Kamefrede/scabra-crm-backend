@@ -7,17 +7,17 @@ extern crate rocket_contrib;
 
 use rocket_contrib::database;
 
+mod db;
 mod models;
+mod proxies;
 mod routes;
 mod schema;
-mod db;
-mod proxies;
 
 #[database("mainDb")]
 pub struct CrmDbConn(diesel::PgConnection);
 
 pub fn launch() -> rocket::Rocket {
     rocket::ignite()
-    .attach(CrmDbConn::fairing())
-    .mount("/", routes![routes::user::create_user])
+        .attach(CrmDbConn::fairing())
+        .mount("/", routes![routes::user::create_user])
 }

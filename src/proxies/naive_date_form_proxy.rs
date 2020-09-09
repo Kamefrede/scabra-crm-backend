@@ -1,16 +1,19 @@
 use chrono::{Duration, NaiveDate, NaiveDateTime, NaiveTime};
-use rocket::http::RawStr;
-use rocket::request::FromFormValue;
-use std::ops::Deref;
-use std::io::Write;
-use diesel::pg::data_types::{PgTimestamp};
 use diesel::deserialize::{self, FromSql};
+use diesel::pg::data_types::PgTimestamp;
 use diesel::pg::Pg;
 use diesel::serialize::{self, Output, ToSql};
 use diesel::sql_types::{Timestamp, Timestamptz};
-use serde::{Serialize, Deserialize};
+use rocket::http::RawStr;
+use rocket::request::FromFormValue;
+use serde::{Deserialize, Serialize};
+use std::io::Write;
+use std::ops::Deref;
 
 /*
+    The following section of code was taken from
+    https://github.com/diesel-rs/diesel/blob/master/diesel/src/type_impls/date_and_time.rs
+    Which is licensed under the Apache License(https://github.com/diesel-rs/diesel/blob/master/LICENSE-APACHE)
 */
 #[derive(AsExpression, FromSqlRow, Debug, Serialize, Deserialize)]
 #[sql_type = "diesel::sql_types::Timestamptz"]
@@ -38,7 +41,6 @@ impl NaiveDateForm {
     Which is dual-licensed under the MIT and Apache License(https://github.com/chronotope/chrono/blob/main/LICENSE.txt)
 */
 
-
 impl<'v> FromFormValue<'v> for NaiveDateForm {
     type Error = &'v RawStr;
 
@@ -54,7 +56,6 @@ impl<'v> FromFormValue<'v> for NaiveDateForm {
         Ok(NaiveDateForm(NaiveDateTime::new(date, time)))
     }
 }
-
 
 fn naive_date_from_form_value<'v>(form_value: &'v RawStr) -> Result<NaiveDate, &'v RawStr> {
     let decoded = form_value.url_decode().map_err(|_| form_value)?;

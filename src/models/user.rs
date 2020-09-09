@@ -1,4 +1,4 @@
-use diesel::{Queryable};
+use diesel::Queryable;
 
 #[derive(Queryable)]
 pub struct UserEntity {
