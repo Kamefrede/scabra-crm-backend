@@ -57,7 +57,7 @@ impl<'v> FromFormValue<'v> for NaiveDateForm {
     }
 }
 
-fn naive_date_from_form_value<'v>(form_value: &'v RawStr) -> Result<NaiveDate, &'v RawStr> {
+fn naive_date_from_form_value(form_value: &'_ RawStr) -> Result<NaiveDate, &'_ RawStr> {
     let decoded = form_value.url_decode().map_err(|_| form_value)?;
     if let Ok(date) = NaiveDate::parse_from_str(&decoded, "%Y-%m-%d") {
         return Ok(date);
@@ -65,7 +65,7 @@ fn naive_date_from_form_value<'v>(form_value: &'v RawStr) -> Result<NaiveDate, &
     Err(form_value)
 }
 
-fn naive_time_from_form_value<'v>(form_value: &'v RawStr) -> Result<NaiveTime, &'v RawStr> {
+fn naive_time_from_form_value(form_value: &'_ RawStr) -> Result<NaiveTime, &'_ RawStr> {
     let decoded = form_value.url_decode().map_err(|_| form_value)?;
     if let Ok(time) = NaiveTime::parse_from_str(&decoded, "%H:%M:%S%.3f") {
         use chrono::Timelike;

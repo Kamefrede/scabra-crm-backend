@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true">
+    <generated />
+  </component>
+  <component name="CMakeSettings">
+    <configurations>
+      <configuration PROFILE_NAME="Debug" CONFIG_NAME="Debug" />
+    </configurations>
+  </component>
+  <component name="CargoProjects">
+    <cargoProject FILE="$PROJECT_DIR$/Cargo.toml" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="490d91f4-0946-4692-8cf0-856a9d480261" name="Default Changelist" comment="password hashing &amp; actual db migrations">
+      <change afterPath="$PROJECT_DIR$/.idea/hprs-crm-backend.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/db_modelling/address.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/db_modelling/client.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/db_modelling/person.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/db_modelling/profile.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/db_modelling/user.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/db_modelling/user_auth_token.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/migrations/2020-09-11-152026_create_person/down.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/migrations/2020-09-11-152026_create_person/up.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/migrations/2020-09-11-152344_create_user/down.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/migrations/2020-09-11-152344_create_user/up.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/migrations/2020-09-11-152501_create_user_auth_token/down.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/migrations/2020-09-11-152501_create_user_auth_token/up.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/migrations/2020-09-11-152655_create_address/down.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/migrations/2020-09-11-152655_create_address/up.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/migrations/2020-09-11-152757_create_profile/down.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/migrations/2020-09-11-152757_create_profile/up.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/migrations/2020-09-11-152859_create_client/down.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/migrations/2020-09-11-152859_create_client/up.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Cargo.lock" beforeDir="false" afterPath="$PROJECT_DIR$/Cargo.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Cargo.toml" beforeDir="false" afterPath="$PROJECT_DIR$/Cargo.toml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/2020-09-01-162217_create_users/down.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/2020-09-01-162217_create_users/up.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/2020-09-01-162448_create_articles/down.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/2020-09-01-162448_create_articles/up.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/db/user.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/db/user.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/models/user.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/user.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proxies/naive_date_form_proxy.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/proxies/naive_date_form_proxy.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/user.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/user.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/schema.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/schema.rs" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ClangdSettings">
+    <option name="formatViaClangd" value="false" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MacroExpansionManager">
+    <option name="directoryName" value="hfijqmsg" />
+  </component>
+  <component name="ProjectId" id="1hMxAldJqn4i7mNyr24XmXeMWgK" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="cf.first.check.clang-format" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/Cargo.toml" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="org.rust.cargo.project.model.PROJECT_DISCOVERY" value="true" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+  </component>
+  <component name="RunManager" selected="Cargo Command.build">
+    <configuration name="add" type="CargoCommandRunConfiguration" factoryName="Cargo Command" temporary="true">
+      <option name="channel" value="DEFAULT" />
+      <option name="command" value="add rust-crypto" />
+      <option name="allFeatures" value="false" />
+      <option name="emulateTerminal" value="false" />
+      <option name="backtrace" value="SHORT" />
+      <option name="workingDirectory" value="file://$PROJECT_DIR$" />
+      <envs />
+      <method v="2">
+        <option name="CARGO.BUILD_TASK_PROVIDER" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="build" type="CargoCommandRunConfiguration" factoryName="Cargo Command" temporary="true">
+      <option name="channel" value="DEFAULT" />
+      <option name="command" value="build" />
+      <option name="allFeatures" value="false" />
+      <option name="emulateTerminal" value="false" />
+      <option name="backtrace" value="SHORT" />
+      <option name="workingDirectory" value="file://$PROJECT_DIR$" />
+      <envs />
+      <method v="2">
+        <option name="CARGO.BUILD_TASK_PROVIDER" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="doc" type="CargoCommandRunConfiguration" factoryName="Cargo Command" temporary="true">
+      <option name="channel" value="DEFAULT" />
+      <option name="command" value="doc --open" />
+      <option name="allFeatures" value="false" />
+      <option name="emulateTerminal" value="false" />
+      <option name="backtrace" value="SHORT" />
+      <option name="workingDirectory" value="file://$PROJECT_DIR$" />
+      <envs />
+      <method v="2">
+        <option name="CARGO.BUILD_TASK_PROVIDER" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="docs" type="CargoCommandRunConfiguration" factoryName="Cargo Command" temporary="true">
+      <option name="channel" value="DEFAULT" />
+      <option name="command" value="docs --open" />
+      <option name="allFeatures" value="false" />
+      <option name="emulateTerminal" value="false" />
+      <option name="backtrace" value="SHORT" />
+      <option name="workingDirectory" value="file://$PROJECT_DIR$" />
+      <envs />
+      <method v="2">
+        <option name="CARGO.BUILD_TASK_PROVIDER" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="test" type="CargoCommandRunConfiguration" factoryName="Cargo Command" temporary="true">
+      <option name="channel" value="DEFAULT" />
+      <option name="command" value="test" />
+      <option name="allFeatures" value="false" />
+      <option name="emulateTerminal" value="false" />
+      <option name="backtrace" value="SHORT" />
+      <option name="workingDirectory" value="file://$PROJECT_DIR$" />
+      <envs />
+      <method v="2">
+        <option name="CARGO.BUILD_TASK_PROVIDER" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="GradleAppRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true">
+      <method v="2">
+        <option name="com.jetbrains.cidr.cpp.gradle.execution.GradleNativeBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Cargo Command.build" />
+        <item itemvalue="Cargo Command.test" />
+        <item itemvalue="Cargo Command.doc" />
+        <item itemvalue="Cargo Command.docs" />
+        <item itemvalue="Cargo Command.add" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="RustProjectSettings">
+    <option name="externalLinter" value="Clippy" />
+    <option name="runRustfmtOnSave" value="true" />
+    <option name="toolchainHomeDirectory" value="$USER_HOME$/.cargo/bin" />
+    <option name="version" value="2" />
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="490d91f4-0946-4692-8cf0-856a9d480261" name="Default Changelist" comment="" />
+      <created>1599834642053</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1599834642053</updated>
+      <workItem from="1599834654584" duration="1159000" />
+      <workItem from="1599836034234" duration="814000" />
+      <workItem from="1599839830206" duration="4469000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="password hashing &amp; actual db migrations" />
+    <option name="LAST_COMMIT_MESSAGE" value="password hashing &amp; actual db migrations" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="582" y="229" width="415" height="381" key="#Vim_Emulation" timestamp="1599843679805">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="582" y="229" width="415" height="381" key="#Vim_Emulation/0.0.1366.728@0.0.1366.728" timestamp="1599843679805" />
+    <state x="137" y="19" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1599840066771">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="137" y="19" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1366.728@0.0.1366.728" timestamp="1599840066771" />
+    <state x="457" y="166" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1599842273372">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="457" y="166" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1366.728@0.0.1366.728" timestamp="1599842273372" />
+    <state width="1323" height="179" key="GridCell.Tab.0.bottom" timestamp="1599844943674">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1323" height="179" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1599844943674" />
+    <state width="1323" height="179" key="GridCell.Tab.0.center" timestamp="1599844943673">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1323" height="179" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1599844943673" />
+    <state width="1323" height="179" key="GridCell.Tab.0.left" timestamp="1599844943673">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1323" height="179" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1599844943673" />
+    <state width="1323" height="179" key="GridCell.Tab.0.right" timestamp="1599844943674">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1323" height="179" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1599844943674" />
+    <state x="184" y="9" key="SettingsEditor" timestamp="1599835859579">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="184" y="9" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1599835859579" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1599843824553">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1599843824553" />
+  </component>
+</project>

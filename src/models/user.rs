@@ -3,7 +3,8 @@ use diesel::Queryable;
 #[derive(Queryable)]
 pub struct UserEntity {
     pub id: i32,
-    pub name: String,
+    pub person_id: Option<i32>,
+    pub username: String,
     pub email: String,
-    pub age: i32,
+    pub hashed_password: String,
 }
