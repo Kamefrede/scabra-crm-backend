@@ -53,7 +53,7 @@ table! {
 table! {
     user_auth_token (user_id) {
         user_id -> Int4,
-        jwt_token -> Varchar,
+        login_session -> Varchar,
         generated_at -> Timestamptz,
         expires_at -> Timestamptz,
     }

@@ -1,14 +1,22 @@
-use crate::db::user::{insert_user, User};
+use crate::db::user::User;
 use crate::CrmDbConn;
 use rocket::{post, response::status};
 use rocket_contrib::json::Json;
+use serde::{Deserialize, Serialize};
 
-#[post("/users/create", format = "json", data = "<user>")]
+#[derive(FromForm, Serialize, Deserialize)]
+pub struct UserForm {
+    pub username: String,
+    pub email: String,
+    pub password: String,
+}
+
+#[post("/users/create", format = "json", data = "<form_user>")]
 pub fn create_user(
     conn: CrmDbConn,
-    user: Json<User>,
+    form_user: Json<UserForm>,
 ) -> Result<status::Accepted<String>, status::BadRequest<String>> {
-    let result = insert_user(&conn.0, &user);
+    let result = User::signup(&form_user.0, &conn.0);
     match result {
         Ok(user) => Ok(status::Accepted(Some(format!(
             "Successfully added user {} with id {} to the database",
