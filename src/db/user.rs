@@ -1,73 +1,96 @@
-use crate::db::user_auth_token::UserAuthToken;
-use crate::models::user::UserEntity;
-use crate::proxies::naive_date_form_proxy::NaiveDateForm;
-use crate::routes::user::UserForm;
-use crate::schema::*;
+use std::env;
+use std::ops::Deref;
+
+use chrono::Utc;
 use crypto::digest::Digest;
 use crypto::sha3;
 use diesel::prelude::*;
-use diesel::{Insertable, PgConnection, RunQueryDsl};
+use diesel::{Identifiable, Insertable, PgConnection, Queryable, RunQueryDsl};
 use serde::{Deserialize, Serialize};
-use std::env;
 use uuid::Uuid;
 
-#[derive(Insertable, Deserialize, Serialize)]
+use crate::db::user_auth_token::UserAuthToken;
+use crate::routes::user::{UserForm, UserLoginInfo};
+use crate::schema::*;
+
+#[derive(Insertable, Identifiable, Queryable, Deserialize, Serialize)]
 #[table_name = "user"]
 pub struct User {
-    pub username: String,
+    pub id: i32,
     pub person_id: Option<i32>,
+    pub username: String,
     pub email: String,
     pub hashed_password: String,
 }
 
 impl User {
-    pub fn signup(
-        user_form: &UserForm,
-        conn: &PgConnection,
-    ) -> Result<UserEntity, diesel::result::Error> {
-        let user: User = User {
-            username: user_form.username.clone(),
-            person_id: None,
-            email: user_form.email.clone(),
-            hashed_password: hash_password(&user_form.password),
+    //TODO: Check if the user already exists
+    pub fn signup(user_form: UserForm, conn: &PgConnection) -> bool {
+        let hashed_pwd = hash_password(&*user_form.hashed_password);
+        let user_form = UserForm {
+            hashed_password: hashed_pwd,
+            ..user_form
         };
-        diesel::insert_into(user::table)
-            .values(&user)
-            .get_result(conn)
-    }
-
-    pub fn login(
-        user_form: &UserForm,
-        conn: &PgConnection,
-    ) -> Result<UserAuthToken, diesel::result::Error> {
-        unimplemented!()
-    }
-
-    pub fn get_user_by_id(
-        id: i32,
-        conn: &PgConnection,
-    ) -> Result<UserEntity, diesel::result::Error> {
         use crate::schema::user::dsl::*;
-        user.filter(id.eq(&id)).get_result::<UserEntity>(conn)
+        let query_result = diesel::insert_into(user)
+            .values(&user_form)
+            .execute(conn);
+        dbg!(&query_result);
+        query_result.is_ok()
     }
+
+    pub fn login(user_form: UserLoginInfo, conn: &PgConnection) -> Option<UserAuthToken> {
+        let result_user = Self::get_user_by_username_or_email(&*user_form.username_or_email, conn);
+        if let Some(user) = result_user {
+            if !user.hashed_password.is_empty()
+                && verify_password(&*user_form.password, &*user.hashed_password)
+            {
+                let login_session_str = Self::generate_login_session();
+                let auth_token = UserAuthToken::generate_auth_token(user.id, &*login_session_str);
+                Self::update_login_session(&auth_token, conn);
+                Some(auth_token)
+            } else {
+                None
+            }
+        } else {
+            None
+        }
+    }
+
+    pub fn get_user_by_id(user_id: i32, conn: &PgConnection) -> Option<User> {
+        use crate::schema::user::dsl::*;
+        let result_user = user.filter(id.eq(&user_id)).get_result::<User>(conn);
+        if let Ok(db_user) = result_user {
+            Some(db_user)
+        } else {
+            None
+        }
+    }
+
     pub fn get_user_by_username_or_email(
         username_or_email: &str,
         conn: &PgConnection,
-    ) -> Result<UserEntity, diesel::result::Error> {
+    ) -> Option<User> {
         use crate::schema::user::dsl::*;
-        user.filter(username.eq(username_or_email))
+        let result_user = user
+            .filter(username.eq(username_or_email))
             .or_filter(email.eq(username_or_email))
-            .get_result::<UserEntity>(conn)
+            .get_result::<User>(conn);
+        if let Ok(db_user) = result_user {
+            Some(db_user)
+        } else {
+            None
+        }
     }
     pub fn get_id_for_username_or_email(
         username_or_email: &str,
         conn: &PgConnection,
     ) -> Option<i32> {
-        let id: Option<i32> = match User::get_user_by_username_or_email(username_or_email, conn) {
-            Ok(user) => Some(user.id),
-            Err(_) => None,
-        };
-        id
+        if let Some(user) = User::get_user_by_username_or_email(username_or_email, conn) {
+            Some(user.id)
+        } else {
+            None
+        }
     }
 
     pub fn generate_login_session() -> String {
@@ -85,23 +108,32 @@ impl User {
 
     pub fn is_valid_login_session(auth_token: &UserAuthToken, conn: &PgConnection) -> bool {
         use crate::schema::user_auth_token::dsl::*;
-        user_auth_token
+        let result_auth_token: Result<UserAuthToken, diesel::result::Error> = user_auth_token
             .filter(user_id.eq(&auth_token.user_id))
             .filter(login_session.eq(&auth_token.login_session))
-            .get_result::<UserAuthToken>(conn)
-            .is_ok()
-
-        //TODO: Check if date is less than current date
+            .get_result::<UserAuthToken>(conn);
+        if let Ok(auth_token) = result_auth_token {
+            *auth_token.expires_at.deref() < Utc::now().naive_utc()
+        } else {
+            false
+        }
     }
 
-    pub fn update_login_session(
-        user_id: i32,
-        login_session: &str,
-        generated_at: &NaiveDateForm,
-        expires_at: &NaiveDateForm,
-        conn: &PgConnection,
-    ) {
-        unimplemented!()
+    pub fn update_login_session(new_auth_token: &UserAuthToken, conn: &PgConnection) -> bool {
+        use crate::schema::user_auth_token::dsl::*;
+        if let Some(_user) = User::get_user_by_id(new_auth_token.user_id, conn) {
+            diesel::update(user_auth_token.find(new_auth_token.user_id))
+                .set((
+                    user_id.eq(new_auth_token.user_id),
+                    login_session.eq(new_auth_token.login_session.clone()),
+                    generated_at.eq(new_auth_token.generated_at),
+                    expires_at.eq(new_auth_token.expires_at),
+                ))
+                .execute(conn)
+                .is_ok()
+        } else {
+            false
+        }
     }
 }
 
@@ -111,6 +143,10 @@ fn hash_password(password: &str) -> String {
     salt.push_str(password);
     hasher.input_str(&salt);
     hasher.result_str()
+}
+
+fn verify_password(password_to_verify: &str, hashed_password: &str) -> bool {
+    hashed_password == hash_password(password_to_verify)
 }
 
 #[test]

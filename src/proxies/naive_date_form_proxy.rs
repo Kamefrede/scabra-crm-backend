@@ -15,16 +15,16 @@ use std::ops::Deref;
     https://github.com/diesel-rs/diesel/blob/master/diesel/src/type_impls/date_and_time.rs
     Which is licensed under the Apache License(https://github.com/diesel-rs/diesel/blob/master/LICENSE-APACHE)
 */
-#[derive(AsExpression, FromSqlRow, Debug, Serialize, Deserialize)]
+#[derive(AsExpression, FromSqlRow, Debug, Serialize, Deserialize, Copy, Clone, PartialEq, Eq, PartialOrd, Ord)]
 #[sql_type = "diesel::sql_types::Timestamptz"]
 pub struct NaiveDateForm(NaiveDateTime);
 
 impl Deref for NaiveDateForm {
+    type Target = NaiveDateTime;
+
     fn deref(&self) -> &NaiveDateTime {
         &self.0
     }
-
-    type Target = NaiveDateTime;
 }
 
 impl NaiveDateForm {

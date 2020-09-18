@@ -1,5 +1,3 @@
--- Your SQL goes here
-
 CREATE TABLE "user_auth_token" (
   "user_id" int4 NOT NULL,
   "login_session" varchar(255) NOT NULL,
@@ -9,3 +7,4 @@ CREATE TABLE "user_auth_token" (
 );
 
 ALTER TABLE "user_auth_token" ADD CONSTRAINT "fk_user_auth_token_user_auth_token_1" FOREIGN KEY ("user_id") REFERENCES "user" ("id");
+

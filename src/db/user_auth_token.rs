@@ -1,10 +1,22 @@
+use crate::constants::message_constants;
 use crate::db::user::User;
+use crate::db::CrmDbConn;
+use crate::models::response::Response;
 use crate::proxies::naive_date_form_proxy::NaiveDateForm;
 use crate::schema::user_auth_token;
 use chrono::{NaiveDateTime, Timelike, Utc};
-use diesel::{Insertable, PgConnection, Queryable, RunQueryDsl};
+use diesel::PgConnection;
+use diesel::{Insertable, Queryable};
+use jsonwebtoken::errors::Result;
+use jsonwebtoken::TokenData;
+use jsonwebtoken::{DecodingKey, EncodingKey};
+use jsonwebtoken::{Header, Validation};
+use rocket::http::Status;
+use rocket::request;
+use rocket::request::{FromRequest, Outcome, Request};
+use rocket::response::status;
+use rocket_contrib::json::Json;
 use serde::{Deserialize, Serialize};
-use std::ops::Add;
 
 #[derive(Queryable, Insertable, Serialize, Deserialize)]
 #[table_name = "user_auth_token"]
@@ -15,25 +27,76 @@ pub struct UserAuthToken {
     pub expires_at: NaiveDateForm,
 }
 
-static ONE_WEEK: i64 = 60 * 60 * 24 * 7;
+const ONE_WEEK: i64 = 60 * 60 * 24 * 7;
 
 #[derive(Serialize, Deserialize, FromForm)]
 pub struct LoginInfo {
     username_or_email: String,
     password: String,
 }
-pub fn generate_auth_token(user_id: i32, login_session: &str) -> UserAuthToken {
-    let now = Utc::now().naive_utc();
-    let expiry_secs = now.second() as i64 + ONE_WEEK;
-    let expiry = NaiveDateTime::from_timestamp(expiry_secs, 0);
-    UserAuthToken {
-        user_id,
-        login_session: login_session.to_string(),
-        generated_at: NaiveDateForm::new(now),
-        expires_at: NaiveDateForm::new(expiry),
+
+impl<'a, 'r> FromRequest<'a, 'r> for UserAuthToken {
+    type Error = status::Custom<Json<Response>>;
+    fn from_request(
+        request: &'a Request<'r>,
+    ) -> request::Outcome<Self, status::Custom<Json<Response>>> {
+        let conn = request.guard::<CrmDbConn>().unwrap();
+        if let Some(authen_header) = request.headers().get_one("Authorization") {
+            let authen_str = authen_header.to_string();
+            if authen_str.starts_with("Bearer") {
+                let token = authen_str[6..authen_str.len()].trim();
+                if let Ok(token_data) = decode_token(token.to_string()) {
+                    if verify_token(&token_data, &conn.0) {
+                        return Outcome::Success(token_data.claims);
+                    }
+                }
+            }
+        }
+
+        Outcome::Failure((
+            Status::BadRequest,
+            status::Custom(
+                Status::Unauthorized,
+                Json(Response {
+                    message: String::from(message_constants::MESSAGE_INVALID_TOKEN),
+                    data: serde_json::to_value("").unwrap(),
+                }),
+            ),
+        ))
     }
 }
 
-pub fn generate_jwt_token(auth_token: &UserAuthToken) {
-    unimplemented!()
+impl UserAuthToken {
+    pub fn generate_auth_token(user_id: i32, login_session: &str) -> UserAuthToken {
+        let now = Utc::now().naive_utc();
+        let expiry_secs = now.second() as i64 + ONE_WEEK;
+        let expiry = NaiveDateTime::from_timestamp(expiry_secs, 0);
+        UserAuthToken {
+            user_id,
+            login_session: login_session.to_string(),
+            generated_at: NaiveDateForm::new(now),
+            expires_at: NaiveDateForm::new(expiry),
+        }
+    }
+}
+
+pub fn generate_jwt_token(auth_token: &UserAuthToken) -> String {
+    jsonwebtoken::encode(
+        &Header::default(),
+        auth_token,
+        &EncodingKey::from_secret(include_bytes!("secret.key")),
+    )
+    .unwrap()
+}
+
+fn decode_token(token: String) -> Result<TokenData<UserAuthToken>> {
+    jsonwebtoken::decode::<UserAuthToken>(
+        &token,
+        &DecodingKey::from_secret(include_bytes!("secret.key")),
+        &Validation::default(),
+    )
+}
+
+fn verify_token(token_data: &TokenData<UserAuthToken>, conn: &PgConnection) -> bool {
+    User::is_valid_login_session(&token_data.claims, conn)
 }
