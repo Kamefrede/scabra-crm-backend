@@ -2,7 +2,6 @@ use crate::db::CrmDbConn;
 use crate::models::response::Response;
 use crate::schema::user;
 use crate::services;
-use diesel::prelude::Insertable;
 use rocket::http::Status;
 use rocket::{post, response::status};
 use rocket_contrib::json::Json;

@@ -5,13 +5,14 @@ use chrono::Utc;
 use crypto::digest::Digest;
 use crypto::sha3;
 use diesel::prelude::*;
-use diesel::{Identifiable, Insertable, PgConnection, Queryable, RunQueryDsl};
 use serde::{Deserialize, Serialize};
 use uuid::Uuid;
 
 use crate::db::user_auth_token::UserAuthToken;
 use crate::routes::user::{UserForm, UserLoginInfo};
-use crate::schema::*;
+use crate::schema::user;
+use crate::schema::user_auth_token;
+
 
 #[derive(Insertable, Identifiable, Queryable, Deserialize, Serialize)]
 #[table_name = "user"]
@@ -24,7 +25,6 @@ pub struct User {
 }
 
 impl User {
-    //TODO: Check if the user already exists
     pub fn signup(user_form: UserForm, conn: &PgConnection) -> bool {
         let hashed_pwd = hash_password(&*user_form.hashed_password);
         let user_form = UserForm {
@@ -32,11 +32,18 @@ impl User {
             ..user_form
         };
         use crate::schema::user::dsl::*;
-        let query_result = diesel::insert_into(user)
-            .values(&user_form)
-            .execute(conn);
-        dbg!(&query_result);
-        query_result.is_ok()
+        let already_exists = user.filter(username.eq(&*user_form.username))
+            .or_filter(email.eq(&*user_form.email))
+            .get_result::<User>(conn);
+        if let Ok(_existing_user) = already_exists {
+            false
+        } else {
+            let query_result = diesel::insert_into(user)
+                .values(&user_form)
+                .execute(conn);
+            dbg!(&query_result);
+            query_result.is_ok()
+        }
     }
 
     pub fn login(user_form: UserLoginInfo, conn: &PgConnection) -> Option<UserAuthToken> {
