@@ -2,7 +2,12 @@
 /.vscode
 /.env
 /Rocket.toml
+/out
 /.idea
+/atlassian-ide-plugin.xml
+/*.ipr
+/*.iws
+/*.iml
 /jwtRS256.key
 /jwtRS256.key.pub
 /src/db/secret.key
