@@ -3,3 +3,6 @@
 /.env
 /Rocket.toml
 /.idea
+/jwtRS256.key
+/jwtRS256.key.pub
+/src/db/secret.key
