@@ -15,7 +15,19 @@ use std::ops::Deref;
     https://github.com/diesel-rs/diesel/blob/master/diesel/src/type_impls/date_and_time.rs
     Which is licensed under the Apache License(https://github.com/diesel-rs/diesel/blob/master/LICENSE-APACHE)
 */
-#[derive(AsExpression, FromSqlRow, Debug, Serialize, Deserialize, Copy, Clone, PartialEq, Eq, PartialOrd, Ord)]
+#[derive(
+    AsExpression,
+    FromSqlRow,
+    Debug,
+    Serialize,
+    Deserialize,
+    Copy,
+    Clone,
+    PartialEq,
+    Eq,
+    PartialOrd,
+    Ord,
+)]
 #[sql_type = "diesel::sql_types::Timestamptz"]
 pub struct NaiveDateForm(NaiveDateTime);
 

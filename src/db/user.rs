@@ -13,7 +13,6 @@ use crate::routes::user::{UserForm, UserLoginInfo};
 use crate::schema::user;
 use crate::schema::user_auth_token;
 
-
 #[derive(Insertable, Identifiable, Queryable, Deserialize, Serialize)]
 #[table_name = "user"]
 pub struct User {
@@ -32,17 +31,17 @@ impl User {
             ..user_form
         };
         use crate::schema::user::dsl::*;
-        let already_exists = user.filter(username.eq(&*user_form.username))
+        let already_exists = user
+            .filter(username.eq(&*user_form.username))
             .or_filter(email.eq(&*user_form.email))
             .get_result::<User>(conn);
         if let Ok(_existing_user) = already_exists {
             false
         } else {
-            let query_result = diesel::insert_into(user)
+            diesel::insert_into(user)
                 .values(&user_form)
-                .execute(conn);
-            dbg!(&query_result);
-            query_result.is_ok()
+                .execute(conn)
+                .is_ok()
         }
     }
 
@@ -120,7 +119,7 @@ impl User {
             .filter(login_session.eq(&auth_token.login_session))
             .get_result::<UserAuthToken>(conn);
         if let Ok(auth_token) = result_auth_token {
-            *auth_token.expires_at.deref() < Utc::now().naive_utc()
+            Utc::now().naive_utc() < *auth_token.expires_at.deref()
         } else {
             false
         }
@@ -129,15 +128,22 @@ impl User {
     pub fn update_login_session(new_auth_token: &UserAuthToken, conn: &PgConnection) -> bool {
         use crate::schema::user_auth_token::dsl::*;
         if let Some(_user) = User::get_user_by_id(new_auth_token.user_id, conn) {
-            diesel::update(user_auth_token.find(new_auth_token.user_id))
-                .set((
-                    user_id.eq(new_auth_token.user_id),
-                    login_session.eq(new_auth_token.login_session.clone()),
-                    generated_at.eq(new_auth_token.generated_at),
-                    expires_at.eq(new_auth_token.expires_at),
-                ))
-                .execute(conn)
-                .is_ok()
+            if let Err(_e) = user_auth_token
+                .find(new_auth_token.user_id)
+                .get_result::<UserAuthToken>(conn)
+            {
+                !matches!(Self::insert_login_session(new_auth_token, conn), Err(_e))
+            } else {
+                diesel::update(user_auth_token.find(new_auth_token.user_id))
+                    .set((
+                        user_id.eq(new_auth_token.user_id),
+                        login_session.eq(new_auth_token.login_session.clone()),
+                        generated_at.eq(new_auth_token.generated_at),
+                        expires_at.eq(new_auth_token.expires_at),
+                    ))
+                    .execute(conn)
+                    .is_ok()
+            }
         } else {
             false
         }

@@ -65,11 +65,4 @@ joinable!(profile -> person (person_id));
 joinable!(user -> person (person_id));
 joinable!(user_auth_token -> user (user_id));
 
-allow_tables_to_appear_in_same_query!(
-    address,
-    client,
-    person,
-    profile,
-    user,
-    user_auth_token,
-);
+allow_tables_to_appear_in_same_query!(address, client, person, profile, user, user_auth_token,);

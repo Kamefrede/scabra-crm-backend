@@ -24,7 +24,17 @@ pub fn launch() -> rocket::Rocket {
     use db::CrmDbConn;
     use dotenv::dotenv;
     dotenv().ok();
-    rocket::ignite()
-        .attach(CrmDbConn::fairing())
-        .mount("/", routes![routes::user::login, routes::user::signup])
+    rocket::ignite().attach(CrmDbConn::fairing()).mount(
+        "/",
+        routes![
+            routes::user::login,
+            routes::user::signup,
+            routes::person::find_by_id,
+            routes::person::find_by_name,
+            routes::person::insert,
+            routes::person::update,
+            routes::person::delete,
+            routes::person::find_all
+        ],
+    )
 }

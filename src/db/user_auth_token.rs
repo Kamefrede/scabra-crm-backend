@@ -4,11 +4,11 @@ use crate::db::CrmDbConn;
 use crate::models::response::Response;
 use crate::proxies::naive_date_form_proxy::NaiveDateForm;
 use crate::schema::user_auth_token;
-use chrono::{NaiveDateTime, Timelike, Utc};
+use chrono::{NaiveDateTime, Utc};
 use diesel::PgConnection;
 use diesel::{Insertable, Queryable};
 use jsonwebtoken::errors::Result;
-use jsonwebtoken::TokenData;
+use jsonwebtoken::{Algorithm, TokenData};
 use jsonwebtoken::{DecodingKey, EncodingKey};
 use jsonwebtoken::{Header, Validation};
 use rocket::http::Status;
@@ -18,7 +18,7 @@ use rocket::response::status;
 use rocket_contrib::json::Json;
 use serde::{Deserialize, Serialize};
 
-#[derive(Queryable, Insertable, Serialize, Deserialize)]
+#[derive(Queryable, Insertable, Serialize, Deserialize, Debug)]
 #[table_name = "user_auth_token"]
 pub struct UserAuthToken {
     pub user_id: i32,
@@ -69,7 +69,7 @@ impl<'a, 'r> FromRequest<'a, 'r> for UserAuthToken {
 impl UserAuthToken {
     pub fn generate_auth_token(user_id: i32, login_session: &str) -> UserAuthToken {
         let now = Utc::now().naive_utc();
-        let expiry_secs = now.second() as i64 + ONE_WEEK;
+        let expiry_secs = now.timestamp() as i64 + ONE_WEEK;
         let expiry = NaiveDateTime::from_timestamp(expiry_secs, 0);
         UserAuthToken {
             user_id,
@@ -90,10 +90,19 @@ pub fn generate_jwt_token(auth_token: &UserAuthToken) -> String {
 }
 
 fn decode_token(token: String) -> Result<TokenData<UserAuthToken>> {
+    let jwt_validation: Validation = Validation {
+        leeway: 0,
+        validate_exp: false,
+        validate_nbf: false,
+        aud: None,
+        iss: None,
+        sub: None,
+        algorithms: vec![Algorithm::HS256],
+    };
     jsonwebtoken::decode::<UserAuthToken>(
         &token,
         &DecodingKey::from_secret(include_bytes!("secret.key")),
-        &Validation::default(),
+        &jwt_validation,
     )
 }
 
