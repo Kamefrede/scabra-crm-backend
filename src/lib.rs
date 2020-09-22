@@ -8,6 +8,7 @@ extern crate rocket_contrib;
 #[macro_use]
 extern crate serde_json;
 
+
 mod constants;
 mod db;
 mod models;

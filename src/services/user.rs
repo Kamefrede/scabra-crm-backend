@@ -1,9 +1,10 @@
 use crate::constants::message_constants;
-use crate::db::user::User;
+use crate::models::user::User;
 use crate::db::user_auth_token::generate_jwt_token;
 use crate::db::CrmDbConn;
 use crate::models::response::{Response, ResponseWithStatus};
-use crate::routes::user::{UserForm, UserLoginInfo};
+use crate::models::user::UserForm;
+use crate::models::user_auth_token::LoginInfo;
 use rocket::http::Status;
 
 pub fn signup(user: UserForm, conn: CrmDbConn) -> ResponseWithStatus {
@@ -26,7 +27,7 @@ pub fn signup(user: UserForm, conn: CrmDbConn) -> ResponseWithStatus {
     }
 }
 
-pub fn login(login: UserLoginInfo, conn: CrmDbConn) -> ResponseWithStatus {
+pub fn login(login: LoginInfo, conn: CrmDbConn) -> ResponseWithStatus {
     if let Some(result) = User::login(login, &*conn) {
         ResponseWithStatus {
             status_code: Status::Ok.code,

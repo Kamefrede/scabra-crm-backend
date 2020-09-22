@@ -4,24 +4,13 @@ use std::ops::Deref;
 use chrono::Utc;
 use crypto::digest::Digest;
 use crypto::sha3;
-use diesel::prelude::*;
-use serde::{Deserialize, Serialize};
+
 use uuid::Uuid;
-
-use crate::db::user_auth_token::UserAuthToken;
-use crate::routes::user::{UserForm, UserLoginInfo};
-use crate::schema::user;
+use crate::models::user::User;
+use diesel::prelude::*;
+use crate::models::user_auth_token::{UserAuthToken, LoginInfo};
+use crate::models::user::UserForm;
 use crate::schema::user_auth_token;
-
-#[derive(Insertable, Identifiable, Queryable, Deserialize, Serialize)]
-#[table_name = "user"]
-pub struct User {
-    pub id: i32,
-    pub person_id: Option<i32>,
-    pub username: String,
-    pub email: String,
-    pub hashed_password: String,
-}
 
 impl User {
     pub fn signup(user_form: UserForm, conn: &PgConnection) -> bool {
@@ -45,7 +34,7 @@ impl User {
         }
     }
 
-    pub fn login(user_form: UserLoginInfo, conn: &PgConnection) -> Option<UserAuthToken> {
+    pub fn login(user_form: LoginInfo, conn: &PgConnection) -> Option<UserAuthToken> {
         let result_user = Self::get_user_by_username_or_email(&*user_form.username_or_email, conn);
         if let Some(user) = result_user {
             if !user.hashed_password.is_empty()

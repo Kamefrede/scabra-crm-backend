@@ -1,12 +1,10 @@
 use crate::constants::message_constants;
-use crate::db::user::User;
+use crate::models::user::User;
 use crate::db::CrmDbConn;
 use crate::models::response::Response;
 use crate::proxies::naive_date_form_proxy::NaiveDateForm;
-use crate::schema::user_auth_token;
 use chrono::{NaiveDateTime, Utc};
 use diesel::PgConnection;
-use diesel::{Insertable, Queryable};
 use jsonwebtoken::errors::Result;
 use jsonwebtoken::{Algorithm, TokenData};
 use jsonwebtoken::{DecodingKey, EncodingKey};
@@ -16,24 +14,7 @@ use rocket::request;
 use rocket::request::{FromRequest, Outcome, Request};
 use rocket::response::status;
 use rocket_contrib::json::Json;
-use serde::{Deserialize, Serialize};
-
-#[derive(Queryable, Insertable, Serialize, Deserialize, Debug)]
-#[table_name = "user_auth_token"]
-pub struct UserAuthToken {
-    pub user_id: i32,
-    pub login_session: String,
-    pub generated_at: NaiveDateForm,
-    pub expires_at: NaiveDateForm,
-}
-
-const ONE_WEEK: i64 = 60 * 60 * 24 * 7;
-
-#[derive(Serialize, Deserialize, FromForm)]
-pub struct LoginInfo {
-    username_or_email: String,
-    password: String,
-}
+use crate::models::user_auth_token::{UserAuthToken, ONE_WEEK};
 
 impl<'a, 'r> FromRequest<'a, 'r> for UserAuthToken {
     type Error = status::Custom<Json<Response>>;

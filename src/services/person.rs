@@ -1,5 +1,5 @@
 use crate::constants::message_constants::*;
-use crate::db::person::{Person, PersonEntity};
+use crate::models::person::{Person, PersonEntity};
 use crate::db::CrmDbConn;
 use crate::models::response::{Response, ResponseWithStatus};
 use rocket::http::Status;
