@@ -1,4 +1,5 @@
-use crate::models::address::{Address, AddressEntity, AddressQuery, AddressQueryType};
+use crate::models::address::{Address, AddressEntity, AddressQueryType};
+use crate::models::Query;
 use crate::schema::address::dsl::*;
 use diesel::prelude::*;
 use std::string::ToString;
@@ -25,7 +26,7 @@ impl Address {
     }
 
     //TODO: Fuzzy searching from DB
-    pub fn query(query: AddressQuery, conn: &PgConnection) -> Vec<Address> {
+    pub fn query(query: Query, conn: &PgConnection) -> Vec<Address> {
         match query.query_type {
             x if x == AddressQueryType::Name.to_string() => address
                 .filter(name.eq(&query.query_text))

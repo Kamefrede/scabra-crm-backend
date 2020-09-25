@@ -27,12 +27,6 @@ pub struct AddressEntity {
     pub address_type: String,
 }
 
-#[derive(Deserialize, Serialize, FromForm)]
-pub struct AddressQuery {
-    pub query_type: String,
-    pub query_text: String,
-}
-
 #[derive(Deserialize, Serialize, EnumString, Display)]
 pub enum AddressQueryType {
     #[strum(serialize = "name")]

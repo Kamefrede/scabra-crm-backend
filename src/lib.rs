@@ -44,6 +44,12 @@ pub fn launch() -> rocket::Rocket {
             routes::address::update,
             routes::address::delete,
             routes::address::find_all,
+            routes::profile::find_by_id,
+            routes::profile::query,
+            routes::profile::insert,
+            routes::profile::update,
+            routes::profile::delete,
+            routes::profile::find_all,
         ],
     )
 }

@@ -1,6 +1,6 @@
 use crate::constants::message_constants::*;
 use crate::db::CrmDbConn;
-use crate::models::address::{Address, AddressEntity};
+use crate::models::profile::{Profile};
 use crate::models::Query;
 use crate::models::response::{Response, ResponseWithStatus};
 use rocket::http::Status;
@@ -10,34 +10,34 @@ pub fn find_all(conn: CrmDbConn) -> ResponseWithStatus {
         status_code: Status::Ok.code,
         response: Response {
             message: String::from(MESSAGE_OK),
-            data: serde_json::to_value(Address::find_all(&*conn)).unwrap(),
+            data: serde_json::to_value(Profile::find_all(&*conn)).unwrap(),
         },
     }
 }
 
 pub fn find_by_id(id: i32, conn: CrmDbConn) -> ResponseWithStatus {
-    let option_address = Address::find_by_id(id, &*conn);
-    if let Some(address) = option_address {
+    let option_profile = Profile::find_by_id(id, &*conn);
+    if let Some(profile) = option_profile {
         ResponseWithStatus {
             status_code: Status::Ok.code,
             response: Response {
                 message: String::from(MESSAGE_OK),
-                data: serde_json::to_value(address).unwrap(),
+                data: serde_json::to_value(profile).unwrap(),
             },
         }
     } else {
         ResponseWithStatus {
             status_code: Status::NotFound.code,
             response: Response {
-                message: format!("Could not find address with id {}", id),
+                message: format!("Could not find profile with id {}", id),
                 data: serde_json::to_value("").unwrap(),
             },
         }
     }
 }
 
-pub fn insert(address: AddressEntity, conn: CrmDbConn) -> ResponseWithStatus {
-    if Address::insert(address, &*conn) {
+pub fn insert(profile: Profile, conn: CrmDbConn) -> ResponseWithStatus {
+    if Profile::insert(profile, &*conn) {
         ResponseWithStatus::ok_empty()
     } else {
         ResponseWithStatus {
@@ -51,13 +51,13 @@ pub fn insert(address: AddressEntity, conn: CrmDbConn) -> ResponseWithStatus {
 }
 
 pub fn query(query: Query, conn: CrmDbConn) -> ResponseWithStatus {
-    ResponseWithStatus::ok_with_data(Address::query(query, &*conn), String::from(MESSAGE_OK))
+    ResponseWithStatus::ok_with_data(Profile::query(query, &*conn), String::from(MESSAGE_OK))
 }
 
-pub fn update(id: i32, new_address: AddressEntity, conn: CrmDbConn) -> ResponseWithStatus {
-    let option_address = Address::find_by_id(id, &*conn);
-    if option_address.is_some() {
-        if Address::update(id, new_address, &*conn) {
+pub fn update(id: i32, new_profile: Profile, conn: CrmDbConn) -> ResponseWithStatus {
+    let option_profile = Profile::find_by_id(id, &*conn);
+    if option_profile.is_some() {
+        if Profile::update(id, new_profile, &*conn) {
             ResponseWithStatus::ok_empty()
         } else {
             ResponseWithStatus {
@@ -72,7 +72,7 @@ pub fn update(id: i32, new_address: AddressEntity, conn: CrmDbConn) -> ResponseW
         ResponseWithStatus {
             status_code: Status::NotFound.code,
             response: Response {
-                message: format!("Could not find address with id {}", id),
+                message: format!("Could not find profile with id {}", id),
                 data: serde_json::to_value("").unwrap(),
             },
         }
@@ -80,9 +80,9 @@ pub fn update(id: i32, new_address: AddressEntity, conn: CrmDbConn) -> ResponseW
 }
 
 pub fn delete(id: i32, conn: CrmDbConn) -> ResponseWithStatus {
-    let option_address = Address::find_by_id(id, &*conn);
-    if option_address.is_some() {
-        if Address::delete(id, &*conn) {
+    let option_profile = Profile::find_by_id(id, &*conn);
+    if option_profile.is_some() {
+        if Profile::delete(id, &*conn) {
             ResponseWithStatus::ok_empty()
         } else {
             ResponseWithStatus {
@@ -97,7 +97,7 @@ pub fn delete(id: i32, conn: CrmDbConn) -> ResponseWithStatus {
         ResponseWithStatus {
             status_code: Status::NotFound.code,
             response: Response {
-                message: format!("Could not find address with id {}", id),
+                message: format!("Could not find profile with id {}", id),
                 data: serde_json::to_value("").unwrap(),
             },
         }
