@@ -1,44 +1,39 @@
 use crate::models::person::{Person, PersonEntity};
-use crate::schema::person::dsl::*;
+use crate::schema::person::dsl::{id, name, person};
 use diesel::prelude::*;
 
 impl Person {
-    pub fn find_all(conn: &PgConnection) -> Vec<Person> {
-        person.order(id.asc()).load::<Person>(conn).unwrap()
+    pub fn find_all(conn: &PgConnection) -> Vec<Self> {
+        person.order(id.asc()).load::<Self>(conn).unwrap()
     }
 
-    pub fn find_by_id(person_id: i32, conn: &PgConnection) -> Option<Person> {
-        let result = person.find(person_id).get_result::<Person>(conn);
-        if let Ok(p) = result {
-            Some(p)
-        } else {
-            None
-        }
+    pub fn find_by_id(person_id: i32, conn: &PgConnection) -> Option<Self> {
+        person.find(person_id).get_result::<Self>(conn).ok()
     }
 
-    pub fn find_by_name(person_name: &str, conn: &PgConnection) -> Option<Vec<Person>> {
-        let people = person.filter(name.eq(person_name)).load::<Person>(conn);
-        if let Ok(people_vec) = people {
-            if people_vec.is_empty() {
-                None
-            } else {
-                Some(people_vec)
-            }
-        } else {
-            None
-        }
+    pub fn find_by_name(person_name: &str, conn: &PgConnection) -> Option<Vec<Self>> {
+        person
+            .filter(name.eq(person_name))
+            .load::<Self>(conn)
+            .map_or(None, |people_vec| {
+                if people_vec.is_empty() {
+                    None
+                } else {
+                    Some(people_vec)
+                }
+            })
     }
 
-    pub fn insert(new_person: PersonEntity, conn: &PgConnection) -> bool {
+    pub fn insert(new_person: &PersonEntity, conn: &PgConnection) -> bool {
         diesel::insert_into(person)
-            .values(&new_person)
+            .values(new_person)
             .execute(conn)
             .is_ok()
     }
 
-    pub fn update(person_id: i32, updated_person: PersonEntity, conn: &PgConnection) -> bool {
+    pub fn update(person_id: i32, updated_person: &PersonEntity, conn: &PgConnection) -> bool {
         diesel::update(person.find(person_id))
-            .set(&updated_person)
+            .set(updated_person)
             .execute(conn)
             .is_ok()
     }

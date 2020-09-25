@@ -1,3 +1,4 @@
+#![allow(clippy::needless_pass_by_value)]
 use crate::models::response::{Response, ResponseWithStatus};
 use crate::models::user_auth_token::UserAuthToken;
 use rocket::http::Status;

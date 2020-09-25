@@ -40,8 +40,8 @@ impl Deref for NaiveDateForm {
 }
 
 impl NaiveDateForm {
-    pub fn new(naive_date_time: NaiveDateTime) -> NaiveDateForm {
-        NaiveDateForm(naive_date_time)
+    pub(crate) const fn new(naive_date_time: NaiveDateTime) -> Self {
+        Self(naive_date_time)
     }
 }
 
@@ -56,7 +56,7 @@ impl NaiveDateForm {
 impl<'v> FromFormValue<'v> for NaiveDateForm {
     type Error = &'v RawStr;
 
-    fn from_form_value(form_value: &'v RawStr) -> Result<NaiveDateForm, &'v RawStr> {
+    fn from_form_value(form_value: &'v RawStr) -> Result<Self, &'v RawStr> {
         let decoded = form_value.url_decode().map_err(|_| form_value)?;
         if decoded.len() < "0000-00-00T00:00".len() {
             return Err(form_value);
@@ -65,7 +65,7 @@ impl<'v> FromFormValue<'v> for NaiveDateForm {
             .map_err(|_| form_value)?;
         let time = naive_time_from_form_value(RawStr::from_str(&decoded["0000-00-00T".len()..]))
             .map_err(|_| form_value)?;
-        Ok(NaiveDateForm(NaiveDateTime::new(date, time)))
+        Ok(Self(NaiveDateTime::new(date, time)))
     }
 }
 
@@ -104,27 +104,26 @@ fn pg_epoch() -> NaiveDateTime {
 impl FromSql<Timestamp, Pg> for NaiveDateForm {
     fn from_sql(bytes: Option<&[u8]>) -> deserialize::Result<Self> {
         let PgTimestamp(offset) = FromSql::<Timestamp, Pg>::from_sql(bytes)?;
-        match pg_epoch().checked_add_signed(Duration::microseconds(offset)) {
-            Some(v) => Ok(NaiveDateForm(v)),
-            None => {
-                let message = "Tried to deserialize a timestamp that is too large for Chrono";
-                Err(message.into())
-            }
-        }
+        pg_epoch()
+            .checked_add_signed(Duration::microseconds(offset))
+            .map_or_else(
+                || {
+                    let message = "Tried to deserialize a timestamp that is too large for Chrono";
+                    Err(message.into())
+                },
+                |v| Ok(Self(v)),
+            )
     }
 }
 
 impl ToSql<Timestamp, Pg> for NaiveDateForm {
     fn to_sql<W: Write>(&self, out: &mut Output<W, Pg>) -> serialize::Result {
-        let time = match (self.deref().signed_duration_since(pg_epoch())).num_microseconds() {
-            Some(time) => time,
-            None => {
-                let error_message =
-                    format!("{:?} as microseconds is too large to fit in an i64", self);
-                return Err(error_message.into());
-            }
-        };
-        ToSql::<Timestamp, Pg>::to_sql(&PgTimestamp(time), out)
+        if let Some(time) = (self.deref().signed_duration_since(pg_epoch())).num_microseconds() {
+            ToSql::<Timestamp, Pg>::to_sql(&PgTimestamp(time), out)
+        } else {
+            let error_message = format!("{:?} as microseconds is too large to fit in an i64", self);
+            Err(error_message.into())
+        }
     }
 }
 

@@ -10,7 +10,7 @@ pub fn find_all(token: JsonWebToken, conn: CrmDbConn) -> CustomJsonResponse {
     if let Err(e) = token {
         return e;
     }
-    let response = person::find_all(conn);
+    let response = person::find_all(&conn);
     rocket_status_from_response(response)
 }
 
@@ -19,7 +19,7 @@ pub fn find_by_id(id: i32, token: JsonWebToken, conn: CrmDbConn) -> CustomJsonRe
     if let Err(e) = token {
         return e;
     }
-    let response = person::find_by_id(id, conn);
+    let response = person::find_by_id(id, &conn);
     rocket_status_from_response(response)
 }
 
@@ -28,7 +28,7 @@ pub fn find_by_name(name: &RawStr, token: JsonWebToken, conn: CrmDbConn) -> Cust
     if let Err(e) = token {
         return e;
     }
-    let response = person::find_by_name(name.to_string(), conn);
+    let response = person::find_by_name(name, &conn);
     rocket_status_from_response(response)
 }
 
@@ -41,7 +41,7 @@ pub fn insert(
     if let Err(e) = token {
         return e;
     }
-    let response = person::insert(person.0, conn);
+    let response = person::insert(&person.0, &conn);
     rocket_status_from_response(response)
 }
 
@@ -55,7 +55,7 @@ pub fn update(
     if let Err(e) = token {
         return e;
     }
-    let response = person::update(id, person.0, conn);
+    let response = person::update(id, &person.0, &conn);
     rocket_status_from_response(response)
 }
 
@@ -64,6 +64,6 @@ pub fn delete(id: i32, token: JsonWebToken, conn: CrmDbConn) -> CustomJsonRespon
     if let Err(e) = token {
         return e;
     }
-    let response = person::delete(id, conn);
+    let response = person::delete(id, &conn);
     rocket_status_from_response(response)
 }

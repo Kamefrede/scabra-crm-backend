@@ -1,3 +1,5 @@
+#![warn(clippy::all, clippy::pedantic, clippy::nursery)]
+#![allow(clippy::module_name_repetitions)]
 #![feature(proc_macro_hygiene, decl_macro)]
 #[macro_use]
 extern crate rocket;
@@ -19,10 +21,12 @@ mod routes;
 mod schema;
 mod services;
 
+
 /// #Actual entry endpoint
 /// Launching logic is handled here so that
 /// main.rs doesn't expose any of our internals.
 ///
+#[must_use]
 pub fn launch() -> rocket::Rocket {
     use db::CrmDbConn;
     use dotenv::dotenv;

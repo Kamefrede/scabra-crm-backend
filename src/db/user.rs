@@ -8,7 +8,10 @@ use crypto::sha3;
 use crate::models::user::User;
 use crate::models::user::UserForm;
 use crate::models::user_auth_token::{LoginInfo, UserAuthToken};
-use crate::schema::user_auth_token;
+use crate::schema::user::dsl::{email, id, user, username};
+use crate::schema::user_auth_token::dsl::{
+    expires_at, generated_at, login_session, user_auth_token, user_id,
+};
 use diesel::prelude::*;
 use uuid::Uuid;
 
@@ -19,73 +22,53 @@ impl User {
             hashed_password: hashed_pwd,
             ..user_form
         };
-        use crate::schema::user::dsl::*;
-        let already_exists = user
-            .filter(username.eq(&*user_form.username))
+        user.filter(username.eq(&*user_form.username))
             .or_filter(email.eq(&*user_form.email))
-            .get_result::<User>(conn);
-        if let Ok(_existing_user) = already_exists {
-            false
-        } else {
-            diesel::insert_into(user)
-                .values(&user_form)
-                .execute(conn)
-                .is_ok()
-        }
+            .get_result::<Self>(conn)
+            .map_or(
+                diesel::insert_into(user)
+                    .values(&user_form)
+                    .execute(conn)
+                    .is_ok(),
+                |_existing_user| false,
+            )
     }
 
-    pub fn login(user_form: LoginInfo, conn: &PgConnection) -> Option<UserAuthToken> {
-        let result_user = Self::get_user_by_username_or_email(&*user_form.username_or_email, conn);
-        if let Some(user) = result_user {
-            if !user.hashed_password.is_empty()
-                && verify_password(&*user_form.password, &*user.hashed_password)
-            {
+    pub fn login(user_form: &LoginInfo, conn: &PgConnection) -> Option<UserAuthToken> {
+        Self::get_user_by_username_or_email(&*user_form.username_or_email, conn).and_then(
+            |db_user| {
+                if db_user.hashed_password.is_empty()
+                    && !verify_password(&*user_form.password, &*db_user.hashed_password)
+                {
+                    return None;
+                }
                 let login_session_str = Self::generate_login_session();
-                let auth_token = UserAuthToken::generate_auth_token(user.id, &*login_session_str);
+                let auth_token =
+                    UserAuthToken::generate_auth_token(db_user.id, &*login_session_str);
                 Self::update_login_session(&auth_token, conn);
                 Some(auth_token)
-            } else {
-                None
-            }
-        } else {
-            None
-        }
+            },
+        )
     }
 
-    pub fn get_user_by_id(user_id: i32, conn: &PgConnection) -> Option<User> {
-        use crate::schema::user::dsl::*;
-        let result_user = user.filter(id.eq(&user_id)).get_result::<User>(conn);
-        if let Ok(db_user) = result_user {
-            Some(db_user)
-        } else {
-            None
-        }
+    pub fn get_user_by_id(id_user: i32, conn: &PgConnection) -> Option<Self> {
+        user.filter(id.eq(&id_user)).get_result::<Self>(conn).ok()
     }
 
     pub fn get_user_by_username_or_email(
         username_or_email: &str,
         conn: &PgConnection,
-    ) -> Option<User> {
-        use crate::schema::user::dsl::*;
-        let result_user = user
-            .filter(username.eq(username_or_email))
+    ) -> Option<Self> {
+        user.filter(username.eq(username_or_email))
             .or_filter(email.eq(username_or_email))
-            .get_result::<User>(conn);
-        if let Ok(db_user) = result_user {
-            Some(db_user)
-        } else {
-            None
-        }
+            .get_result::<Self>(conn)
+            .ok()
     }
     pub fn get_id_for_username_or_email(
         username_or_email: &str,
         conn: &PgConnection,
     ) -> Option<i32> {
-        if let Some(user) = User::get_user_by_username_or_email(username_or_email, conn) {
-            Some(user.id)
-        } else {
-            None
-        }
+        Self::get_user_by_username_or_email(username_or_email, conn).map(|db_user| db_user.id)
     }
 
     pub fn generate_login_session() -> String {
@@ -96,27 +79,23 @@ impl User {
         auth_token: &UserAuthToken,
         conn: &PgConnection,
     ) -> Result<UserAuthToken, diesel::result::Error> {
-        diesel::insert_into(user_auth_token::table)
+        diesel::insert_into(user_auth_token)
             .values(auth_token)
             .get_result(conn)
     }
 
     pub fn is_valid_login_session(auth_token: &UserAuthToken, conn: &PgConnection) -> bool {
-        use crate::schema::user_auth_token::dsl::*;
-        let result_auth_token: Result<UserAuthToken, diesel::result::Error> = user_auth_token
+        user_auth_token
             .filter(user_id.eq(&auth_token.user_id))
             .filter(login_session.eq(&auth_token.login_session))
-            .get_result::<UserAuthToken>(conn);
-        if let Ok(auth_token) = result_auth_token {
-            Utc::now().naive_utc() < *auth_token.expires_at.deref()
-        } else {
-            false
-        }
+            .get_result::<UserAuthToken>(conn)
+            .map_or(false, |auth_token: UserAuthToken| {
+                Utc::now().naive_utc() < *auth_token.expires_at.deref()
+            })
     }
 
     pub fn update_login_session(new_auth_token: &UserAuthToken, conn: &PgConnection) -> bool {
-        use crate::schema::user_auth_token::dsl::*;
-        if let Some(_user) = User::get_user_by_id(new_auth_token.user_id, conn) {
+        if let Some(_user) = Self::get_user_by_id(new_auth_token.user_id, conn) {
             if let Err(_e) = user_auth_token
                 .find(new_auth_token.user_id)
                 .get_result::<UserAuthToken>(conn)
@@ -147,8 +126,8 @@ fn hash_password(password: &str) -> String {
     hasher.result_str()
 }
 
-fn verify_password(password_to_verify: &str, hashed_password: &str) -> bool {
-    hashed_password == hash_password(password_to_verify)
+fn verify_password(password_to_verify: &str, password: &str) -> bool {
+    password == hash_password(password_to_verify)
 }
 
 #[test]

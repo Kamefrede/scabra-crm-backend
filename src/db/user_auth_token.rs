@@ -26,7 +26,7 @@ impl<'a, 'r> FromRequest<'a, 'r> for UserAuthToken {
             let authen_str = authen_header.to_string();
             if authen_str.starts_with("Bearer") {
                 let token = authen_str[6..authen_str.len()].trim();
-                if let Ok(token_data) = decode_token(token.to_string()) {
+                if let Ok(token_data) = decode_token(token) {
                     if verify_token(&token_data, &conn.0) {
                         return Outcome::Success(token_data.claims);
                     }
@@ -48,11 +48,11 @@ impl<'a, 'r> FromRequest<'a, 'r> for UserAuthToken {
 }
 
 impl UserAuthToken {
-    pub fn generate_auth_token(user_id: i32, login_session: &str) -> UserAuthToken {
+    pub fn generate_auth_token(user_id: i32, login_session: &str) -> Self {
         let now = Utc::now().naive_utc();
         let expiry_secs = now.timestamp() as i64 + ONE_WEEK;
         let expiry = NaiveDateTime::from_timestamp(expiry_secs, 0);
-        UserAuthToken {
+        Self {
             user_id,
             login_session: login_session.to_string(),
             generated_at: NaiveDateForm::new(now),
@@ -70,7 +70,7 @@ pub fn generate_jwt_token(auth_token: &UserAuthToken) -> String {
     .unwrap()
 }
 
-fn decode_token(token: String) -> Result<TokenData<UserAuthToken>> {
+fn decode_token(token: &str) -> Result<TokenData<UserAuthToken>> {
     let jwt_validation: Validation = Validation {
         leeway: 0,
         validate_exp: false,
@@ -81,7 +81,7 @@ fn decode_token(token: String) -> Result<TokenData<UserAuthToken>> {
         algorithms: vec![Algorithm::HS256],
     };
     jsonwebtoken::decode::<UserAuthToken>(
-        &token,
+        token,
         &DecodingKey::from_secret(include_bytes!("secret.key")),
         &jwt_validation,
     )

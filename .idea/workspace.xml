@@ -30,42 +30,26 @@
     <cargoProject FILE="$PROJECT_DIR$/Cargo.toml" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="490d91f4-0946-4692-8cf0-856a9d480261" name="Default Changelist" comment="password hashing &amp; actual db migrations">
-      <change afterPath="$PROJECT_DIR$/.idea/hprs-crm-backend.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/db_modelling/address.sql" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/db_modelling/client.sql" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/db_modelling/person.sql" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/db_modelling/profile.sql" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/db_modelling/user.sql" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/db_modelling/user_auth_token.sql" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/migrations/2020-09-11-152026_create_person/down.sql" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/migrations/2020-09-11-152026_create_person/up.sql" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/migrations/2020-09-11-152344_create_user/down.sql" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/migrations/2020-09-11-152344_create_user/up.sql" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/migrations/2020-09-11-152501_create_user_auth_token/down.sql" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/migrations/2020-09-11-152501_create_user_auth_token/up.sql" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/migrations/2020-09-11-152655_create_address/down.sql" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/migrations/2020-09-11-152655_create_address/up.sql" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/migrations/2020-09-11-152757_create_profile/down.sql" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/migrations/2020-09-11-152757_create_profile/up.sql" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/migrations/2020-09-11-152859_create_client/down.sql" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/migrations/2020-09-11-152859_create_client/up.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Cargo.lock" beforeDir="false" afterPath="$PROJECT_DIR$/Cargo.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Cargo.toml" beforeDir="false" afterPath="$PROJECT_DIR$/Cargo.toml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/migrations/2020-09-01-162217_create_users/down.sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/migrations/2020-09-01-162217_create_users/up.sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/migrations/2020-09-01-162448_create_articles/down.sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/migrations/2020-09-01-162448_create_articles/up.sql" beforeDir="false" />
+    <list default="true" id="490d91f4-0946-4692-8cf0-856a9d480261" name="Default Changelist" comment="run formatting">
+      <change beforePath="$PROJECT_DIR$/.idea/hprs-crm-backend.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/hprs-crm-backend.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/db/address.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/db/address.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/db/person.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/db/person.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/db/profile.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/db/profile.rs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/db/user.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/db/user.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/db/user_auth_token.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/db/user_auth_token.rs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/lib.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models/user.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/user.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/models/response.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/response.rs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/proxies/naive_date_form_proxy.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/proxies/naive_date_form_proxy.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/address.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/address.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/mod.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/mod.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/person.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/person.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/profile.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/profile.rs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/routes/user.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/user.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/schema.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/schema.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/address.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/address.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/person.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/person.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/profile.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/profile.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/user.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/user.rs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -74,6 +58,13 @@
   </component>
   <component name="ClangdSettings">
     <option name="formatViaClangd" value="false" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Rust File" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -88,18 +79,24 @@
   </component>
   <component name="PropertiesComponent">
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="DatabaseDriversLRU" value="oracle&#10;postgresql" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="cf.first.check.clang-format" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/Cargo.toml" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/target" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="org.rust.cargo.project.model.PROJECT_DISCOVERY" value="true" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
-  <component name="RunManager" selected="Cargo Command.build">
-    <configuration name="add" type="CargoCommandRunConfiguration" factoryName="Cargo Command" temporary="true">
+  <component name="RunAnythingCache">
+    <option name="myCommands">
+      <command value="cargo clippy" />
+    </option>
+  </component>
+  <component name="RunManager" selected="Cargo.Fmt">
+    <configuration name="Fmt" type="CargoCommandRunConfiguration" factoryName="Cargo Command" nameIsGenerated="true">
       <option name="channel" value="DEFAULT" />
-      <option name="command" value="add rust-crypto" />
+      <option name="command" value="fmt --all -v" />
       <option name="allFeatures" value="false" />
       <option name="emulateTerminal" value="false" />
       <option name="backtrace" value="SHORT" />
@@ -121,6 +118,18 @@
         <option name="CARGO.BUILD_TASK_PROVIDER" enabled="true" />
       </method>
     </configuration>
+    <configuration name="clippy" type="CargoCommandRunConfiguration" factoryName="Cargo Command" temporary="true">
+      <option name="channel" value="DEFAULT" />
+      <option name="command" value="clippy" />
+      <option name="allFeatures" value="false" />
+      <option name="emulateTerminal" value="false" />
+      <option name="backtrace" value="SHORT" />
+      <option name="workingDirectory" value="file://$PROJECT_DIR$" />
+      <envs />
+      <method v="2">
+        <option name="CARGO.BUILD_TASK_PROVIDER" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="doc" type="CargoCommandRunConfiguration" factoryName="Cargo Command" temporary="true">
       <option name="channel" value="DEFAULT" />
       <option name="command" value="doc --open" />
@@ -133,9 +142,9 @@
         <option name="CARGO.BUILD_TASK_PROVIDER" enabled="true" />
       </method>
     </configuration>
-    <configuration name="docs" type="CargoCommandRunConfiguration" factoryName="Cargo Command" temporary="true">
+    <configuration name="run" type="CargoCommandRunConfiguration" factoryName="Cargo Command" temporary="true">
       <option name="channel" value="DEFAULT" />
-      <option name="command" value="docs --open" />
+      <option name="command" value="run" />
       <option name="allFeatures" value="false" />
       <option name="emulateTerminal" value="false" />
       <option name="backtrace" value="SHORT" />
@@ -157,24 +166,26 @@
         <option name="CARGO.BUILD_TASK_PROVIDER" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="GradleAppRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true">
-      <method v="2">
-        <option name="com.jetbrains.cidr.cpp.gradle.execution.GradleNativeBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
+    <list>
+      <item itemvalue="Cargo.Fmt" />
+      <item itemvalue="Cargo.build" />
+      <item itemvalue="Cargo.clippy" />
+      <item itemvalue="Cargo.doc" />
+      <item itemvalue="Cargo.run" />
+      <item itemvalue="Cargo.test" />
+    </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Cargo Command.build" />
-        <item itemvalue="Cargo Command.test" />
-        <item itemvalue="Cargo Command.doc" />
-        <item itemvalue="Cargo Command.docs" />
-        <item itemvalue="Cargo Command.add" />
+        <item itemvalue="Cargo.run" />
+        <item itemvalue="Cargo.clippy" />
+        <item itemvalue="Cargo.clippy" />
+        <item itemvalue="Cargo.clippy" />
+        <item itemvalue="Cargo.clippy" />
       </list>
     </recent_temporary>
   </component>
   <component name="RustProjectSettings">
     <option name="externalLinter" value="Clippy" />
-    <option name="runRustfmtOnSave" value="true" />
     <option name="toolchainHomeDirectory" value="$USER_HOME$/.cargo/bin" />
     <option name="version" value="2" />
   </component>
@@ -188,8 +199,97 @@
       <updated>1599834642053</updated>
       <workItem from="1599834654584" duration="1159000" />
       <workItem from="1599836034234" duration="814000" />
-      <workItem from="1599839830206" duration="4469000" />
+      <workItem from="1599839830206" duration="4559000" />
+      <workItem from="1600179192053" duration="105000" />
+      <workItem from="1600180979179" duration="8238000" />
+      <workItem from="1600248925232" duration="1571000" />
+      <workItem from="1600420089085" duration="15663000" />
+      <workItem from="1600446356530" duration="1054000" />
+      <workItem from="1600765267581" duration="86000" />
+      <workItem from="1600765697893" duration="7939000" />
+      <workItem from="1600779644215" duration="508000" />
+      <workItem from="1600780390395" duration="14179000" />
+      <workItem from="1601029241884" duration="258000" />
+      <workItem from="1601029603932" duration="16996000" />
     </task>
+    <task id="LOCAL-00001" summary="password hashing &amp; actual db migrations">
+      <created>1599845049914</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1599845049914</updated>
+    </task>
+    <task id="LOCAL-00002" summary="work on auth">
+      <created>1600189342783</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1600189342783</updated>
+    </task>
+    <task id="LOCAL-00003" summary="auth just needs one more tweak">
+      <created>1600444907472</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1600444907472</updated>
+    </task>
+    <task id="LOCAL-00004" summary="update gitignore">
+      <created>1600444951849</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1600444951849</updated>
+    </task>
+    <task id="LOCAL-00005" summary="update gitignore">
+      <created>1600445062982</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1600445062982</updated>
+    </task>
+    <task id="LOCAL-00006" summary="auth is now ready!">
+      <created>1600447406420</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1600447406420</updated>
+    </task>
+    <task id="LOCAL-00007" summary="fixed auth bug, added person CRUD">
+      <created>1600787758435</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1600787758435</updated>
+    </task>
+    <task id="LOCAL-00008" summary="TODO: Fix query for person">
+      <created>1600795987761</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1600795987761</updated>
+    </task>
+    <task id="LOCAL-00009" summary="address done">
+      <created>1601037919947</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1601037919947</updated>
+    </task>
+    <task id="LOCAL-00010" summary="profile done">
+      <created>1601040343566</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1601040343566</updated>
+    </task>
+    <task id="LOCAL-00011" summary="run formatting">
+      <created>1601040377696</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1601040377696</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -205,47 +305,128 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="password hashing &amp; actual db migrations" />
-    <option name="LAST_COMMIT_MESSAGE" value="password hashing &amp; actual db migrations" />
+    <MESSAGE value="work on auth" />
+    <MESSAGE value="auth just needs one more tweak" />
+    <MESSAGE value="update gitignore" />
+    <MESSAGE value="auth is now ready!" />
+    <MESSAGE value="fixed auth bug, added person CRUD" />
+    <MESSAGE value="TODO: Fix query for person" />
+    <MESSAGE value="address done" />
+    <MESSAGE value="profile done" />
+    <MESSAGE value="run formatting" />
+    <option name="LAST_COMMIT_MESSAGE" value="run formatting" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="582" y="229" width="415" height="381" key="#Vim_Emulation" timestamp="1599843679805">
+    <state x="70" y="205" key="#SQL_Dialects" timestamp="1600443679695">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="582" y="229" width="415" height="381" key="#Vim_Emulation/0.0.1366.728@0.0.1366.728" timestamp="1599843679805" />
-    <state x="137" y="19" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1599840066771">
+    <state x="70" y="205" key="#SQL_Dialects/0.0.1366.728@0.0.1366.728" timestamp="1600443679695" />
+    <state x="259" y="9" key="#SSH_Configurations" timestamp="1600782999827">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="137" y="19" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1366.728@0.0.1366.728" timestamp="1599840066771" />
+    <state x="259" y="9" key="#SSH_Configurations/0.0.1366.728@0.0.1366.728" timestamp="1600782999827" />
+    <state x="582" y="229" width="415" height="381" key="#Vim_Emulation" timestamp="1600249590003">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="582" y="229" width="415" height="381" key="#Vim_Emulation/0.0.1366.728@0.0.1366.728" timestamp="1600249590003" />
+    <state x="266" y="30" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1600787788477">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="266" y="30" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1366.728@0.0.1366.728" timestamp="1600787788477" />
     <state x="457" y="166" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1599842273372">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="457" y="166" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1366.728@0.0.1366.728" timestamp="1599842273372" />
-    <state width="1323" height="179" key="GridCell.Tab.0.bottom" timestamp="1599844943674">
+    <state x="488" y="80" key="#com.intellij.ide.util.MemberChooser" timestamp="1600439155407">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="179" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1599844943674" />
-    <state width="1323" height="179" key="GridCell.Tab.0.center" timestamp="1599844943673">
+    <state x="488" y="80" key="#com.intellij.ide.util.MemberChooser/0.0.1366.728@0.0.1366.728" timestamp="1600439155407" />
+    <state x="413" y="111" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1601038171644">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="179" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1599844943673" />
-    <state width="1323" height="179" key="GridCell.Tab.0.left" timestamp="1599844943673">
+    <state x="413" y="111" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1366.728@0.0.1366.728" timestamp="1601038171644" />
+    <state x="512" y="73" key="#xdebugger.evaluate" timestamp="1600786207205">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="179" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1599844943673" />
-    <state width="1323" height="179" key="GridCell.Tab.0.right" timestamp="1599844943674">
+    <state x="512" y="73" key="#xdebugger.evaluate/0.0.1366.728@0.0.1366.728" timestamp="1600786207205" />
+    <state x="463" y="119" key="FileChooserDialogImpl" timestamp="1600783351346">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="179" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1599844943674" />
-    <state x="184" y="9" key="SettingsEditor" timestamp="1599835859579">
+    <state x="463" y="119" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1600783351346" />
+    <state width="1323" height="179" key="GridCell.Tab.0.bottom" timestamp="1601050763642">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="184" y="9" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1599835859579" />
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1599843824553">
+    <state width="1323" height="179" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1601050763642" />
+    <state width="1323" height="179" key="GridCell.Tab.0.center" timestamp="1601050763642">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1599843824553" />
+    <state width="1323" height="179" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1601050763642" />
+    <state width="1323" height="179" key="GridCell.Tab.0.left" timestamp="1601050763641">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1323" height="179" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1601050763641" />
+    <state width="1323" height="179" key="GridCell.Tab.0.right" timestamp="1601050763642">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1323" height="179" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1601050763642" />
+    <state width="1323" height="172" key="GridCell.Tab.1.bottom" timestamp="1600796014301">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1323" height="172" key="GridCell.Tab.1.bottom/0.0.1366.728@0.0.1366.728" timestamp="1600796014301" />
+    <state width="1323" height="172" key="GridCell.Tab.1.center" timestamp="1600796014300">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1323" height="172" key="GridCell.Tab.1.center/0.0.1366.728@0.0.1366.728" timestamp="1600796014300" />
+    <state width="1323" height="172" key="GridCell.Tab.1.left" timestamp="1600796014300">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1323" height="172" key="GridCell.Tab.1.left/0.0.1366.728@0.0.1366.728" timestamp="1600796014300" />
+    <state width="1323" height="172" key="GridCell.Tab.1.right" timestamp="1600796014300">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1323" height="172" key="GridCell.Tab.1.right/0.0.1366.728@0.0.1366.728" timestamp="1600796014300" />
+    <state x="184" y="9" key="SettingsEditor" timestamp="1601029528368">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="184" y="9" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1601029528368" />
+    <state x="275" y="97" key="Vcs.Push.Dialog.v2" timestamp="1601040381522">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="275" y="97" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1601040381522" />
+    <state x="293" y="0" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1601042762933">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="293" y="0" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1366.728@0.0.1366.728" timestamp="1601042762933" />
+    <state x="390" y="0" width="585" height="728" key="find.popup" timestamp="1601051874798">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="390" y="0" width="585" height="728" key="find.popup/0.0.1366.728@0.0.1366.728" timestamp="1601051874798" />
+    <state x="876" y="151" key="ftp.server.browser" timestamp="1600783126592">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="876" y="151" key="ftp.server.browser/0.0.1366.728@0.0.1366.728" timestamp="1600783126592" />
+    <state width="600" height="428" key="javadoc.popup" timestamp="1600181148312">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="600" height="428" key="javadoc.popup/0.0.1366.728@0.0.1366.728" timestamp="1600181148312" />
+    <state x="339" y="162" width="672" height="677" key="run.anything.popup" timestamp="1601031191847">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="339" y="162" width="672" height="677" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1601031191847" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1601045945354">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1601045945354" />
+  </component>
+  <component name="XDebuggerManager">
+    <watches-manager>
+      <configuration name="CargoCommandRunConfiguration">
+        <watch expression="token" />
+      </configuration>
+    </watches-manager>
   </component>
 </project>
