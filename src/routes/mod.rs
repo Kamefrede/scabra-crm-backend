@@ -6,8 +6,8 @@ use rocket_contrib::json::Json;
 
 pub mod address;
 pub mod person;
-pub mod user;
 pub mod profile;
+pub mod user;
 
 pub type CustomJsonResponse = status::Custom<Json<Response>>;
 pub type JsonWebToken = Result<UserAuthToken, CustomJsonResponse>;

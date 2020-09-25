@@ -1,9 +1,9 @@
 pub mod address;
 pub mod person;
+pub mod profile;
 pub mod response;
 pub mod user;
 pub mod user_auth_token;
-pub mod profile;
 use serde::{Deserialize, Serialize};
 
 #[derive(Deserialize, Serialize, FromForm)]

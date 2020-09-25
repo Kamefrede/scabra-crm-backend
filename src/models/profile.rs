@@ -1,5 +1,5 @@
 use crate::schema::profile;
-use serde::{Serialize, Deserialize};
+use serde::{Deserialize, Serialize};
 
 #[derive(Deserialize, Serialize, Insertable, Queryable, FromForm, AsChangeset)]
 #[table_name = "profile"]
@@ -11,7 +11,6 @@ pub struct Profile {
     role: Option<String>,
     address_id: Option<i32>,
 }
-
 
 #[derive(Deserialize, Serialize, EnumString, Display)]
 pub enum ProfileQueryType {

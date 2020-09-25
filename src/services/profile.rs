@@ -1,8 +1,8 @@
 use crate::constants::message_constants::*;
 use crate::db::CrmDbConn;
-use crate::models::profile::{Profile};
-use crate::models::Query;
+use crate::models::profile::Profile;
 use crate::models::response::{Response, ResponseWithStatus};
+use crate::models::Query;
 use rocket::http::Status;
 
 pub fn find_all(conn: CrmDbConn) -> ResponseWithStatus {
