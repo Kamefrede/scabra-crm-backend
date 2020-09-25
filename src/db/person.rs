@@ -1,6 +1,6 @@
-use crate::models::person::{PersonEntity, Person};
-use diesel::prelude::*;
+use crate::models::person::{Person, PersonEntity};
 use crate::schema::person::dsl::*;
+use diesel::prelude::*;
 
 impl Person {
     pub fn find_all(conn: &PgConnection) -> Vec<Person> {
@@ -17,7 +17,6 @@ impl Person {
     }
 
     pub fn find_by_name(person_name: &str, conn: &PgConnection) -> Option<Vec<Person>> {
-        
         let people = person.filter(name.eq(person_name)).load::<Person>(conn);
         if let Ok(people_vec) = people {
             if people_vec.is_empty() {
@@ -31,7 +30,6 @@ impl Person {
     }
 
     pub fn insert(new_person: PersonEntity, conn: &PgConnection) -> bool {
-        
         diesel::insert_into(person)
             .values(&new_person)
             .execute(conn)
@@ -39,7 +37,6 @@ impl Person {
     }
 
     pub fn update(person_id: i32, updated_person: PersonEntity, conn: &PgConnection) -> bool {
-        
         diesel::update(person.find(person_id))
             .set(&updated_person)
             .execute(conn)
@@ -47,7 +44,6 @@ impl Person {
     }
 
     pub fn delete(person_id: i32, conn: &PgConnection) -> bool {
-        
         diesel::delete(person.find(person_id)).execute(conn).is_ok()
     }
 }

@@ -7,7 +7,9 @@ extern crate crypto;
 extern crate rocket_contrib;
 #[macro_use]
 extern crate serde_json;
-
+extern crate strum;
+#[macro_use]
+extern crate strum_macros;
 
 mod constants;
 mod db;
@@ -35,7 +37,13 @@ pub fn launch() -> rocket::Rocket {
             routes::person::insert,
             routes::person::update,
             routes::person::delete,
-            routes::person::find_all
+            routes::person::find_all,
+            routes::address::find_by_id,
+            routes::address::query,
+            routes::address::insert,
+            routes::address::update,
+            routes::address::delete,
+            routes::address::find_all,
         ],
     )
 }

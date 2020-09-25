@@ -1,10 +1,11 @@
-use diesel::prelude::*;
-use crate::models::address::{Address, AddressEntity, AddressQuery};
+use crate::models::address::{Address, AddressEntity, AddressQuery, AddressQueryType};
 use crate::schema::address::dsl::*;
+use diesel::prelude::*;
+use std::string::ToString;
 
 impl Address {
     pub fn find_all(conn: &PgConnection) -> Vec<Address> {
-       address.order(id.asc()).load::<Address>(conn).unwrap()
+        address.order(id.asc()).load::<Address>(conn).unwrap()
     }
 
     pub fn find_by_id(address_id: i32, conn: &PgConnection) -> Option<Address> {
@@ -23,53 +24,42 @@ impl Address {
             .is_ok()
     }
 
+    //TODO: Fuzzy searching from DB
     pub fn query(query: AddressQuery, conn: &PgConnection) -> Vec<Address> {
-        /*match query {
-            AddressQuery::Name(value) => {
-                address
-                    .filter(name.eq(&value))
-                    .order(id.asc())
-                    .load::<Address>(conn)
-                    .unwrap()
-            }
-            AddressQuery::Line(value) => {
-                address
-                    .filter(line1.eq(&value))
-                    .or_filter(line2.eq(&value))
-                    .order(id.asc())
-                    .load::<Address>(conn)
-                    .unwrap()
-            }
-            AddressQuery::City(value) => {
-                address
-                    .filter(city.eq(&value))
-                    .order(id.asc())
-                    .load::<Address>(conn)
-                    .unwrap()
-            }
-            AddressQuery::PostalCode(value) => {
-                address
-                    .filter(postal_code.eq(&value))
-                    .order(id.asc())
-                    .load::<Address>(conn)
-                    .unwrap()
-            }
-            AddressQuery::Country(value) => {
-                address
-                    .filter(country.eq(&value))
-                    .order(id.asc())
-                    .load::<Address>(conn)
-                    .unwrap()
-            }
-            AddressQuery::AddressType(value) => {
-                address
-                    .filter(address_type.eq(&value))
-                    .order(id.asc())
-                    .load::<Address>(conn)
-                    .unwrap()
-            }
-        }*/
-        unimplemented!()
+        match query.query_type {
+            x if x == AddressQueryType::Name.to_string() => address
+                .filter(name.eq(&query.query_text))
+                .order(id.asc())
+                .load::<Address>(conn)
+                .unwrap(),
+            x if x == AddressQueryType::Line.to_string() => address
+                .filter(line1.eq(&query.query_text))
+                .or_filter(line2.eq(&query.query_text))
+                .order(id.asc())
+                .load::<Address>(conn)
+                .unwrap(),
+            x if x == AddressQueryType::City.to_string() => address
+                .filter(city.eq(&query.query_text))
+                .order(id.asc())
+                .load::<Address>(conn)
+                .unwrap(),
+            x if x == AddressQueryType::PostalCode.to_string() => address
+                .filter(postal_code.eq(&query.query_text))
+                .order(id.asc())
+                .load::<Address>(conn)
+                .unwrap(),
+            x if x == AddressQueryType::Country.to_string() => address
+                .filter(country.eq(&query.query_text))
+                .order(id.asc())
+                .load::<Address>(conn)
+                .unwrap(),
+            x if x == AddressQueryType::AddressType.to_string() => address
+                .filter(address_type.eq(&query.query_text))
+                .order(id.asc())
+                .load::<Address>(conn)
+                .unwrap(),
+            _ => vec![],
+        }
     }
 
     pub fn update(address_id: i32, updated_address: AddressEntity, conn: &PgConnection) -> bool {

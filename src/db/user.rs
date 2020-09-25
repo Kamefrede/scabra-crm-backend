@@ -5,12 +5,12 @@ use chrono::Utc;
 use crypto::digest::Digest;
 use crypto::sha3;
 
-use uuid::Uuid;
 use crate::models::user::User;
-use diesel::prelude::*;
-use crate::models::user_auth_token::{UserAuthToken, LoginInfo};
 use crate::models::user::UserForm;
+use crate::models::user_auth_token::{LoginInfo, UserAuthToken};
 use crate::schema::user_auth_token;
+use diesel::prelude::*;
+use uuid::Uuid;
 
 impl User {
     pub fn signup(user_form: UserForm, conn: &PgConnection) -> bool {

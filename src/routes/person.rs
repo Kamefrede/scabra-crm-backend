@@ -1,6 +1,6 @@
 use super::{rocket_status_from_response, CustomJsonResponse, JsonWebToken};
-use crate::models::person::PersonEntity;
 use crate::db::CrmDbConn;
+use crate::models::person::PersonEntity;
 use crate::services::person;
 use rocket::http::RawStr;
 use rocket_contrib::json::Json;

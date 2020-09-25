@@ -1,15 +1,11 @@
 use super::{rocket_status_from_response, CustomJsonResponse, JsonWebToken};
-use crate::models::address::{AddressEntity, AddressQuery};
 use crate::db::CrmDbConn;
+use crate::models::address::{AddressEntity, AddressQuery};
 use crate::services::address;
 use rocket_contrib::json::Json;
 
-
 #[get("/address")]
-pub fn find_all(
-    token: JsonWebToken,
-    conn: CrmDbConn
-) -> CustomJsonResponse {
+pub fn find_all(token: JsonWebToken, conn: CrmDbConn) -> CustomJsonResponse {
     if let Err(e) = token {
         return e;
     }
@@ -18,11 +14,7 @@ pub fn find_all(
 }
 
 #[get("/address/id/<id>")]
-pub fn find_by_id(
-    id: i32,
-    token: JsonWebToken,
-    conn: CrmDbConn
-) -> CustomJsonResponse {
+pub fn find_by_id(id: i32, token: JsonWebToken, conn: CrmDbConn) -> CustomJsonResponse {
     if let Err(e) = token {
         return e;
     }
@@ -30,11 +22,11 @@ pub fn find_by_id(
     rocket_status_from_response(response)
 }
 
-#[post("/address/query", format="json", data="<query>")]
+#[post("/address/query", format = "json", data = "<query>")]
 pub fn query(
     query: Json<AddressQuery>,
     token: JsonWebToken,
-    conn: CrmDbConn
+    conn: CrmDbConn,
 ) -> CustomJsonResponse {
     if let Err(e) = token {
         return e;
@@ -43,11 +35,11 @@ pub fn query(
     rocket_status_from_response(response)
 }
 
-#[post("/address", format="json", data="<address>")]
+#[post("/address", format = "json", data = "<address>")]
 pub fn insert(
     address: Json<AddressEntity>,
     token: JsonWebToken,
-    conn: CrmDbConn
+    conn: CrmDbConn,
 ) -> CustomJsonResponse {
     if let Err(e) = token {
         return e;
@@ -56,12 +48,12 @@ pub fn insert(
     rocket_status_from_response(response)
 }
 
-#[put("/address/<id>", format="json", data="<address>")]
+#[put("/address/<id>", format = "json", data = "<address>")]
 pub fn update(
     id: i32,
     address: Json<AddressEntity>,
     token: JsonWebToken,
-    conn: CrmDbConn
+    conn: CrmDbConn,
 ) -> CustomJsonResponse {
     if let Err(e) = token {
         return e;
@@ -71,11 +63,7 @@ pub fn update(
 }
 
 #[delete("/address/<id>")]
-pub fn delete(
-    id: i32,
-    token: JsonWebToken,
-    conn: CrmDbConn
-) -> CustomJsonResponse {
+pub fn delete(id: i32, token: JsonWebToken, conn: CrmDbConn) -> CustomJsonResponse {
     if let Err(e) = token {
         return e;
     }

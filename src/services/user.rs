@@ -1,8 +1,8 @@
 use crate::constants::message_constants;
-use crate::models::user::User;
 use crate::db::user_auth_token::generate_jwt_token;
 use crate::db::CrmDbConn;
 use crate::models::response::{Response, ResponseWithStatus};
+use crate::models::user::User;
 use crate::models::user::UserForm;
 use crate::models::user_auth_token::LoginInfo;
 use rocket::http::Status;

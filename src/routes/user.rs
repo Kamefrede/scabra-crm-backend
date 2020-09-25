@@ -1,11 +1,10 @@
 use super::{rocket_status_from_response, CustomJsonResponse};
 use crate::db::CrmDbConn;
+use crate::models::user::UserForm;
+use crate::models::user_auth_token::LoginInfo;
 use crate::services;
 use rocket::post;
 use rocket_contrib::json::Json;
-use crate::models::user_auth_token::LoginInfo;
-use crate::models::user::UserForm;
-
 
 #[post("/signup", format = "json", data = "<user>")]
 pub fn signup(user: Json<UserForm>, conn: CrmDbConn) -> CustomJsonResponse {

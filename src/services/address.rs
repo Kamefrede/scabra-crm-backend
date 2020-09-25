@@ -1,6 +1,6 @@
 use crate::constants::message_constants::*;
-use crate::models::address::{AddressEntity, Address, AddressQuery};
 use crate::db::CrmDbConn;
+use crate::models::address::{Address, AddressEntity, AddressQuery};
 use crate::models::response::{Response, ResponseWithStatus};
 use rocket::http::Status;
 
@@ -9,8 +9,8 @@ pub fn find_all(conn: CrmDbConn) -> ResponseWithStatus {
         status_code: Status::Ok.code,
         response: Response {
             message: String::from(MESSAGE_OK),
-            data: serde_json::to_value(Address::find_all(&*conn)).unwrap()
-        }
+            data: serde_json::to_value(Address::find_all(&*conn)).unwrap(),
+        },
     }
 }
 
@@ -21,16 +21,16 @@ pub fn find_by_id(id: i32, conn: CrmDbConn) -> ResponseWithStatus {
             status_code: Status::Ok.code,
             response: Response {
                 message: String::from(MESSAGE_OK),
-                data: serde_json::to_value(address).unwrap()
-            }
+                data: serde_json::to_value(address).unwrap(),
+            },
         }
     } else {
         ResponseWithStatus {
             status_code: Status::NotFound.code,
             response: Response {
                 message: format!("Could not find address with id {}", id),
-                data: serde_json::to_value("").unwrap()
-            }
+                data: serde_json::to_value("").unwrap(),
+            },
         }
     }
 }
@@ -43,8 +43,8 @@ pub fn insert(address: AddressEntity, conn: CrmDbConn) -> ResponseWithStatus {
             status_code: Status::InternalServerError.code,
             response: Response {
                 message: String::from(MESSAGE_CAN_NOT_INSERT_DATA),
-                data: serde_json::to_value("").unwrap()
-            }
+                data: serde_json::to_value("").unwrap(),
+            },
         }
     }
 }
@@ -63,8 +63,8 @@ pub fn update(id: i32, new_address: AddressEntity, conn: CrmDbConn) -> ResponseW
                 status_code: Status::InternalServerError.code,
                 response: Response {
                     message: String::from(MESSAGE_CAN_NOT_UPDATE_DATA),
-                    data: serde_json::to_value("").unwrap()
-                }
+                    data: serde_json::to_value("").unwrap(),
+                },
             }
         }
     } else {
@@ -72,8 +72,8 @@ pub fn update(id: i32, new_address: AddressEntity, conn: CrmDbConn) -> ResponseW
             status_code: Status::NotFound.code,
             response: Response {
                 message: format!("Could not find address with id {}", id),
-                data: serde_json::to_value("").unwrap()
-            }
+                data: serde_json::to_value("").unwrap(),
+            },
         }
     }
 }
@@ -88,8 +88,8 @@ pub fn delete(id: i32, conn: CrmDbConn) -> ResponseWithStatus {
                 status_code: Status::InternalServerError.code,
                 response: Response {
                     message: String::from(MESSAGE_CAN_NOT_DELETE_DATA),
-                    data: serde_json::to_value("").unwrap()
-                }
+                    data: serde_json::to_value("").unwrap(),
+                },
             }
         }
     } else {
@@ -97,8 +97,8 @@ pub fn delete(id: i32, conn: CrmDbConn) -> ResponseWithStatus {
             status_code: Status::NotFound.code,
             response: Response {
                 message: format!("Could not find address with id {}", id),
-                data: serde_json::to_value("").unwrap()
-            }
+                data: serde_json::to_value("").unwrap(),
+            },
         }
     }
 }

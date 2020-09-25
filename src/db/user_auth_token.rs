@@ -1,7 +1,8 @@
 use crate::constants::message_constants;
-use crate::models::user::User;
 use crate::db::CrmDbConn;
 use crate::models::response::Response;
+use crate::models::user::User;
+use crate::models::user_auth_token::{UserAuthToken, ONE_WEEK};
 use crate::proxies::naive_date_form_proxy::NaiveDateForm;
 use chrono::{NaiveDateTime, Utc};
 use diesel::PgConnection;
@@ -14,7 +15,6 @@ use rocket::request;
 use rocket::request::{FromRequest, Outcome, Request};
 use rocket::response::status;
 use rocket_contrib::json::Json;
-use crate::models::user_auth_token::{UserAuthToken, ONE_WEEK};
 
 impl<'a, 'r> FromRequest<'a, 'r> for UserAuthToken {
     type Error = status::Custom<Json<Response>>;
