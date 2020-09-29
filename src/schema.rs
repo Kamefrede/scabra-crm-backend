@@ -22,9 +22,9 @@ table! {
 }
 
 table! {
-    employee (person_id) {
-        person_id -> Int4,
-        company_id -> Int4,
+    employee (id) {
+        id -> Int4,
+        client_id -> Int4,
     }
 }
 
@@ -65,8 +65,8 @@ table! {
     }
 }
 
-joinable!(employee -> client (company_id));
-joinable!(employee -> person (person_id));
+joinable!(employee -> client (client_id));
+joinable!(employee -> person (id));
 joinable!(profile -> address (address_id));
 joinable!(profile -> person (person_id));
 joinable!(user -> person (person_id));

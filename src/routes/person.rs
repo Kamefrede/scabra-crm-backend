@@ -8,7 +8,7 @@ use rocket_contrib::json::Json;
 #[get("/person")]
 pub fn find_all(token: JsonWebToken, conn: CrmDbConn) -> CustomJsonResponse {
     if let Err(e) = token {
-        return e;
+        return e
     }
     let response = person::find_all(&conn);
     rocket_status_from_response(response)
@@ -17,7 +17,7 @@ pub fn find_all(token: JsonWebToken, conn: CrmDbConn) -> CustomJsonResponse {
 #[get("/person/id/<id>")]
 pub fn find_by_id(id: i32, token: JsonWebToken, conn: CrmDbConn) -> CustomJsonResponse {
     if let Err(e) = token {
-        return e;
+        return e
     }
     let response = person::find_by_id(id, &conn);
     rocket_status_from_response(response)
@@ -26,7 +26,7 @@ pub fn find_by_id(id: i32, token: JsonWebToken, conn: CrmDbConn) -> CustomJsonRe
 #[get("/person/name/<name>")]
 pub fn find_by_name(name: &RawStr, token: JsonWebToken, conn: CrmDbConn) -> CustomJsonResponse {
     if let Err(e) = token {
-        return e;
+        return e
     }
     let response = person::find_by_name(name, &conn);
     rocket_status_from_response(response)
@@ -39,7 +39,7 @@ pub fn insert(
     conn: CrmDbConn,
 ) -> CustomJsonResponse {
     if let Err(e) = token {
-        return e;
+        return e
     }
     let response = person::insert(&person.0, &conn);
     rocket_status_from_response(response)
@@ -53,7 +53,7 @@ pub fn update(
     conn: CrmDbConn,
 ) -> CustomJsonResponse {
     if let Err(e) = token {
-        return e;
+        return e
     }
     let response = person::update(id, &person.0, &conn);
     rocket_status_from_response(response)
@@ -62,7 +62,7 @@ pub fn update(
 #[delete("/person/<id>")]
 pub fn delete(id: i32, token: JsonWebToken, conn: CrmDbConn) -> CustomJsonResponse {
     if let Err(e) = token {
-        return e;
+        return e
     }
     let response = person::delete(id, &conn);
     rocket_status_from_response(response)

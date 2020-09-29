@@ -6,6 +6,7 @@ pub mod client;
 pub mod person;
 pub mod profile;
 pub mod user;
+pub mod employee;
 pub mod user_auth_token;
 
 #[database("mainDb")]

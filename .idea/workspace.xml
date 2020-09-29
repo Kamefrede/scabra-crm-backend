@@ -30,20 +30,22 @@
     <cargoProject FILE="$PROJECT_DIR$/Cargo.toml" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="490d91f4-0946-4692-8cf0-856a9d480261" name="Default Changelist" comment="formatting and refactoring">
-      <change afterPath="$PROJECT_DIR$/src/db/client.rs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/models/client.rs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/routes/client.rs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/services/client.rs" afterDir="false" />
+    <list default="true" id="490d91f4-0946-4692-8cf0-856a9d480261" name="Default Changelist" comment="implemented client">
+      <change afterPath="$PROJECT_DIR$/src/db/employee.rs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/models/employee.rs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/routes/employee.rs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/services/employee.rs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db_modelling/client.sql" beforeDir="false" afterPath="$PROJECT_DIR$/db_modelling/client.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/migrations/2020-09-11-152859_create_client/down.sql" beforeDir="false" afterPath="$PROJECT_DIR$/migrations/2020-09-11-152859_create_client/down.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/migrations/2020-09-11-152859_create_client/up.sql" beforeDir="false" afterPath="$PROJECT_DIR$/migrations/2020-09-11-152859_create_client/up.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db_modelling/employee.sql" beforeDir="false" afterPath="$PROJECT_DIR$/db_modelling/employee.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/2020-09-29-101104_create_emplyoee/up.sql" beforeDir="false" afterPath="$PROJECT_DIR$/migrations/2020-09-29-101104_create_emplyoee/up.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/db/mod.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/db/mod.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/db/profile.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/db/profile.rs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/lib.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib.rs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/models/mod.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/mod.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/address.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/address.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/client.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/client.rs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/routes/mod.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/mod.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/person.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/person.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/profile.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/profile.rs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/schema.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/schema.rs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/services/mod.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/mod.rs" afterDir="false" />
     </list>
@@ -206,7 +208,7 @@
       <workItem from="1600780390395" duration="14179000" />
       <workItem from="1601029241884" duration="258000" />
       <workItem from="1601029603932" duration="17053000" />
-      <workItem from="1601372388758" duration="4316000" />
+      <workItem from="1601372388758" duration="7191000" />
     </task>
     <task id="LOCAL-00001" summary="password hashing &amp; actual db migrations">
       <created>1599845049914</created>
@@ -292,7 +294,14 @@
       <option name="project" value="LOCAL" />
       <updated>1601052147993</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="implemented client">
+      <created>1601376812730</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1601376812730</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -322,7 +331,8 @@
     <MESSAGE value="profile done" />
     <MESSAGE value="run formatting" />
     <MESSAGE value="formatting and refactoring" />
-    <option name="LAST_COMMIT_MESSAGE" value="formatting and refactoring" />
+    <MESSAGE value="implemented client" />
+    <option name="LAST_COMMIT_MESSAGE" value="implemented client" />
   </component>
   <component name="WindowStateProjectService">
     <state x="70" y="205" key="#SQL_Dialects" timestamp="1600443679695">
@@ -361,22 +371,22 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="463" y="119" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1600783351346" />
-    <state width="1323" height="179" key="GridCell.Tab.0.bottom" timestamp="1601376738695">
+    <state width="1306" height="179" key="GridCell.Tab.0.bottom" timestamp="1601383815700">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="179" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1601376738695" />
-    <state width="1323" height="179" key="GridCell.Tab.0.center" timestamp="1601376738694">
+    <state width="1306" height="179" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1601383815700" />
+    <state width="1306" height="179" key="GridCell.Tab.0.center" timestamp="1601383815699">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="179" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1601376738694" />
-    <state width="1323" height="179" key="GridCell.Tab.0.left" timestamp="1601376738694">
+    <state width="1306" height="179" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1601383815699" />
+    <state width="1306" height="179" key="GridCell.Tab.0.left" timestamp="1601383815699">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="179" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1601376738694" />
-    <state width="1323" height="179" key="GridCell.Tab.0.right" timestamp="1601376738695">
+    <state width="1306" height="179" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1601383815699" />
+    <state width="1306" height="179" key="GridCell.Tab.0.right" timestamp="1601383815700">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="179" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1601376738695" />
+    <state width="1306" height="179" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1601383815700" />
     <state width="1323" height="172" key="GridCell.Tab.1.bottom" timestamp="1600796014301">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -397,18 +407,18 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="184" y="9" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1601029528368" />
-    <state x="275" y="97" key="Vcs.Push.Dialog.v2" timestamp="1601052153447">
+    <state x="275" y="97" key="Vcs.Push.Dialog.v2" timestamp="1601376821920">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="275" y="97" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1601052153447" />
+    <state x="275" y="97" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1601376821920" />
     <state x="293" y="0" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1601042762933">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="293" y="0" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1366.728@0.0.1366.728" timestamp="1601042762933" />
-    <state x="390" y="0" width="655" height="728" key="find.popup" timestamp="1601376648249">
+    <state x="390" y="0" width="655" height="728" key="find.popup" timestamp="1601383697992">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="390" y="0" width="655" height="728" key="find.popup/0.0.1366.728@0.0.1366.728" timestamp="1601376648249" />
+    <state x="390" y="0" width="655" height="728" key="find.popup/0.0.1366.728@0.0.1366.728" timestamp="1601383697992" />
     <state x="876" y="151" key="ftp.server.browser" timestamp="1600783126592">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -417,14 +427,14 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state width="600" height="428" key="javadoc.popup/0.0.1366.728@0.0.1366.728" timestamp="1600181148312" />
-    <state x="339" y="162" width="672" height="677" key="run.anything.popup" timestamp="1601376643592">
+    <state x="339" y="162" width="672" height="677" key="run.anything.popup" timestamp="1601383185105">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="339" y="162" width="672" height="677" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1601376643592" />
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1601376523313">
+    <state x="339" y="162" width="672" height="677" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1601383185105" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1601383016433">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1601376523313" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1601383016433" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>

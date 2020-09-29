@@ -59,6 +59,12 @@ pub fn launch() -> rocket::Rocket {
             routes::client::insert,
             routes::client::update,
             routes::client::delete,
+            routes::employee::find_all,
+            routes::employee::find_by_id,
+            routes::employee::find_all_employees_by_company,
+            routes::employee::insert,
+            routes::employee::update,
+            routes::employee::delete,
         ],
     )
 }

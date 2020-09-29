@@ -1,69 +1,64 @@
 use super::{rocket_status_from_response, CustomJsonResponse, JsonWebToken};
 use crate::db::CrmDbConn;
-use crate::models::address::AddressEntity;
-use crate::models::Query;
-use crate::services::address;
+use crate::models::employee::Employee;
+use crate::services::employee;
 use rocket_contrib::json::Json;
 
-#[get("/address")]
+#[get("/employee")]
 pub fn find_all(token: JsonWebToken, conn: CrmDbConn) -> CustomJsonResponse {
     if let Err(e) = token {
         return e
     }
-    let response = address::find_all(&conn);
+    let response = employee::find_all(&conn);
     rocket_status_from_response(response)
 }
 
-#[get("/address/id/<id>")]
+#[get("/employee/id/<id>")]
 pub fn find_by_id(id: i32, token: JsonWebToken, conn: CrmDbConn) -> CustomJsonResponse {
     if let Err(e) = token {
         return e
     }
-    let response = address::find_by_id(id, &conn);
+    let response = employee::find_by_id(id, &conn);
     rocket_status_from_response(response)
 }
 
-#[post("/address/query", format = "json", data = "<query>")]
-pub fn query(query: Json<Query>, token: JsonWebToken, conn: CrmDbConn) -> CustomJsonResponse {
+#[get("/employee/company/<id>")]
+pub fn find_all_employees_by_company(id: i32, token: JsonWebToken, conn: CrmDbConn) -> CustomJsonResponse {
     if let Err(e) = token {
         return e
     }
-    let response = address::query(query.0, &conn);
+    let response = employee::find_all_employees_by_company(id, &conn);
     rocket_status_from_response(response)
 }
 
-#[post("/address", format = "json", data = "<address>")]
-pub fn insert(
-    address: Json<AddressEntity>,
-    token: JsonWebToken,
-    conn: CrmDbConn,
-) -> CustomJsonResponse {
+#[post("/employee", format = "json", data = "<employee>")]
+pub fn insert(employee: Json<Employee>, token: JsonWebToken, conn: CrmDbConn) -> CustomJsonResponse {
     if let Err(e) = token {
         return e
     }
-    let response = address::insert(&address.0, &conn);
+    let response = employee::insert(&employee.0, &conn);
     rocket_status_from_response(response)
 }
 
-#[put("/address/<id>", format = "json", data = "<address>")]
+#[put("/employee/<id>", format = "json", data = "<employee>")]
 pub fn update(
     id: i32,
-    address: Json<AddressEntity>,
+    employee: Json<Employee>,
     token: JsonWebToken,
     conn: CrmDbConn,
 ) -> CustomJsonResponse {
     if let Err(e) = token {
         return e
     }
-    let response = address::update(id, &address.0, &conn);
+    let response = employee::update( &employee.0,id, &conn);
     rocket_status_from_response(response)
 }
 
-#[delete("/address/<id>")]
+#[delete("/employee/<id>")]
 pub fn delete(id: i32, token: JsonWebToken, conn: CrmDbConn) -> CustomJsonResponse {
     if let Err(e) = token {
         return e
     }
-    let response = address::delete(id, &conn);
+    let response = employee::delete(id, &conn);
     rocket_status_from_response(response)
 }
