@@ -21,7 +21,6 @@ mod routes;
 mod schema;
 mod services;
 
-
 /// #Actual entry endpoint
 /// Launching logic is handled here so that
 /// main.rs doesn't expose any of our internals.
@@ -54,6 +53,12 @@ pub fn launch() -> rocket::Rocket {
             routes::profile::update,
             routes::profile::delete,
             routes::profile::find_all,
+            routes::client::find_all,
+            routes::client::find_by_id,
+            routes::client::query,
+            routes::client::insert,
+            routes::client::update,
+            routes::client::delete,
         ],
     )
 }

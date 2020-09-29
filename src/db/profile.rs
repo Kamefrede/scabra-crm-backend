@@ -28,8 +28,11 @@ impl Profile {
                 .order(person_id.asc())
                 .load::<Self>(conn)
                 .unwrap(),
-            x if x == ProfileQueryType::AddressId.to_string() && x.parse::<i32>().is_ok() => {
-                let profile_option = Self::find_by_id(x.parse::<i32>().unwrap(), conn);
+            x if x == ProfileQueryType::AddressId.to_string()
+                && query.query_text.parse::<i32>().is_ok() =>
+            {
+                let profile_option =
+                    Self::find_by_id(query.query_text.parse::<i32>().unwrap(), conn);
                 profile_option.map_or(vec![], |prof| vec![prof])
             }
             x if x == ProfileQueryType::PhoneNumber.to_string() => profile

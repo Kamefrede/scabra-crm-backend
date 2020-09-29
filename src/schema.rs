@@ -16,9 +16,15 @@ table! {
         id -> Int4,
         name -> Varchar,
         address_id -> Int4,
-        employees -> Int4,
         client_type -> Varchar,
         nif -> Varchar,
+    }
+}
+
+table! {
+    employee (person_id) {
+        person_id -> Int4,
+        company_id -> Int4,
     }
 }
 
@@ -59,10 +65,19 @@ table! {
     }
 }
 
-joinable!(client -> person (employees));
+joinable!(employee -> client (company_id));
+joinable!(employee -> person (person_id));
 joinable!(profile -> address (address_id));
 joinable!(profile -> person (person_id));
 joinable!(user -> person (person_id));
 joinable!(user_auth_token -> user (user_id));
 
-allow_tables_to_appear_in_same_query!(address, client, person, profile, user, user_auth_token,);
+allow_tables_to_appear_in_same_query!(
+    address,
+    client,
+    employee,
+    person,
+    profile,
+    user,
+    user_auth_token,
+);

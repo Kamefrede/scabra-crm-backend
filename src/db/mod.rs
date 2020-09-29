@@ -2,6 +2,7 @@ use diesel::pg::PgConnection;
 use rocket_contrib::database;
 
 pub mod address;
+pub mod client;
 pub mod person;
 pub mod profile;
 pub mod user;
