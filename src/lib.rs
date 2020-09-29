@@ -12,6 +12,13 @@ extern crate serde_json;
 extern crate strum;
 #[macro_use]
 extern crate strum_macros;
+#[macro_use]
+extern crate log;
+extern crate pretty_env_logger;
+
+use crate::models::user_auth_token::UserAuthToken;
+use chrono::Utc;
+use diesel::prelude::*;
 
 mod constants;
 mod db;
@@ -29,8 +36,10 @@ mod services;
 pub fn launch() -> rocket::Rocket {
     use db::CrmDbConn;
     use dotenv::dotenv;
+    pretty_env_logger::init();
     dotenv().ok();
-    rocket::ignite().attach(CrmDbConn::fairing()).mount(
+
+    let rocket = rocket::ignite().attach(CrmDbConn::fairing()).mount(
         "/",
         routes![
             routes::user::login,
@@ -66,5 +75,23 @@ pub fn launch() -> rocket::Rocket {
             routes::employee::update,
             routes::employee::delete,
         ],
-    )
+    );
+    cleanup_old_tokens(&CrmDbConn::get_one(&rocket).unwrap());
+
+    rocket
+}
+
+fn cleanup_old_tokens(conn: &PgConnection) {
+    use crate::schema::user_auth_token::dsl::{expires_at, user_auth_token};
+    let old_tokens = user_auth_token.filter(expires_at.le(Utc::now().naive_utc()));
+    for token in old_tokens.load::<UserAuthToken>(conn).unwrap() {
+        info!(
+            "{}",
+            format!(
+                "Deleting token for user {} that expired at {:?}",
+                token.user_id, token.expires_at
+            )
+        )
+    }
+    diesel::delete(old_tokens).execute(conn).unwrap();
 }

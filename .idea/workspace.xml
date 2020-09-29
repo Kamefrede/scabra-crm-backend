@@ -30,24 +30,13 @@
     <cargoProject FILE="$PROJECT_DIR$/Cargo.toml" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="490d91f4-0946-4692-8cf0-856a9d480261" name="Default Changelist" comment="implemented client">
-      <change afterPath="$PROJECT_DIR$/src/db/employee.rs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/models/employee.rs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/routes/employee.rs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/services/employee.rs" afterDir="false" />
+    <list default="true" id="490d91f4-0946-4692-8cf0-856a9d480261" name="Default Changelist" comment="formatting">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db_modelling/employee.sql" beforeDir="false" afterPath="$PROJECT_DIR$/db_modelling/employee.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/migrations/2020-09-29-101104_create_emplyoee/up.sql" beforeDir="false" afterPath="$PROJECT_DIR$/migrations/2020-09-29-101104_create_emplyoee/up.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/db/mod.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/db/mod.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Cargo.lock" beforeDir="false" afterPath="$PROJECT_DIR$/Cargo.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Cargo.toml" beforeDir="false" afterPath="$PROJECT_DIR$/Cargo.toml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/lib.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models/mod.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/mod.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/address.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/address.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/client.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/client.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/mod.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/mod.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/person.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/person.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/profile.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/profile.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/schema.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/schema.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/mod.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/mod.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/models/user_auth_token.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/user_auth_token.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proxies/naive_date_form_proxy.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/proxies/naive_date_form_proxy.rs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -89,9 +78,10 @@
   <component name="RunAnythingCache">
     <option name="myCommands">
       <command value="cargo clippy" />
+      <command value="run" />
     </option>
   </component>
-  <component name="RunManager" selected="Cargo.clippy">
+  <component name="RunManager" selected="Cargo.Fmt">
     <configuration name="Fmt" type="CargoCommandRunConfiguration" factoryName="Cargo Command" nameIsGenerated="true">
       <option name="channel" value="DEFAULT" />
       <option name="command" value="fmt --all -v" />
@@ -118,7 +108,7 @@
     </configuration>
     <configuration name="clippy" type="CargoCommandRunConfiguration" factoryName="Cargo Command">
       <option name="channel" value="DEFAULT" />
-      <option name="command" value="clippy --all -- -Z unstable-options" />
+      <option name="command" value="clippy -- -Z unstable-options" />
       <option name="allFeatures" value="false" />
       <option name="emulateTerminal" value="false" />
       <option name="backtrace" value="FULL" />
@@ -140,14 +130,16 @@
         <option name="CARGO.BUILD_TASK_PROVIDER" enabled="true" />
       </method>
     </configuration>
-    <configuration name="run" type="CargoCommandRunConfiguration" factoryName="Cargo Command" temporary="true">
+    <configuration name="run" type="CargoCommandRunConfiguration" factoryName="Cargo Command">
       <option name="channel" value="DEFAULT" />
       <option name="command" value="run" />
       <option name="allFeatures" value="false" />
       <option name="emulateTerminal" value="false" />
-      <option name="backtrace" value="SHORT" />
+      <option name="backtrace" value="FULL" />
       <option name="workingDirectory" value="file://$PROJECT_DIR$" />
-      <envs />
+      <envs>
+        <env name="RUST_LOG" value="trace" />
+      </envs>
       <method v="2">
         <option name="CARGO.BUILD_TASK_PROVIDER" enabled="true" />
       </method>
@@ -167,14 +159,13 @@
     <list>
       <item itemvalue="Cargo.clippy" />
       <item itemvalue="Cargo.Fmt" />
+      <item itemvalue="Cargo.run" />
       <item itemvalue="Cargo.build" />
       <item itemvalue="Cargo.doc" />
-      <item itemvalue="Cargo.run" />
       <item itemvalue="Cargo.test" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Cargo.run" />
         <item itemvalue="Cargo.clippy" />
         <item itemvalue="Cargo.clippy" />
         <item itemvalue="Cargo.clippy" />
@@ -208,7 +199,7 @@
       <workItem from="1600780390395" duration="14179000" />
       <workItem from="1601029241884" duration="258000" />
       <workItem from="1601029603932" duration="17053000" />
-      <workItem from="1601372388758" duration="7191000" />
+      <workItem from="1601372388758" duration="10861000" />
     </task>
     <task id="LOCAL-00001" summary="password hashing &amp; actual db migrations">
       <created>1599845049914</created>
@@ -301,7 +292,21 @@
       <option name="project" value="LOCAL" />
       <updated>1601376812730</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="added employee">
+      <created>1601383843947</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1601383843947</updated>
+    </task>
+    <task id="LOCAL-00015" summary="formatting">
+      <created>1601383885891</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1601383885891</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -332,7 +337,9 @@
     <MESSAGE value="run formatting" />
     <MESSAGE value="formatting and refactoring" />
     <MESSAGE value="implemented client" />
-    <option name="LAST_COMMIT_MESSAGE" value="implemented client" />
+    <MESSAGE value="added employee" />
+    <MESSAGE value="formatting" />
+    <option name="LAST_COMMIT_MESSAGE" value="formatting" />
   </component>
   <component name="WindowStateProjectService">
     <state x="70" y="205" key="#SQL_Dialects" timestamp="1600443679695">
@@ -347,10 +354,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="582" y="229" width="415" height="381" key="#Vim_Emulation/0.0.1366.728@0.0.1366.728" timestamp="1600249590003" />
-    <state x="266" y="30" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1601373348306">
+    <state x="266" y="30" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1601387592197">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="266" y="30" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1366.728@0.0.1366.728" timestamp="1601373348306" />
+    <state x="266" y="30" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1366.728@0.0.1366.728" timestamp="1601387592197" />
     <state x="457" y="166" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1599842273372">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -371,22 +378,22 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="463" y="119" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1600783351346" />
-    <state width="1306" height="179" key="GridCell.Tab.0.bottom" timestamp="1601383815700">
+    <state width="1323" height="179" key="GridCell.Tab.0.bottom" timestamp="1601387369919">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1306" height="179" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1601383815700" />
-    <state width="1306" height="179" key="GridCell.Tab.0.center" timestamp="1601383815699">
+    <state width="1323" height="179" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1601387369919" />
+    <state width="1323" height="179" key="GridCell.Tab.0.center" timestamp="1601387369919">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1306" height="179" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1601383815699" />
-    <state width="1306" height="179" key="GridCell.Tab.0.left" timestamp="1601383815699">
+    <state width="1323" height="179" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1601387369919" />
+    <state width="1323" height="179" key="GridCell.Tab.0.left" timestamp="1601387369919">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1306" height="179" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1601383815699" />
-    <state width="1306" height="179" key="GridCell.Tab.0.right" timestamp="1601383815700">
+    <state width="1323" height="179" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1601387369919" />
+    <state width="1323" height="179" key="GridCell.Tab.0.right" timestamp="1601387369919">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1306" height="179" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1601383815700" />
+    <state width="1323" height="179" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1601387369919" />
     <state width="1323" height="172" key="GridCell.Tab.1.bottom" timestamp="1600796014301">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -407,18 +414,22 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="184" y="9" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1601029528368" />
-    <state x="275" y="97" key="Vcs.Push.Dialog.v2" timestamp="1601376821920">
+    <state x="275" y="97" key="Vcs.Push.Dialog.v2" timestamp="1601383889591">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="275" y="97" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1601376821920" />
-    <state x="293" y="0" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1601042762933">
+    <state x="275" y="97" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1601383889591" />
+    <state x="413" y="169" key="com.intellij.database.dbimport.ImportUtil.ChooseTargetDialog" timestamp="1601386387957">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="293" y="0" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1366.728@0.0.1366.728" timestamp="1601042762933" />
-    <state x="390" y="0" width="655" height="728" key="find.popup" timestamp="1601383697992">
+    <state x="413" y="169" key="com.intellij.database.dbimport.ImportUtil.ChooseTargetDialog/0.0.1366.728@0.0.1366.728" timestamp="1601386387957" />
+    <state x="293" y="0" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1601387424585">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="390" y="0" width="655" height="728" key="find.popup/0.0.1366.728@0.0.1366.728" timestamp="1601383697992" />
+    <state x="293" y="0" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1366.728@0.0.1366.728" timestamp="1601387424585" />
+    <state x="390" y="0" width="655" height="728" key="find.popup" timestamp="1601386540973">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="390" y="0" width="655" height="728" key="find.popup/0.0.1366.728@0.0.1366.728" timestamp="1601386540973" />
     <state x="876" y="151" key="ftp.server.browser" timestamp="1600783126592">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -427,14 +438,14 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state width="600" height="428" key="javadoc.popup/0.0.1366.728@0.0.1366.728" timestamp="1600181148312" />
-    <state x="339" y="162" width="672" height="677" key="run.anything.popup" timestamp="1601383185105">
+    <state x="339" y="162" width="672" height="677" key="run.anything.popup" timestamp="1601384057652">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="339" y="162" width="672" height="677" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1601383185105" />
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1601383016433">
+    <state x="339" y="162" width="672" height="677" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1601384057652" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1601387043313">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1601383016433" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1601387043313" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
