@@ -61,7 +61,7 @@ pub fn get_latest_event(calendar_state: &State<CalendarState>) -> ResponseWithSt
     )
 }
 
-pub fn query(query: Query, calendar_state: &State<CalendarState>) -> ResponseWithStatus {
+pub fn query(query: &Query, calendar_state: &State<CalendarState>) -> ResponseWithStatus {
     let calendar = calendar_state.calendar.lock().unwrap();
     ResponseWithStatus::ok_with_data(calendar::query(query, &calendar))
 }

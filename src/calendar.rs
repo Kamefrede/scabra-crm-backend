@@ -37,10 +37,48 @@ pub fn add_event(calendar: &mut Calendar, event_json: &EventJson) {
     write_calendar_from_env(calendar);
 }
 
-//TODO finish this tomorrow
+//Future TODO: See if it's needed to add timestamp stuff
 //Future TODO: implement fuzzy searching
-pub fn query(query: Query, calendar: &Calendar) -> Vec<Events> {
-    match query.query_type {
+pub fn query(query: &Query, calendar: &Calendar) -> Vec<Events> {
+    match (*query.query_type).to_string() {
+        x if x == EventQueryType::Status.to_string() => calendar
+            .events
+            .iter()
+            .cloned()
+            .filter(|event| event.status == query.query_text)
+            .collect(),
+        x if x == EventQueryType::Description.to_string() => calendar
+            .events
+            .iter()
+            .cloned()
+            .filter(|event| event.description == query.query_text)
+            .collect(),
+        x if x == EventQueryType::Location.to_string() => calendar
+            .events
+            .iter()
+            .cloned()
+            .filter(|event| event.location == query.query_text)
+            .collect(),
+        x if x == EventQueryType::Summary.to_string() => calendar
+            .events
+            .iter()
+            .cloned()
+            .filter(|event| event.summary == query.query_text)
+            .collect(),
+        x if x == EventQueryType::Transp.to_string() => calendar
+            .events
+            .iter()
+            .cloned()
+            .filter(|event| event.transp == query.query_text)
+            .collect(),
+        x if x == EventQueryType::Status.to_string() && query.query_text.parse::<u32>().is_ok() => {
+            calendar
+                .events
+                .iter()
+                .cloned()
+                .filter(|event| event.sequence == query.query_text.parse::<u32>().unwrap())
+                .collect()
+        }
         _ => vec![],
     }
 }

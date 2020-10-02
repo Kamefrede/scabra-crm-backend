@@ -40,7 +40,7 @@ pub fn query(
     if let Err(e) = token {
         return e;
     }
-    let response = calendar::query(query.0, &calendar_state);
+    let response = calendar::query(&query.0, &calendar_state);
     rocket_status_from_response(response)
 }
 

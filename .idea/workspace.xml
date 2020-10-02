@@ -30,22 +30,12 @@
     <cargoProject FILE="$PROJECT_DIR$/Cargo.toml" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="490d91f4-0946-4692-8cf0-856a9d480261" name="Default Changelist" comment="clean up old tokens on launch">
-      <change afterPath="$PROJECT_DIR$/calendar.ics" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/calendar.rs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/models/calendar.rs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/proxies/event_proxy.rs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/routes/calendar.rs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/services/calendar.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.env.example" beforeDir="false" afterPath="$PROJECT_DIR$/.env.example" afterDir="false" />
+    <list default="true" id="490d91f4-0946-4692-8cf0-856a9d480261" name="Default Changelist" comment="todo: finished up event query">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Cargo.lock" beforeDir="false" afterPath="$PROJECT_DIR$/Cargo.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Cargo.toml" beforeDir="false" afterPath="$PROJECT_DIR$/Cargo.toml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models/mod.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/mod.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/proxies/mod.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/proxies/mod.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/mod.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/mod.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/mod.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/mod.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/calendar.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/calendar.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/models/calendar.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/calendar.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/calendar.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/calendar.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/calendar.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/calendar.rs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -90,7 +80,7 @@
       <command value="run" />
     </option>
   </component>
-  <component name="RunManager" selected="Cargo.clippy">
+  <component name="RunManager" selected="Cargo.Fmt">
     <configuration name="Fmt" type="CargoCommandRunConfiguration" factoryName="Cargo Command" nameIsGenerated="true">
       <option name="channel" value="DEFAULT" />
       <option name="command" value="fmt --all -v" />
@@ -224,7 +214,9 @@
       <workItem from="1601029603932" duration="17053000" />
       <workItem from="1601372388758" duration="11921000" />
       <workItem from="1601459249274" duration="8966000" />
-      <workItem from="1601476724625" duration="9133000" />
+      <workItem from="1601476724625" duration="9914000" />
+      <workItem from="1601650468937" duration="1701000" />
+      <workItem from="1601653414001" duration="737000" />
     </task>
     <task id="LOCAL-00001" summary="password hashing &amp; actual db migrations">
       <created>1599845049914</created>
@@ -338,7 +330,14 @@
       <option name="project" value="LOCAL" />
       <updated>1601387787693</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="todo: finished up event query">
+      <created>1601486030956</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1601486030956</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -372,7 +371,8 @@
     <MESSAGE value="added employee" />
     <MESSAGE value="formatting" />
     <MESSAGE value="clean up old tokens on launch" />
-    <option name="LAST_COMMIT_MESSAGE" value="clean up old tokens on launch" />
+    <MESSAGE value="todo: finished up event query" />
+    <option name="LAST_COMMIT_MESSAGE" value="todo: finished up event query" />
   </component>
   <component name="WindowStateProjectService">
     <state x="70" y="205" key="#SQL_Dialects" timestamp="1600443679695">
@@ -411,22 +411,22 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="463" y="119" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1600783351346" />
-    <state width="1323" height="179" key="GridCell.Tab.0.bottom" timestamp="1601485974953">
+    <state width="1323" height="179" key="GridCell.Tab.0.bottom" timestamp="1601654031240">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="179" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1601485974953" />
-    <state width="1323" height="179" key="GridCell.Tab.0.center" timestamp="1601485974953">
+    <state width="1323" height="179" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1601654031240" />
+    <state width="1323" height="179" key="GridCell.Tab.0.center" timestamp="1601654031240">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="179" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1601485974953" />
-    <state width="1323" height="179" key="GridCell.Tab.0.left" timestamp="1601485974952">
+    <state width="1323" height="179" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1601654031240" />
+    <state width="1323" height="179" key="GridCell.Tab.0.left" timestamp="1601654031240">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="179" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1601485974952" />
-    <state width="1323" height="179" key="GridCell.Tab.0.right" timestamp="1601485974953">
+    <state width="1323" height="179" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1601654031240" />
+    <state width="1323" height="179" key="GridCell.Tab.0.right" timestamp="1601654031240">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="179" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1601485974953" />
+    <state width="1323" height="179" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1601654031240" />
     <state width="1323" height="172" key="GridCell.Tab.1.bottom" timestamp="1600796014301">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -447,10 +447,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="184" y="9" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1601029528368" />
-    <state x="275" y="97" key="Vcs.Push.Dialog.v2" timestamp="1601387800818">
+    <state x="275" y="97" key="Vcs.Push.Dialog.v2" timestamp="1601486036230">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="275" y="97" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1601387800818" />
+    <state x="275" y="97" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1601486036230" />
     <state x="413" y="169" key="com.intellij.database.dbimport.ImportUtil.ChooseTargetDialog" timestamp="1601386387957">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -459,10 +459,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="293" y="0" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1366.728@0.0.1366.728" timestamp="1601484873700" />
-    <state x="390" y="0" width="655" height="728" key="find.popup" timestamp="1601477521781">
+    <state x="390" y="0" width="655" height="728" key="find.popup" timestamp="1601652612707">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="390" y="0" width="655" height="728" key="find.popup/0.0.1366.728@0.0.1366.728" timestamp="1601477521781" />
+    <state x="390" y="0" width="655" height="728" key="find.popup/0.0.1366.728@0.0.1366.728" timestamp="1601652612707" />
     <state x="876" y="151" key="ftp.server.browser" timestamp="1600783126592">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -475,10 +475,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="339" y="162" width="672" height="677" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1601461395158" />
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1601485517620">
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1601652340685">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1601485517620" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1601652340685" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
