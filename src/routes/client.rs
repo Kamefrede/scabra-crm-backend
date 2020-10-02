@@ -28,7 +28,7 @@ pub fn query(query: Json<Query>, token: JsonWebToken, conn: CrmDbConn) -> Custom
     if let Err(e) = token {
         return e;
     }
-    let response = client::query(query.0, &conn);
+    let response = client::query(&query.0, &conn);
     rocket_status_from_response(response)
 }
 

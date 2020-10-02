@@ -24,7 +24,7 @@ pub fn insert(client: &ClientEntity, conn: &CrmDbConn) -> ResponseWithStatus {
     }
 }
 
-pub fn query(query: Query, conn: &CrmDbConn) -> ResponseWithStatus {
+pub fn query(query: &Query, conn: &CrmDbConn) -> ResponseWithStatus {
     ResponseWithStatus::ok_with_data(Client::query(query, &**conn))
 }
 

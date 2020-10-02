@@ -24,7 +24,7 @@ pub fn insert(profile: &Profile, conn: &CrmDbConn) -> ResponseWithStatus {
     }
 }
 
-pub fn query(query: Query, conn: &CrmDbConn) -> ResponseWithStatus {
+pub fn query(query: &Query, conn: &CrmDbConn) -> ResponseWithStatus {
     ResponseWithStatus::ok_with_data(Profile::query(query, &**conn))
 }
 

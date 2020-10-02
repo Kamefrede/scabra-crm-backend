@@ -21,8 +21,8 @@ impl Client {
     }
 
     //TODO: Implement fuzzy searching
-    pub fn query(query: Query, conn: &PgConnection) -> Vec<Self> {
-        match query.query_type {
+    pub fn query(query: &Query, conn: &PgConnection) -> Vec<Self> {
+        match (*query.query_type).to_string() {
             x if x == ClientQueryType::AddressId.to_string()
                 && query.query_text.parse::<i32>().is_ok() =>
             {

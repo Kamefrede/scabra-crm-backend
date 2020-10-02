@@ -24,7 +24,7 @@ pub fn insert(address: &AddressEntity, conn: &CrmDbConn) -> ResponseWithStatus {
     }
 }
 
-pub fn query(query: Query, conn: &CrmDbConn) -> ResponseWithStatus {
+pub fn query(query: &Query, conn: &CrmDbConn) -> ResponseWithStatus {
     ResponseWithStatus::ok_with_data(Address::query(query, &**conn))
 }
 

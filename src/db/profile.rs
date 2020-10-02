@@ -21,8 +21,8 @@ impl Profile {
     }
 
     //TODO: Implement fuzzy query searching
-    pub fn query(query: Query, conn: &PgConnection) -> Vec<Self> {
-        match query.query_type {
+    pub fn query(query: &Query, conn: &PgConnection) -> Vec<Self> {
+        match (*query.query_type).to_string() {
             x if x == ProfileQueryType::DisplayName.to_string() => profile
                 .filter(displayname.eq(&query.query_text))
                 .order(person_id.asc())

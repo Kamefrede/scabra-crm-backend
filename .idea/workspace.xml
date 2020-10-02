@@ -411,22 +411,22 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="463" y="119" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1600783351346" />
-    <state width="1323" height="179" key="GridCell.Tab.0.bottom" timestamp="1601654031240">
+    <state width="1323" height="179" key="GridCell.Tab.0.bottom" timestamp="1601654362209">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="179" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1601654031240" />
-    <state width="1323" height="179" key="GridCell.Tab.0.center" timestamp="1601654031240">
+    <state width="1323" height="179" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1601654362209" />
+    <state width="1323" height="179" key="GridCell.Tab.0.center" timestamp="1601654362209">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="179" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1601654031240" />
-    <state width="1323" height="179" key="GridCell.Tab.0.left" timestamp="1601654031240">
+    <state width="1323" height="179" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1601654362209" />
+    <state width="1323" height="179" key="GridCell.Tab.0.left" timestamp="1601654362209">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="179" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1601654031240" />
-    <state width="1323" height="179" key="GridCell.Tab.0.right" timestamp="1601654031240">
+    <state width="1323" height="179" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1601654362209" />
+    <state width="1323" height="179" key="GridCell.Tab.0.right" timestamp="1601654362209">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="179" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1601654031240" />
+    <state width="1323" height="179" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1601654362209" />
     <state width="1323" height="172" key="GridCell.Tab.1.bottom" timestamp="1600796014301">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -459,10 +459,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="293" y="0" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1366.728@0.0.1366.728" timestamp="1601484873700" />
-    <state x="390" y="0" width="655" height="728" key="find.popup" timestamp="1601652612707">
+    <state x="390" y="0" width="655" height="728" key="find.popup" timestamp="1601654225576">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="390" y="0" width="655" height="728" key="find.popup/0.0.1366.728@0.0.1366.728" timestamp="1601652612707" />
+    <state x="390" y="0" width="655" height="728" key="find.popup/0.0.1366.728@0.0.1366.728" timestamp="1601654225576" />
     <state x="876" y="151" key="ftp.server.browser" timestamp="1600783126592">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -475,10 +475,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="339" y="162" width="672" height="677" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1601461395158" />
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1601652340685">
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1601654239493">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1601652340685" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1601654239493" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>

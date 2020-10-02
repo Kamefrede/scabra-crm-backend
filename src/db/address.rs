@@ -23,8 +23,8 @@ impl Address {
     }
 
     //TODO: Fuzzy searching from DB
-    pub fn query(query: Query, conn: &PgConnection) -> Vec<Self> {
-        match query.query_type {
+    pub fn query(query: &Query, conn: &PgConnection) -> Vec<Self> {
+        match (*query.query_type).to_string() {
             x if x == AddressQueryType::Name.to_string() => address
                 .filter(name.eq(&query.query_text))
                 .order(id.asc())
