@@ -71,7 +71,7 @@ pub fn query(query: &Query, calendar: &Calendar) -> Vec<Events> {
             .cloned()
             .filter(|event| event.transp == query.query_text)
             .collect(),
-        x if x == EventQueryType::Status.to_string() && query.query_text.parse::<u32>().is_ok() => {
+        x if x == EventQueryType::Sequence.to_string() && query.query_text.parse::<u32>().is_ok() => {
             calendar
                 .events
                 .iter()

@@ -30,12 +30,8 @@
     <cargoProject FILE="$PROJECT_DIR$/Cargo.toml" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="490d91f4-0946-4692-8cf0-856a9d480261" name="Default Changelist" comment="todo: finished up event query">
+    <list default="true" id="490d91f4-0946-4692-8cf0-856a9d480261" name="Default Changelist" comment="Change queries to be borrows instead of moving values!">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/calendar.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/calendar.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models/calendar.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/calendar.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/calendar.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/calendar.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/calendar.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/calendar.rs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -80,7 +76,7 @@
       <command value="run" />
     </option>
   </component>
-  <component name="RunManager" selected="Cargo.Fmt">
+  <component name="RunManager" selected="Cargo.run">
     <configuration name="Fmt" type="CargoCommandRunConfiguration" factoryName="Cargo Command" nameIsGenerated="true">
       <option name="channel" value="DEFAULT" />
       <option name="command" value="fmt --all -v" />
@@ -216,7 +212,7 @@
       <workItem from="1601459249274" duration="8966000" />
       <workItem from="1601476724625" duration="9914000" />
       <workItem from="1601650468937" duration="1701000" />
-      <workItem from="1601653414001" duration="737000" />
+      <workItem from="1601653414001" duration="1463000" />
     </task>
     <task id="LOCAL-00001" summary="password hashing &amp; actual db migrations">
       <created>1599845049914</created>
@@ -337,7 +333,21 @@
       <option name="project" value="LOCAL" />
       <updated>1601486030956</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="Added querying to events">
+      <created>1601654202201</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1601654202201</updated>
+    </task>
+    <task id="LOCAL-00019" summary="Change queries to be borrows instead of moving values!">
+      <created>1601654385443</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1601654385443</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -372,7 +382,9 @@
     <MESSAGE value="formatting" />
     <MESSAGE value="clean up old tokens on launch" />
     <MESSAGE value="todo: finished up event query" />
-    <option name="LAST_COMMIT_MESSAGE" value="todo: finished up event query" />
+    <MESSAGE value="Added querying to events" />
+    <MESSAGE value="Change queries to be borrows instead of moving values!" />
+    <option name="LAST_COMMIT_MESSAGE" value="Change queries to be borrows instead of moving values!" />
   </component>
   <component name="WindowStateProjectService">
     <state x="70" y="205" key="#SQL_Dialects" timestamp="1600443679695">
@@ -411,22 +423,22 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="463" y="119" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1600783351346" />
-    <state width="1323" height="179" key="GridCell.Tab.0.bottom" timestamp="1601654362209">
+    <state width="1323" height="179" key="GridCell.Tab.0.bottom" timestamp="1601654960809">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="179" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1601654362209" />
-    <state width="1323" height="179" key="GridCell.Tab.0.center" timestamp="1601654362209">
+    <state width="1323" height="179" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1601654960809" />
+    <state width="1323" height="179" key="GridCell.Tab.0.center" timestamp="1601654960808">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="179" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1601654362209" />
-    <state width="1323" height="179" key="GridCell.Tab.0.left" timestamp="1601654362209">
+    <state width="1323" height="179" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1601654960808" />
+    <state width="1323" height="179" key="GridCell.Tab.0.left" timestamp="1601654960808">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="179" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1601654362209" />
-    <state width="1323" height="179" key="GridCell.Tab.0.right" timestamp="1601654362209">
+    <state width="1323" height="179" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1601654960808" />
+    <state width="1323" height="179" key="GridCell.Tab.0.right" timestamp="1601654960809">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="179" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1601654362209" />
+    <state width="1323" height="179" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1601654960809" />
     <state width="1323" height="172" key="GridCell.Tab.1.bottom" timestamp="1600796014301">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -475,10 +487,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="339" y="162" width="672" height="677" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1601461395158" />
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1601654239493">
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1601654887443">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1601654239493" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1601654887443" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
