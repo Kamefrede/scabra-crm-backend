@@ -5,7 +5,6 @@ use std::env;
 use web_ical::{Calendar, Events};
 
 const CALENDAR_VERSION: &str = "2.0";
-const CALENDAR_PRODID: &str = "-//My Business Inc//My Calendar 70.9054//EN";
 const CALENDAR_SCALE: &str = "GREGORIAN";
 const CALENDAR_METHOD: &str = "PUBLISH";
 
@@ -71,7 +70,9 @@ pub fn query(query: &Query, calendar: &Calendar) -> Vec<Events> {
             .cloned()
             .filter(|event| event.transp == query.query_text)
             .collect(),
-        x if x == EventQueryType::Sequence.to_string() && query.query_text.parse::<u32>().is_ok() => {
+        x if x == EventQueryType::Sequence.to_string()
+            && query.query_text.parse::<u32>().is_ok() =>
+        {
             calendar
                 .events
                 .iter()
@@ -164,16 +165,22 @@ pub fn write_calendar_to_file(file_path: &str, calendar: &Calendar) -> bool {
  * perhaps
  */
 pub fn create_calendar_from_env() -> Calendar {
+    let calendar_prodid =
+        env::var("CALENDAR_PRODID").expect("CALENDAR_PRODID should be defined in the .env file");
     let calendar_name =
         env::var("CALENDAR_NAME").expect("CALENDAR_NAME should be defined in the .env file");
     let calendar_timezone = env::var("CALENDAR_TIMEZONE")
         .expect("CALENDAR_TIMEZONE should be defined in the .env file");
-    create_calendar(&calendar_name, &calendar_timezone)
+    create_calendar(&calendar_prodid, &calendar_name, &calendar_timezone)
 }
 
-pub fn create_calendar(calendar_name: &str, calendar_timezone: &str) -> Calendar {
+pub fn create_calendar(
+    calendar_prodid: &str,
+    calendar_name: &str,
+    calendar_timezone: &str,
+) -> Calendar {
     Calendar::create(
-        CALENDAR_PRODID,
+        calendar_prodid,
         CALENDAR_VERSION,
         CALENDAR_SCALE,
         CALENDAR_METHOD,

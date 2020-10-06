@@ -32,6 +32,11 @@
   <component name="ChangeListManager">
     <list default="true" id="490d91f4-0946-4692-8cf0-856a9d480261" name="Default Changelist" comment="Change queries to be borrows instead of moving values!">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Cargo.toml" beforeDir="false" afterPath="$PROJECT_DIR$/Cargo.toml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/calendar.ics" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/calendar.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/calendar.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/schema.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/schema.rs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,10 +70,10 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="cf.first.check.clang-format" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/target" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/Cargo.toml" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="org.rust.cargo.project.model.PROJECT_DISCOVERY" value="true" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="settings.editor.selected.configurable" value="language.rust.rustfmt" />
   </component>
   <component name="RunAnythingCache">
     <option name="myCommands">
@@ -164,13 +169,13 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="Cargo.clippy" />
       <item itemvalue="Cargo.Fmt" />
+      <item itemvalue="Cargo.clippy" />
       <item itemvalue="Cargo.run" />
+      <item itemvalue="Cargo.Test calendar::test_calendar" />
       <item itemvalue="Cargo.build" />
       <item itemvalue="Cargo.doc" />
       <item itemvalue="Cargo.test" />
-      <item itemvalue="Cargo.Test calendar::test_calendar" />
     </list>
     <recent_temporary>
       <list>
@@ -183,7 +188,10 @@
   </component>
   <component name="RustProjectSettings">
     <option name="externalLinter" value="Clippy" />
+    <option name="runExternalLinterOnTheFly" value="true" />
+    <option name="runRustfmtOnSave" value="true" />
     <option name="toolchainHomeDirectory" value="$USER_HOME$/.cargo/bin" />
+    <option name="useRustfmt" value="true" />
     <option name="version" value="2" />
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -213,6 +221,10 @@
       <workItem from="1601476724625" duration="9914000" />
       <workItem from="1601650468937" duration="1701000" />
       <workItem from="1601653414001" duration="1463000" />
+      <workItem from="1601995763112" duration="377000" />
+      <workItem from="1601996155964" duration="896000" />
+      <workItem from="1601998760961" duration="456000" />
+      <workItem from="1601999568792" duration="2800000" />
     </task>
     <task id="LOCAL-00001" summary="password hashing &amp; actual db migrations">
       <created>1599845049914</created>
@@ -423,22 +435,22 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="463" y="119" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1600783351346" />
-    <state width="1323" height="179" key="GridCell.Tab.0.bottom" timestamp="1601654960809">
+    <state width="1323" height="179" key="GridCell.Tab.0.bottom" timestamp="1602000703870">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="179" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1601654960809" />
-    <state width="1323" height="179" key="GridCell.Tab.0.center" timestamp="1601654960808">
+    <state width="1323" height="179" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1602000703870" />
+    <state width="1323" height="179" key="GridCell.Tab.0.center" timestamp="1602000703870">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="179" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1601654960808" />
-    <state width="1323" height="179" key="GridCell.Tab.0.left" timestamp="1601654960808">
+    <state width="1323" height="179" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1602000703870" />
+    <state width="1323" height="179" key="GridCell.Tab.0.left" timestamp="1602000703870">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="179" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1601654960808" />
-    <state width="1323" height="179" key="GridCell.Tab.0.right" timestamp="1601654960809">
+    <state width="1323" height="179" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1602000703870" />
+    <state width="1323" height="179" key="GridCell.Tab.0.right" timestamp="1602000703870">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="179" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1601654960809" />
+    <state width="1323" height="179" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1602000703870" />
     <state width="1323" height="172" key="GridCell.Tab.1.bottom" timestamp="1600796014301">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -455,10 +467,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state width="1323" height="172" key="GridCell.Tab.1.right/0.0.1366.728@0.0.1366.728" timestamp="1600796014300" />
-    <state x="184" y="9" key="SettingsEditor" timestamp="1601029528368">
+    <state x="184" y="9" key="SettingsEditor" timestamp="1601996138167">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="184" y="9" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1601029528368" />
+    <state x="184" y="9" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1601996138167" />
     <state x="275" y="97" key="Vcs.Push.Dialog.v2" timestamp="1601486036230">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -467,10 +479,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="413" y="169" key="com.intellij.database.dbimport.ImportUtil.ChooseTargetDialog/0.0.1366.728@0.0.1366.728" timestamp="1601386387957" />
-    <state x="293" y="0" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1601484873700">
+    <state x="293" y="0" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1602000651667">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="293" y="0" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1366.728@0.0.1366.728" timestamp="1601484873700" />
+    <state x="293" y="0" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1366.728@0.0.1366.728" timestamp="1602000651667" />
     <state x="390" y="0" width="655" height="728" key="find.popup" timestamp="1601654225576">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -487,10 +499,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="339" y="162" width="672" height="677" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1601461395158" />
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1601654887443">
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1602000332258">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1601654887443" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1602000332258" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>

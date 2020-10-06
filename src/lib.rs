@@ -39,6 +39,7 @@ pub fn launch() -> rocket::Rocket {
     use crate::models::calendar::CalendarState;
     use db::CrmDbConn;
     use dotenv::dotenv;
+    use rocket_contrib::serve::StaticFiles;
     use std::sync::{Arc, Mutex};
     pretty_env_logger::init();
     dotenv().ok();
@@ -91,6 +92,10 @@ pub fn launch() -> rocket::Rocket {
                 routes::calendar::get_event_by_id,
                 routes::calendar::query,
             ],
+        )
+        .mount(
+            "/static",
+            StaticFiles::from(concat!(env!("CARGO_MANIFEST_DIR"), "/static")),
         );
     cleanup_old_tokens(&CrmDbConn::get_one(&rocket).unwrap());
 
