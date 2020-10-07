@@ -1,3 +1,5 @@
+# Taken from https://github.com/bevyengine/bevy/blob/master/.cargo/config_fast_builds
+
 # Rename this file to `config.toml` to enable "fast build" configuration. Please read the notes below.
 
 # NOTE: For maximum performance, build using a nightly compiler

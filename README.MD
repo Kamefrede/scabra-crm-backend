@@ -23,6 +23,7 @@ Without the following projects it wouldn't be possible for me to make this backe
  * https://github.com/marcocastignoli/rust_rocket_api_authentication
  * https://github.com/lawliet89/rowdy
  * https://skinkade.github.io/rocket-jwt-roles-demo/
- * https://mmhaskell.com/  
+ * https://mmhaskell.com/
+ * https://github.com/bevyengine/bevy/blob/master/.cargo/config_fast_builds  
  * And all the other dependencies and sub-dependencies listed in the Cargo.toml
 
