@@ -8,7 +8,7 @@
 /*.ipr
 /*.iws
 /*.iml
-/jwtRS256.key
-/jwtRS256.key.pub
+/*.key
+/*.key.pub
 /src/db/secret.key
 /static/calendar.ics
