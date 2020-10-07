@@ -24,7 +24,7 @@ pub fn get_or_create_calendar() -> Calendar {
     }
     info!("No calendar was found, fallbacking to a new one");
     let calendar = create_calendar_from_env();
-    if write_calendar_to_file(&calendar_name, &calendar) {
+    if !write_calendar_to_file(&calendar_name, &calendar) {
         error!("Errored while writing to file {}", &calendar_name);
     }
     calendar
@@ -165,12 +165,12 @@ pub fn write_calendar_to_file(file_path: &str, calendar: &Calendar) -> bool {
  * perhaps
  */
 pub fn create_calendar_from_env() -> Calendar {
-    let calendar_prodid =
-        env::var("CALENDAR_PRODID").expect("CALENDAR_PRODID should be defined in the .env file");
     let calendar_name =
         env::var("CALENDAR_NAME").expect("CALENDAR_NAME should be defined in the .env file");
     let calendar_timezone = env::var("CALENDAR_TIMEZONE")
         .expect("CALENDAR_TIMEZONE should be defined in the .env file");
+    let calendar_prodid =
+        env::var("CALENDAR_PRODID").expect("CALENDAR_PRODID should be defined in the .env file");
     create_calendar(&calendar_prodid, &calendar_name, &calendar_timezone)
 }
 
