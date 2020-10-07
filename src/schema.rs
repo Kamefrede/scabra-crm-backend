@@ -47,6 +47,18 @@ table! {
 }
 
 table! {
+    task (id) {
+        id -> Int4,
+        client_id -> Int4,
+        start_time -> Nullable<Timestamptz>,
+        end_time -> Nullable<Timestamptz>,
+        status -> Nullable<Text>,
+        description -> Nullable<Text>,
+        user_id -> Nullable<Int4>,
+    }
+}
+
+table! {
     user (id) {
         id -> Int4,
         person_id -> Nullable<Int4>,
@@ -69,6 +81,8 @@ joinable!(employee -> client (client_id));
 joinable!(employee -> person (id));
 joinable!(profile -> address (address_id));
 joinable!(profile -> person (person_id));
+joinable!(task -> client (client_id));
+joinable!(task -> user (user_id));
 joinable!(user -> person (person_id));
 joinable!(user_auth_token -> user (user_id));
 
@@ -78,6 +92,7 @@ allow_tables_to_appear_in_same_query!(
     employee,
     person,
     profile,
+    task,
     user,
     user_auth_token,
 );

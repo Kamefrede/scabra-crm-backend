@@ -12,7 +12,7 @@ pub fn find_by_id(id: i32, conn: &CrmDbConn) -> ResponseWithStatus {
     if let Some(client) = option_client {
         ResponseWithStatus::ok_with_data(client)
     } else {
-        ResponseWithStatus::eror_not_found(format!("Client with id {} was not found", id))
+        ResponseWithStatus::error_not_found(format!("Client with id {} was not found", id))
     }
 }
 
@@ -36,7 +36,7 @@ pub fn update(id: i32, updated_client: &ClientEntity, conn: &CrmDbConn) -> Respo
             ResponseWithStatus::ok_empty()
         }
     } else {
-        ResponseWithStatus::eror_not_found(format!("Could not find client with id {}", id))
+        ResponseWithStatus::error_not_found(format!("Could not find client with id {}", id))
     }
 }
 
@@ -48,6 +48,6 @@ pub fn delete(id: i32, conn: &CrmDbConn) -> ResponseWithStatus {
             ResponseWithStatus::error_delete()
         }
     } else {
-        ResponseWithStatus::eror_not_found(format!("Could not find client with id {}", id))
+        ResponseWithStatus::error_not_found(format!("Could not find client with id {}", id))
     }
 }

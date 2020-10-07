@@ -1,3 +1,3 @@
 fn main() {
-    hprs_crm_backend::launch().launch();
+    scabra_crm_backend::launch().launch();
 }

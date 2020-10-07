@@ -914,29 +914,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "hprs-crm-backend"
-version = "0.1.0"
-dependencies = [
- "anyhow",
- "chrono",
- "diesel",
- "dotenv",
- "jsonwebtoken",
- "log 0.4.11",
- "postgres",
- "pretty_env_logger",
- "rocket",
- "rocket_contrib",
- "rust-crypto",
- "serde",
- "serde_json",
- "strum",
- "strum_macros",
- "uuid 0.8.1",
- "web_ical",
-]
-
-[[package]]
 name = "http"
 version = "0.1.21"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -2174,6 +2151,29 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "93fc1dc3aaa9bfed95e02e6eadabb4baf7e3078b0bd1b4d7b6b0b68378900502"
 dependencies = [
  "winapi-util",
+]
+
+[[package]]
+name = "scabra-crm-backend"
+version = "0.1.0"
+dependencies = [
+ "anyhow",
+ "chrono",
+ "diesel",
+ "dotenv",
+ "jsonwebtoken",
+ "log 0.4.11",
+ "postgres",
+ "pretty_env_logger",
+ "rocket",
+ "rocket_contrib",
+ "rust-crypto",
+ "serde",
+ "serde_json",
+ "strum",
+ "strum_macros",
+ "uuid 0.8.1",
+ "web_ical",
 ]
 
 [[package]]

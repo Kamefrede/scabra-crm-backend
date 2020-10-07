@@ -11,7 +11,7 @@ pub fn find_by_id(id: i32, conn: &CrmDbConn) -> ResponseWithStatus {
     if let Some(person) = option_person {
         ResponseWithStatus::ok_with_data(person)
     } else {
-        ResponseWithStatus::eror_not_found(format!("No people with id {} was found", id))
+        ResponseWithStatus::error_not_found(format!("No people with id {} was found", id))
     }
 }
 
@@ -20,7 +20,7 @@ pub fn find_by_name(name: &str, conn: &CrmDbConn) -> ResponseWithStatus {
     if let Some(person) = option_person {
         ResponseWithStatus::ok_with_data(person)
     } else {
-        ResponseWithStatus::eror_not_found(format!("No people with name {} was found", &name))
+        ResponseWithStatus::error_not_found(format!("No people with name {} was found", &name))
     }
 }
 
@@ -40,7 +40,7 @@ pub fn update(id: i32, updated_person: &PersonEntity, conn: &CrmDbConn) -> Respo
             ResponseWithStatus::error_update()
         }
     } else {
-        ResponseWithStatus::eror_not_found(format!("No person with id {} was found", id))
+        ResponseWithStatus::error_not_found(format!("No person with id {} was found", id))
     }
 }
 
@@ -52,6 +52,6 @@ pub fn delete(id: i32, conn: &CrmDbConn) -> ResponseWithStatus {
             ResponseWithStatus::error_delete()
         }
     } else {
-        ResponseWithStatus::eror_not_found(format!("No person with id {} was found", id))
+        ResponseWithStatus::error_not_found(format!("No person with id {} was found", id))
     }
 }

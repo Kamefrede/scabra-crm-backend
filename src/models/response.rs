@@ -44,7 +44,7 @@ impl ResponseWithStatus {
         )
     }
 
-    pub fn eror_not_found(message: String) -> Self {
+    pub fn error_not_found(message: String) -> Self {
         Self::status_message_without_data(message, Status::NotFound.code)
     }
 

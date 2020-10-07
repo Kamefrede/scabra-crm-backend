@@ -11,7 +11,7 @@ pub fn find_by_id(id: i32, conn: &CrmDbConn) -> ResponseWithStatus {
     if let Some(employee) = option_employee {
         ResponseWithStatus::ok_with_data(employee)
     } else {
-        ResponseWithStatus::eror_not_found(format!("Employee with id {} not found", id))
+        ResponseWithStatus::error_not_found(format!("Employee with id {} not found", id))
     }
 }
 
@@ -39,7 +39,7 @@ pub fn update(
             ResponseWithStatus::error_update()
         }
     } else {
-        ResponseWithStatus::eror_not_found(format!(
+        ResponseWithStatus::error_not_found(format!(
             "Employee with id {} was not found",
             employee_id
         ))
@@ -54,7 +54,7 @@ pub fn delete(employee_id: i32, conn: &CrmDbConn) -> ResponseWithStatus {
             ResponseWithStatus::error_delete()
         }
     } else {
-        ResponseWithStatus::eror_not_found(format!(
+        ResponseWithStatus::error_not_found(format!(
             "Employee with id {} was not found",
             employee_id
         ))

@@ -5,6 +5,7 @@ pub mod employee;
 pub mod person;
 pub mod profile;
 pub mod response;
+pub mod task;
 pub mod user;
 pub mod user_auth_token;
 use serde::{Deserialize, Serialize};

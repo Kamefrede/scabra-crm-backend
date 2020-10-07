@@ -91,6 +91,14 @@ pub fn launch() -> rocket::Rocket {
                 routes::calendar::get_last_event,
                 routes::calendar::get_event_by_id,
                 routes::calendar::query,
+                routes::task::find_all,
+                routes::task::find_by_id,
+                routes::task::find_all_client_tasks,
+                routes::task::find_all_user_tasks,
+                routes::task::query,
+                routes::task::insert,
+                routes::task::update,
+                routes::task::delete,
             ],
         )
         .mount(

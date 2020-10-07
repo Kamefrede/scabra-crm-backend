@@ -15,7 +15,7 @@ const CALENDAR_METHOD: &str = "PUBLISH";
 pub fn get_or_create_calendar() -> Calendar {
     let calendar_name =
         env::var("CALENDAR_FILE").expect("CALENDAR_FILE should be defined in the .env file");
-    dbg!(env::current_dir().unwrap());
+    info!("Current directory is {:?}", env::current_dir().unwrap());
     if let Ok(calendar_str) = std::fs::read_to_string(&calendar_name) {
         if let Ok(calendar) = Calendar::new_from_data(&calendar_str) {
             info!("Existing calendar: {} was found", &calendar_name);

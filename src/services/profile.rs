@@ -12,7 +12,7 @@ pub fn find_by_id(id: i32, conn: &CrmDbConn) -> ResponseWithStatus {
     if let Some(profile) = option_profile {
         ResponseWithStatus::ok_with_data(profile)
     } else {
-        ResponseWithStatus::eror_not_found(format!("Could not find profile with id {}", id))
+        ResponseWithStatus::error_not_found(format!("Could not find profile with id {}", id))
     }
 }
 
@@ -36,7 +36,7 @@ pub fn update(id: i32, new_profile: &Profile, conn: &CrmDbConn) -> ResponseWithS
             ResponseWithStatus::ok_empty()
         }
     } else {
-        ResponseWithStatus::eror_not_found(format!("Could not find profile with id {}", id))
+        ResponseWithStatus::error_not_found(format!("Could not find profile with id {}", id))
     }
 }
 
@@ -48,6 +48,6 @@ pub fn delete(id: i32, conn: &CrmDbConn) -> ResponseWithStatus {
             ResponseWithStatus::error_delete()
         }
     } else {
-        ResponseWithStatus::eror_not_found(format!("Could not find profile with id {}", id))
+        ResponseWithStatus::error_not_found(format!("Could not find profile with id {}", id))
     }
 }
