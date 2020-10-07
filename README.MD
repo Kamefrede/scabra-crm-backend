@@ -12,3 +12,17 @@ src/db folder (Code currently looks for a file named secret.key, could probably 
 
 Be sure to also tweak and create an appropriate .env and Rocket.toml file.
 
+# Credits
+
+Without the following projects it wouldn't be possible for me to make this backend
+
+ * https://github.com/SakaDream/rocket-rest-api-with-jwt
+ * https://github.com/diesel-rs/diesel
+ * https://github.com/7omb/chrono
+ * https://github.com/SergioBenitez/Rocket
+ * https://github.com/marcocastignoli/rust_rocket_api_authentication
+ * https://github.com/lawliet89/rowdy
+ * https://skinkade.github.io/rocket-jwt-roles-demo/
+ * https://mmhaskell.com/  
+ * And all the other dependencies and sub-dependencies listed in the Cargo.toml
+
