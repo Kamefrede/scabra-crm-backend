@@ -13,9 +13,3 @@ pub struct UserAuthToken {
 }
 
 pub const ONE_WEEK: i64 = 60 * 60 * 24 * 7;
-
-#[derive(Serialize, Deserialize, FromForm)]
-pub struct LoginInfo {
-    pub username_or_email: String,
-    pub password: String,
-}

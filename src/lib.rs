@@ -1,5 +1,5 @@
 #![warn(clippy::all, clippy::pedantic, clippy::nursery)]
-#![allow(clippy::module_name_repetitions)]
+#![allow(clippy::module_name_repetitions, clippy::map_err_ignore)]
 #![feature(proc_macro_hygiene, decl_macro)]
 #[macro_use]
 extern crate rocket;
@@ -54,6 +54,8 @@ pub fn launch() -> rocket::Rocket {
             routes![
                 routes::user::login,
                 routes::user::signup,
+                routes::user::delete,
+                routes::user::update,
                 routes::person::find_by_id,
                 routes::person::find_by_name,
                 routes::person::insert,

@@ -10,9 +10,17 @@ pub struct User {
     pub hashed_password: String,
 }
 
+#[derive(Insertable, FromForm, Serialize, Deserialize, AsChangeset)]
+#[table_name = "user"]
+pub struct UserEntity {
+    pub person_id: Option<i32>,
+    pub email: String,
+    pub hashed_password: String,
+}
+
 #[derive(Insertable, FromForm, Serialize, Deserialize)]
 #[table_name = "user"]
-pub struct UserForm {
+pub struct LoginInfo {
     pub email: String,
     pub hashed_password: String,
 }

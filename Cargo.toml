@@ -1,6 +1,6 @@
 [package]
 name = "scabra-crm-backend"
-version = "0.1.0"
+version = "0.2.0"
 authors = ["Kamefrede <kamefrede@gmail.com>"]
 edition = "2018"
 

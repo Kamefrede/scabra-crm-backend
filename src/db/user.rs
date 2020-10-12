@@ -5,9 +5,9 @@ use chrono::Utc;
 use crypto::digest::Digest;
 use crypto::sha3;
 
-use crate::models::user::User;
-use crate::models::user::UserForm;
-use crate::models::user_auth_token::{LoginInfo, UserAuthToken};
+use crate::models::user::LoginInfo;
+use crate::models::user::{User, UserEntity};
+use crate::models::user_auth_token::UserAuthToken;
 use crate::schema::user::dsl::{email, id, user};
 use crate::schema::user_auth_token::dsl::{
     expires_at, generated_at, login_session, user_auth_token, user_id,
@@ -16,9 +16,9 @@ use diesel::prelude::*;
 use uuid::Uuid;
 
 impl User {
-    pub fn signup(user_form: UserForm, conn: &PgConnection) -> bool {
+    pub fn signup(user_form: LoginInfo, conn: &PgConnection) -> bool {
         let hashed_pwd = hash_password(&*user_form.hashed_password);
-        let user_form = UserForm {
+        let user_form = LoginInfo {
             hashed_password: hashed_pwd,
             ..user_form
         };
@@ -34,11 +34,11 @@ impl User {
     }
 
     pub fn login(user_form: &LoginInfo, conn: &PgConnection) -> (Option<UserAuthToken>, String) {
-        Self::get_user_by_email(&*user_form.username_or_email, conn).map_or(
+        Self::get_user_by_email(&*user_form.email, conn).map_or(
             (None, String::from("")),
             |db_user| {
                 if db_user.hashed_password.is_empty()
-                    && !verify_password(&*user_form.password, &*db_user.hashed_password)
+                    && !verify_password(&*user_form.hashed_password, &*db_user.hashed_password)
                 {
                     return (None, String::from(""));
                 }
@@ -108,6 +108,17 @@ impl User {
         } else {
             false
         }
+    }
+
+    pub fn update(updated_user: &UserEntity, userid: i32, conn: &PgConnection) -> bool {
+        diesel::update(user.find(userid))
+            .set(updated_user)
+            .execute(conn)
+            .is_ok()
+    }
+
+    pub fn delete(userid: i32, conn: &PgConnection) -> bool {
+        diesel::delete(user.find(userid)).execute(conn).is_ok()
     }
 }
 
