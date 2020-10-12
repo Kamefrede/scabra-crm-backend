@@ -6,7 +6,6 @@ use serde::{Deserialize, Serialize};
 pub struct User {
     pub id: i32,
     pub person_id: Option<i32>,
-    pub username: String,
     pub email: String,
     pub hashed_password: String,
 }
@@ -14,7 +13,6 @@ pub struct User {
 #[derive(Insertable, FromForm, Serialize, Deserialize)]
 #[table_name = "user"]
 pub struct UserForm {
-    pub username: String,
     pub email: String,
     pub hashed_password: String,
 }

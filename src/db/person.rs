@@ -1,5 +1,7 @@
-use crate::models::person::{Person, PersonEntity};
-use crate::schema::person::dsl::{id, name, person};
+use crate::models::client::Client;
+use crate::models::person::{Person, PersonEntity, PersonQueryType};
+use crate::models::Query;
+use crate::schema::person::dsl::{address_id, id, name, person, phone_number, role};
 use diesel::prelude::*;
 
 impl Person {
@@ -22,6 +24,38 @@ impl Person {
                     Some(people_vec)
                 }
             })
+    }
+
+    //TODO: Implement fuzzy query searching
+    pub fn query(query: &Query, conn: &PgConnection) -> Vec<Self> {
+        match (*query.query_type).to_string() {
+            x if x == PersonQueryType::AddressId.to_string()
+                && query.query_text.parse::<i32>().is_ok() =>
+            {
+                person
+                    .filter(address_id.eq(&(query.query_text.parse::<i32>().unwrap())))
+                    .load::<Self>(conn)
+                    .unwrap()
+            }
+            x if x == PersonQueryType::PhoneNumber.to_string() => person
+                .filter(phone_number.eq(&query.query_text))
+                .load::<Self>(conn)
+                .unwrap(),
+            x if x == PersonQueryType::Role.to_string() => person
+                .filter(role.eq(&query.query_text))
+                .load::<Self>(conn)
+                .unwrap(),
+            _ => return vec![],
+        }
+    }
+
+    pub fn find_all_employees_by_company(company_id: i32, conn: &PgConnection) -> Vec<Self> {
+        let option_client = Client::find_by_id(company_id, conn);
+        if let Some(clnt) = option_client {
+            Self::belonging_to(&clnt).load::<Self>(conn).unwrap()
+        } else {
+            vec![]
+        }
     }
 
     pub fn insert(new_person: &PersonEntity, conn: &PgConnection) -> bool {

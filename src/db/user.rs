@@ -8,7 +8,7 @@ use crypto::sha3;
 use crate::models::user::User;
 use crate::models::user::UserForm;
 use crate::models::user_auth_token::{LoginInfo, UserAuthToken};
-use crate::schema::user::dsl::{email, id, user, username};
+use crate::schema::user::dsl::{email, id, user};
 use crate::schema::user_auth_token::dsl::{
     expires_at, generated_at, login_session, user_auth_token, user_id,
 };
@@ -22,8 +22,7 @@ impl User {
             hashed_password: hashed_pwd,
             ..user_form
         };
-        user.filter(username.eq(&*user_form.username))
-            .or_filter(email.eq(&*user_form.email))
+        user.filter(email.eq(&*user_form.email))
             .get_result::<Self>(conn)
             .map_or(
                 diesel::insert_into(user)
@@ -35,7 +34,7 @@ impl User {
     }
 
     pub fn login(user_form: &LoginInfo, conn: &PgConnection) -> (Option<UserAuthToken>, String) {
-        Self::get_user_by_username_or_email(&*user_form.username_or_email, conn).map_or(
+        Self::get_user_by_email(&*user_form.username_or_email, conn).map_or(
             (None, String::from("")),
             |db_user| {
                 if db_user.hashed_password.is_empty()
@@ -47,7 +46,7 @@ impl User {
                 let auth_token =
                     UserAuthToken::generate_auth_token(db_user.id, &*login_session_str);
                 Self::update_login_session(&auth_token, conn);
-                (Some(auth_token), db_user.username)
+                (Some(auth_token), db_user.email)
             },
         )
     }
@@ -56,20 +55,13 @@ impl User {
         user.filter(id.eq(&id_user)).get_result::<Self>(conn).ok()
     }
 
-    pub fn get_user_by_username_or_email(
-        username_or_email: &str,
-        conn: &PgConnection,
-    ) -> Option<Self> {
-        user.filter(username.eq(username_or_email))
-            .or_filter(email.eq(username_or_email))
+    pub fn get_user_by_email(user_email: &str, conn: &PgConnection) -> Option<Self> {
+        user.filter(email.eq(user_email))
             .get_result::<Self>(conn)
             .ok()
     }
-    pub fn get_id_for_username_or_email(
-        username_or_email: &str,
-        conn: &PgConnection,
-    ) -> Option<i32> {
-        Self::get_user_by_username_or_email(username_or_email, conn).map(|db_user| db_user.id)
+    pub fn get_id_for_user_email(user_email: &str, conn: &PgConnection) -> Option<i32> {
+        Self::get_user_by_email(user_email, conn).map(|db_user| db_user.id)
     }
 
     pub fn generate_login_session() -> String {

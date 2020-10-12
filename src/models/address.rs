@@ -7,8 +7,7 @@ use strum_macros::EnumString;
 pub struct Address {
     pub id: i32,
     pub name: String,
-    pub line1: String,
-    pub line2: Option<String>,
+    pub address_line: String,
     pub city: String,
     pub postal_code: String,
     pub country: String,
@@ -19,8 +18,7 @@ pub struct Address {
 #[table_name = "address"]
 pub struct AddressEntity {
     pub name: String,
-    pub line1: String,
-    pub line2: Option<String>,
+    pub address_line: String,
     pub city: String,
     pub postal_code: String,
     pub country: String,
@@ -31,8 +29,8 @@ pub struct AddressEntity {
 pub enum AddressQueryType {
     #[strum(serialize = "name")]
     Name,
-    #[strum(serialize = "line")]
-    Line,
+    #[strum(serialize = "address_line")]
+    AddressLine,
     #[strum(serialize = "city")]
     City,
     #[strum(serialize = "postal_code")]

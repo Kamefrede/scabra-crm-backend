@@ -2,8 +2,7 @@ table! {
     address (id) {
         id -> Int4,
         name -> Varchar,
-        line1 -> Varchar,
-        line2 -> Nullable<Varchar>,
+        address_line -> Text,
         city -> Varchar,
         postal_code -> Varchar,
         country -> Varchar,
@@ -22,27 +21,14 @@ table! {
 }
 
 table! {
-    employee (id) {
-        id -> Int4,
-        client_id -> Int4,
-    }
-}
-
-table! {
     person (id) {
         id -> Int4,
         name -> Varchar,
-    }
-}
-
-table! {
-    profile (person_id) {
-        person_id -> Int4,
-        displayname -> Nullable<Varchar>,
-        image -> Nullable<Varchar>,
+        image -> Nullable<Text>,
         phone_number -> Nullable<Varchar>,
-        role -> Nullable<Varchar>,
+        role -> Nullable<Text>,
         address_id -> Nullable<Int4>,
+        client_id -> Nullable<Int4>,
     }
 }
 
@@ -62,7 +48,6 @@ table! {
     user (id) {
         id -> Int4,
         person_id -> Nullable<Int4>,
-        username -> Varchar,
         email -> Varchar,
         hashed_password -> Varchar,
     }
@@ -77,22 +62,12 @@ table! {
     }
 }
 
-joinable!(employee -> client (client_id));
-joinable!(employee -> person (id));
-joinable!(profile -> address (address_id));
-joinable!(profile -> person (person_id));
+joinable!(client -> address (address_id));
+joinable!(person -> address (address_id));
+joinable!(person -> client (client_id));
 joinable!(task -> client (client_id));
 joinable!(task -> user (user_id));
 joinable!(user -> person (person_id));
 joinable!(user_auth_token -> user (user_id));
 
-allow_tables_to_appear_in_same_query!(
-    address,
-    client,
-    employee,
-    person,
-    profile,
-    task,
-    user,
-    user_auth_token,
-);
+allow_tables_to_appear_in_same_query!(address, client, person, task, user, user_auth_token,);

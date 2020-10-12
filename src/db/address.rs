@@ -1,7 +1,7 @@
 use crate::models::address::{Address, AddressEntity, AddressQueryType};
 use crate::models::Query;
 use crate::schema::address::dsl::{
-    address, address_type, city, country, id, line1, line2, name, postal_code,
+    address, address_line, address_type, city, country, id, name, postal_code,
 };
 use diesel::prelude::*;
 use std::string::ToString;
@@ -30,9 +30,8 @@ impl Address {
                 .order(id.asc())
                 .load::<Self>(conn)
                 .unwrap(),
-            x if x == AddressQueryType::Line.to_string() => address
-                .filter(line1.eq(&query.query_text))
-                .or_filter(line2.eq(&query.query_text))
+            x if x == AddressQueryType::AddressLine.to_string() => address
+                .filter(address_line.eq(&query.query_text))
                 .order(id.asc())
                 .load::<Self>(conn)
                 .unwrap(),
