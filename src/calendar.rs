@@ -43,32 +43,32 @@ pub fn query(query: &Query, calendar: &Calendar) -> Vec<Events> {
         x if x == EventQueryType::Status.to_string() => calendar
             .events
             .iter()
-            .cloned()
             .filter(|event| event.status == query.query_text)
+            .cloned()
             .collect(),
         x if x == EventQueryType::Description.to_string() => calendar
             .events
             .iter()
+            .filter(|event| event.status == query.query_text)
             .cloned()
-            .filter(|event| event.description == query.query_text)
             .collect(),
         x if x == EventQueryType::Location.to_string() => calendar
             .events
             .iter()
+            .filter(|event| event.status == query.query_text)
             .cloned()
-            .filter(|event| event.location == query.query_text)
             .collect(),
         x if x == EventQueryType::Summary.to_string() => calendar
             .events
             .iter()
+            .filter(|event| event.status == query.query_text)
             .cloned()
-            .filter(|event| event.summary == query.query_text)
             .collect(),
         x if x == EventQueryType::Transp.to_string() => calendar
             .events
             .iter()
+            .filter(|event| event.status == query.query_text)
             .cloned()
-            .filter(|event| event.transp == query.query_text)
             .collect(),
         x if x == EventQueryType::Sequence.to_string()
             && query.query_text.parse::<u32>().is_ok() =>
@@ -76,8 +76,8 @@ pub fn query(query: &Query, calendar: &Calendar) -> Vec<Events> {
             calendar
                 .events
                 .iter()
-                .cloned()
                 .filter(|event| event.sequence == query.query_text.parse::<u32>().unwrap())
+                .cloned()
                 .collect()
         }
         _ => vec![],

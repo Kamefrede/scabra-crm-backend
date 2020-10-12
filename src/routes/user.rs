@@ -12,7 +12,7 @@ pub fn signup(user: Json<UserForm>, conn: CrmDbConn) -> CustomJsonResponse {
     rocket_status_from_response(response)
 }
 
-#[post("/login", format = "json", data = "<login>")]
+#[post("/login", format = "application/json", data = "<login>")]
 pub fn login(login: Json<LoginInfo>, conn: CrmDbConn) -> CustomJsonResponse {
     let response = services::user::login(&login.0, &conn);
     rocket_status_from_response(response)

@@ -21,9 +21,9 @@ pub fn signup(user: UserForm, conn: &CrmDbConn) -> ResponseWithStatus {
 }
 
 pub fn login(login: &LoginInfo, conn: &CrmDbConn) -> ResponseWithStatus {
-    if let Some(result) = User::login(login, &**conn) {
+    if let (Some(result), username) = User::login(login, &**conn) {
         ResponseWithStatus::ok_message_with_data(
-            json!({ "token": generate_jwt_token(&result), "type": "Bearer" }),
+            json!({ "token": generate_jwt_token(&result), "type": "Bearer", "username": username, "id": result.user_id }),
             String::from(MESSAGE_LOGIN_SUCCESS),
         )
     } else {

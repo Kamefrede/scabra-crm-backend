@@ -57,37 +57,46 @@ impl<'v> FromFormValue<'v> for NaiveDateForm {
     type Error = &'v RawStr;
 
     fn from_form_value(form_value: &'v RawStr) -> Result<Self, &'v RawStr> {
-        let decoded = form_value.url_decode().map_err(|_| form_value)?;
-        if decoded.len() < "0000-00-00T00:00".len() {
-            return Err(form_value);
+        let decode_result = form_value.url_decode();
+        if let Ok(decoded) = decode_result {
+            if decoded.len() < "0000-00-00T00:00".len() {
+                return Err(form_value);
+            }
+            let date_result =
+                naive_date_from_form_value(RawStr::from_str(&decoded[.."0000-00-00".len()]));
+            let time_result =
+                naive_time_from_form_value(RawStr::from_str(&decoded["0000-00-00T".len()..]));
+            if let (Ok(date), Ok(time)) = (date_result, time_result) {
+                return Ok(Self(NaiveDateTime::new(date, time)));
+            }
         }
-        let date = naive_date_from_form_value(RawStr::from_str(&decoded[.."0000-00-00".len()]))
-            .map_err(|_| form_value)?;
-        let time = naive_time_from_form_value(RawStr::from_str(&decoded["0000-00-00T".len()..]))
-            .map_err(|_| form_value)?;
-        Ok(Self(NaiveDateTime::new(date, time)))
+        Err(form_value)
     }
 }
 
 fn naive_date_from_form_value(form_value: &'_ RawStr) -> Result<NaiveDate, &'_ RawStr> {
-    let decoded = form_value.url_decode().map_err(|_| form_value)?;
-    if let Ok(date) = NaiveDate::parse_from_str(&decoded, "%Y-%m-%d") {
-        return Ok(date);
+    let decode_result = form_value.url_decode();
+    if let Ok(decoded) = decode_result {
+        if let Ok(date) = NaiveDate::parse_from_str(&decoded, "%Y-%m-%d") {
+            return Ok(date);
+        }
     }
     Err(form_value)
 }
 
 fn naive_time_from_form_value(form_value: &'_ RawStr) -> Result<NaiveTime, &'_ RawStr> {
-    let decoded = form_value.url_decode().map_err(|_| form_value)?;
-    if let Ok(time) = NaiveTime::parse_from_str(&decoded, "%H:%M:%S%.3f") {
-        use chrono::Timelike;
-        if time.nanosecond() >= 1_000_000_000 {
-            return Err(form_value);
+    let decode_result = form_value.url_decode();
+    if let Ok(decoded) = decode_result {
+        if let Ok(time) = NaiveTime::parse_from_str(&decoded, "%H:%M:%S%.3f") {
+            use chrono::Timelike;
+            if time.nanosecond() >= 1_000_000_000 {
+                return Err(form_value);
+            }
+            return Ok(time);
         }
-        return Ok(time);
-    }
-    if let Ok(time) = NaiveTime::parse_from_str(&decoded, "%H:%M") {
-        return Ok(time);
+        if let Ok(time) = NaiveTime::parse_from_str(&decoded, "%H:%M") {
+            return Ok(time);
+        }
     }
     Err(form_value)
 }

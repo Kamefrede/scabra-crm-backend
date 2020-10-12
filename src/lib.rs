@@ -18,6 +18,7 @@ extern crate anyhow;
 extern crate pretty_env_logger;
 extern crate web_ical;
 
+use crate::services::cors::CORS;
 use diesel::prelude::*;
 
 mod calendar;
@@ -104,7 +105,8 @@ pub fn launch() -> rocket::Rocket {
         .mount(
             "/static",
             StaticFiles::from(concat!(env!("CARGO_MANIFEST_DIR"), "/static")),
-        );
+        )
+        .attach(CORS());
     cleanup_old_tokens(&CrmDbConn::get_one(&rocket).unwrap());
 
     rocket

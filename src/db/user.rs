@@ -34,19 +34,20 @@ impl User {
             )
     }
 
-    pub fn login(user_form: &LoginInfo, conn: &PgConnection) -> Option<UserAuthToken> {
-        Self::get_user_by_username_or_email(&*user_form.username_or_email, conn).and_then(
+    pub fn login(user_form: &LoginInfo, conn: &PgConnection) -> (Option<UserAuthToken>, String) {
+        Self::get_user_by_username_or_email(&*user_form.username_or_email, conn).map_or(
+            (None, String::from("")),
             |db_user| {
                 if db_user.hashed_password.is_empty()
                     && !verify_password(&*user_form.password, &*db_user.hashed_password)
                 {
-                    return None;
+                    return (None, String::from(""));
                 }
                 let login_session_str = Self::generate_login_session();
                 let auth_token =
                     UserAuthToken::generate_auth_token(db_user.id, &*login_session_str);
                 Self::update_login_session(&auth_token, conn);
-                Some(auth_token)
+                (Some(auth_token), db_user.username)
             },
         )
     }
