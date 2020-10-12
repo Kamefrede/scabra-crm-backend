@@ -2,7 +2,6 @@ use crate::models::client::{Client, ClientEntity, ClientQueryType};
 use crate::models::Query;
 use crate::schema::client::dsl::{address_id, client, client_type, id, name, nif};
 use diesel::prelude::*;
-use std::string::ToString;
 
 impl Client {
     pub fn find_all(conn: &PgConnection) -> Vec<Self> {

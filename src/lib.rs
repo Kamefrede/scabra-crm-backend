@@ -18,7 +18,6 @@ extern crate anyhow;
 extern crate pretty_env_logger;
 extern crate web_ical;
 
-use crate::services::cors::CORS;
 use diesel::prelude::*;
 
 mod calendar;
@@ -38,6 +37,7 @@ mod services;
 pub fn launch() -> rocket::Rocket {
     use crate::calendar::get_or_create_calendar;
     use crate::models::calendar::CalendarState;
+    use crate::services::cors::CORS;
     use db::CrmDbConn;
     use dotenv::dotenv;
     use rocket_contrib::serve::StaticFiles;

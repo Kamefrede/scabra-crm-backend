@@ -5,8 +5,7 @@ use chrono::Utc;
 use crypto::digest::Digest;
 use crypto::sha3;
 
-use crate::models::user::LoginInfo;
-use crate::models::user::{User, UserEntity};
+use crate::models::user::{LoginInfo, User, UserEntity};
 use crate::models::user_auth_token::UserAuthToken;
 use crate::schema::user::dsl::{email, id, user};
 use crate::schema::user_auth_token::dsl::{

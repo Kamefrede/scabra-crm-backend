@@ -4,7 +4,6 @@ use crate::schema::address::dsl::{
     address, address_line, address_type, city, country, id, name, postal_code,
 };
 use diesel::prelude::*;
-use std::string::ToString;
 
 impl Address {
     pub fn find_all(conn: &PgConnection) -> Vec<Self> {

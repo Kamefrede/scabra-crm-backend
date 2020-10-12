@@ -7,12 +7,9 @@ use crate::proxies::naive_date_form_proxy::NaiveDateForm;
 use chrono::{NaiveDateTime, Utc};
 use diesel::PgConnection;
 use jsonwebtoken::errors::Result;
-use jsonwebtoken::{Algorithm, TokenData};
-use jsonwebtoken::{DecodingKey, EncodingKey};
-use jsonwebtoken::{Header, Validation};
+use jsonwebtoken::{Algorithm, DecodingKey, EncodingKey, Header, TokenData, Validation};
 use rocket::http::Status;
-use rocket::request;
-use rocket::request::{FromRequest, Outcome, Request};
+use rocket::request::{self, FromRequest, Outcome, Request};
 use rocket::response::status;
 use rocket_contrib::json::Json;
 
