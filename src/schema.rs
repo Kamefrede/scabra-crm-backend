@@ -39,8 +39,13 @@ table! {
         start_time -> Nullable<Timestamptz>,
         end_time -> Nullable<Timestamptz>,
         status -> Nullable<Text>,
-        description -> Nullable<Text>,
+        description -> Text,
         user_id -> Nullable<Int4>,
+        sync_with_calendar -> Nullable<Bool>,
+        created -> Timestamptz,
+        summary -> Nullable<Text>,
+        location -> Nullable<Text>,
+        calendar_uid -> Nullable<Int4>,
     }
 }
 

@@ -1,8 +1,10 @@
 use super::{rocket_status_from_response, CustomJsonResponse, JsonWebToken};
 use crate::db::CrmDbConn;
+use crate::models::calendar::CalendarState;
 use crate::models::task::TaskEntity;
 use crate::models::Query;
 use crate::services::task;
+use rocket::State;
 use rocket_contrib::json::Json;
 
 #[get("/task")]
@@ -52,11 +54,16 @@ pub fn query(query: Json<Query>, token: JsonWebToken, conn: CrmDbConn) -> Custom
 }
 
 #[post("/task", format = "json", data = "<task>")]
-pub fn insert(task: Json<TaskEntity>, token: JsonWebToken, conn: CrmDbConn) -> CustomJsonResponse {
+pub fn insert(
+    task: Json<TaskEntity>,
+    token: JsonWebToken,
+    conn: CrmDbConn,
+    calendar_state: State<CalendarState>,
+) -> CustomJsonResponse {
     if let Err(e) = token {
         return e;
     }
-    let response = task::insert(&task.0, &conn);
+    let response = task::insert(&task.0, &conn, &calendar_state);
     rocket_status_from_response(response)
 }
 
@@ -66,19 +73,25 @@ pub fn update(
     task: Json<TaskEntity>,
     token: JsonWebToken,
     conn: CrmDbConn,
+    calendar_state: State<CalendarState>,
 ) -> CustomJsonResponse {
     if let Err(e) = token {
         return e;
     }
-    let response = task::update(&task.0, id, &conn);
+    let response = task::update(&task.0, id, &conn, &calendar_state);
     rocket_status_from_response(response)
 }
 
 #[delete("/task/<id>")]
-pub fn delete(id: i32, token: JsonWebToken, conn: CrmDbConn) -> CustomJsonResponse {
+pub fn delete(
+    id: i32,
+    token: JsonWebToken,
+    conn: CrmDbConn,
+    calendar_state: State<CalendarState>,
+) -> CustomJsonResponse {
     if let Err(e) = token {
         return e;
     }
-    let response = task::delete(id, &conn);
+    let response = task::delete(id, &conn, &calendar_state);
     rocket_status_from_response(response)
 }

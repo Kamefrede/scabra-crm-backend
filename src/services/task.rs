@@ -1,7 +1,9 @@
 use crate::db::CrmDbConn;
+use crate::models::calendar::CalendarState;
 use crate::models::response::ResponseWithStatus;
 use crate::models::task::{Task, TaskEntity};
 use crate::models::Query;
+use rocket::State;
 
 pub fn find_all(conn: &CrmDbConn) -> ResponseWithStatus {
     ResponseWithStatus::ok_with_data(Task::find_all(&**conn))
@@ -24,8 +26,12 @@ pub fn find_all_cient_tasks(client_id: i32, conn: &CrmDbConn) -> ResponseWithSta
     ResponseWithStatus::ok_with_data(Task::find_all_client_tasks(client_id, &**conn))
 }
 
-pub fn insert(new_task: &TaskEntity, conn: &CrmDbConn) -> ResponseWithStatus {
-    if Task::insert(new_task, &**conn) {
+pub fn insert(
+    new_task: &TaskEntity,
+    conn: &CrmDbConn,
+    state: &State<CalendarState>,
+) -> ResponseWithStatus {
+    if Task::insert(new_task, &**conn, state) {
         ResponseWithStatus::ok_empty()
     } else {
         ResponseWithStatus::error_insert()
@@ -36,9 +42,14 @@ pub fn query(query: &Query, conn: &CrmDbConn) -> ResponseWithStatus {
     ResponseWithStatus::ok_with_data(Task::query(query, &**conn))
 }
 
-pub fn update(updated_task: &TaskEntity, task_id: i32, conn: &CrmDbConn) -> ResponseWithStatus {
+pub fn update(
+    updated_task: &TaskEntity,
+    task_id: i32,
+    conn: &CrmDbConn,
+    state: &State<CalendarState>,
+) -> ResponseWithStatus {
     if Task::find_by_id(task_id, &**conn).is_some() {
-        if Task::update(updated_task, task_id, &**conn) {
+        if Task::update(updated_task, task_id, &**conn, state) {
             ResponseWithStatus::ok_empty()
         } else {
             ResponseWithStatus::error_update()
@@ -48,9 +59,9 @@ pub fn update(updated_task: &TaskEntity, task_id: i32, conn: &CrmDbConn) -> Resp
     }
 }
 
-pub fn delete(task_id: i32, conn: &CrmDbConn) -> ResponseWithStatus {
+pub fn delete(task_id: i32, conn: &CrmDbConn, state: &State<CalendarState>) -> ResponseWithStatus {
     if Task::find_by_id(task_id, &**conn).is_some() {
-        if Task::delete(task_id, &**conn) {
+        if Task::delete(task_id, &**conn, state) {
             ResponseWithStatus::ok_empty()
         } else {
             ResponseWithStatus::error_delete()

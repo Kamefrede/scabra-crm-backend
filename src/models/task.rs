@@ -9,24 +9,34 @@ use serde::{Deserialize, Serialize};
 #[belongs_to(Client)]
 #[table_name = "task"]
 pub struct Task {
-    id: i32,
-    client_id: i32,
-    start_time: Option<NaiveDateForm>,
-    end_time: Option<NaiveDateForm>,
-    status: Option<String>,
-    description: Option<String>,
-    user_id: Option<i32>,
+    pub id: i32,
+    pub client_id: i32,
+    pub start_time: Option<NaiveDateForm>,
+    pub end_time: Option<NaiveDateForm>,
+    pub status: Option<String>,
+    pub description: String,
+    pub user_id: Option<i32>,
+    pub sync_with_calendar: Option<bool>,
+    pub created: NaiveDateForm,
+    pub summary: Option<String>,
+    pub location: Option<String>,
+    pub calendar_uid: Option<i32>,
 }
 
-#[derive(Serialize, Deserialize, Insertable, AsChangeset, FromForm)]
+#[derive(Serialize, Deserialize, Insertable, AsChangeset, FromForm, Clone)]
 #[table_name = "task"]
 pub struct TaskEntity {
-    client_id: i32,
-    start_time: Option<NaiveDateForm>,
-    end_time: Option<NaiveDateForm>,
-    status: Option<String>,
-    description: Option<String>,
-    user_id: Option<i32>,
+    pub client_id: i32,
+    pub start_time: Option<NaiveDateForm>,
+    pub end_time: Option<NaiveDateForm>,
+    pub status: Option<String>,
+    pub description: String,
+    pub user_id: Option<i32>,
+    pub sync_with_calendar: Option<bool>,
+    pub created: NaiveDateForm,
+    pub summary: Option<String>,
+    pub location: Option<String>,
+    pub calendar_uid: Option<i32>,
 }
 
 #[derive(Serialize, Deserialize, EnumString, Display)]

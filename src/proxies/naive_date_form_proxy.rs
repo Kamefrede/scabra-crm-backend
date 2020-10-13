@@ -40,7 +40,7 @@ impl Deref for NaiveDateForm {
 }
 
 impl NaiveDateForm {
-    pub(crate) const fn new(naive_date_time: NaiveDateTime) -> Self {
+    pub const fn new(naive_date_time: NaiveDateTime) -> Self {
         Self(naive_date_time)
     }
 }

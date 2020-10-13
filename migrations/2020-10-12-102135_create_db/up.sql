@@ -37,8 +37,13 @@ CREATE TABLE "task" (
                         "start_time" timestamptz,
                         "end_time" timestamptz,
                         "status" text DEFAULT '',
-                        "description" text DEFAULT '',
+                        "description" text NOT NULL DEFAULT '',
                         "user_id" int4,
+                        "sync_with_calendar" bool,
+                        "created" timestamptz NOT NULL,
+                        "summary" text,
+                        "location" text,
+                        "calendar_uid" int4,
                         PRIMARY KEY ("id")
 );
 
