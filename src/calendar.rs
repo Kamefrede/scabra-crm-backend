@@ -104,6 +104,11 @@ pub fn find_event_by_id<'a>(calendar: &'a Calendar, id: i32) -> Option<&'a Event
     event
 }
 
+// Only ocassion where it should return 0 is if there are no events!
+pub fn get_next_available_uid(calendar: &Calendar) -> i32 {
+    get_last_event(calendar).map_or(0, |event| event.uid.parse::<i32>().unwrap() + 1)
+}
+
 fn get_index_by_id(calendar: &Calendar, id: i32) -> Option<usize> {
     calendar.events.iter().position(|event| {
         event.uid.parse::<i32>().is_ok() && event.uid.parse::<i32>().unwrap() == id

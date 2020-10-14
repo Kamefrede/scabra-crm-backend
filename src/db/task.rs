@@ -48,8 +48,7 @@ impl Task {
         if Self::is_task_convertable_to_calendar(new_task) {
             let mut calendar = state.calendar.lock().unwrap();
             let mut new_task: TaskEntity = (*new_task).clone();
-            new_task.calendar_uid = crate::calendar::get_last_event(&calendar)
-                .map_or(Some(0), |cal| Some(cal.uid.parse::<i32>().unwrap() + 1));
+            new_task.calendar_uid = Some(crate::calendar::get_next_available_uid(&calendar));
             let insertion_result = diesel::insert_into(task)
                 .values(&new_task)
                 .execute(conn)
@@ -67,7 +66,6 @@ impl Task {
                 .is_ok()
         }
     }
-    //TODO: Refresh values after inserting on frontend
 
     pub fn update(
         updated_task: &TaskEntity,
@@ -86,9 +84,15 @@ impl Task {
                     );
                 }
             } else {
+                //This is a guarantee since this function is only ever called with an explicit is_some() check on find_by_id()
+                let outdated_task = Self::find_by_id(task_id, conn).unwrap();
                 let mut new_task = (*updated_task).clone();
-                new_task.calendar_uid = crate::calendar::get_last_event(&calendar)
-                    .map_or(Some(0), |cal| Some(cal.uid.parse::<i32>().unwrap() + 1));
+                if outdated_task.calendar_uid.is_some() {
+                    new_task.calendar_uid = outdated_task.calendar_uid;
+                } else {
+                    new_task.calendar_uid =
+                        Some(crate::calendar::get_next_available_uid(&calendar));
+                }
                 if let Some(event) = Self::calendar_event_from_task(&new_task) {
                     crate::calendar::replace_event_in_calendar(
                         new_task.calendar_uid.unwrap(),
@@ -105,14 +109,13 @@ impl Task {
     }
 
     pub fn delete(task_id: i32, conn: &PgConnection, state: &State<CalendarState>) -> bool {
-        if let Some(to_be_deleted) = Self::find_by_id(task_id, conn) {
-            let mut calendar = state.calendar.lock().unwrap();
-            if (to_be_deleted.sync_with_calendar.is_some()
-                && to_be_deleted.sync_with_calendar.unwrap())
-                && (to_be_deleted.calendar_uid.is_some())
-            {
-                crate::calendar::delete_by_id(to_be_deleted.calendar_uid.unwrap(), &mut calendar);
-            }
+        //Again, this is a guarantee since delete is always called with a previous check to find_by_id()
+        let to_be_deleted = Self::find_by_id(task_id, conn).unwrap();
+        let mut calendar = state.calendar.lock().unwrap();
+        if (to_be_deleted.sync_with_calendar.is_some() && to_be_deleted.sync_with_calendar.unwrap())
+            && (to_be_deleted.calendar_uid.is_some())
+        {
+            crate::calendar::delete_by_id(to_be_deleted.calendar_uid.unwrap(), &mut calendar);
         }
         diesel::delete(task.find(task_id)).execute(conn).is_ok()
     }

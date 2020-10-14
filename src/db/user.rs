@@ -32,22 +32,21 @@ impl User {
             )
     }
 
-    pub fn login(user_form: &LoginInfo, conn: &PgConnection) -> (Option<UserAuthToken>, String) {
-        Self::get_user_by_email(&*user_form.email, conn).map_or(
-            (None, String::from("")),
-            |db_user| {
-                if db_user.hashed_password.is_empty()
-                    && !verify_password(&*user_form.hashed_password, &*db_user.hashed_password)
-                {
-                    return (None, String::from(""));
-                }
-                let login_session_str = Self::generate_login_session();
-                let auth_token =
-                    UserAuthToken::generate_auth_token(db_user.id, &*login_session_str);
-                Self::update_login_session(&auth_token, conn);
-                (Some(auth_token), db_user.email)
-            },
-        )
+    pub fn login(
+        user_form: &LoginInfo,
+        conn: &PgConnection,
+    ) -> (Option<UserAuthToken>, Option<Self>) {
+        Self::get_user_by_email(&*user_form.email, conn).map_or((None, None), |db_user| {
+            if db_user.hashed_password.is_empty()
+                && !verify_password(&*user_form.hashed_password, &*db_user.hashed_password)
+            {
+                return (None, None);
+            }
+            let login_session_str = Self::generate_login_session();
+            let auth_token = UserAuthToken::generate_auth_token(db_user.id, &*login_session_str);
+            Self::update_login_session(&auth_token, conn);
+            (Some(auth_token), Some(db_user))
+        })
     }
 
     pub fn get_user_by_id(id_user: i32, conn: &PgConnection) -> Option<Self> {
