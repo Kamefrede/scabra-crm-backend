@@ -1,4 +1,4 @@
-#![warn(clippy::all, clippy::pedantic, clippy::nursery)]
+#![warn(clippy::all, clippy::pedantic, clippy::nursery, clippy::cargo)]
 #![allow(clippy::module_name_repetitions, clippy::map_err_ignore)]
 #![feature(proc_macro_hygiene, decl_macro, const_option)]
 #[macro_use]

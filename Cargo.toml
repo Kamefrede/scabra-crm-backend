@@ -3,6 +3,11 @@ name = "scabra-crm-backend"
 version = "0.2.0"
 authors = ["Kamefrede <kamefrede@gmail.com>"]
 edition = "2018"
+repository = "https://github.com/Kamefrede/scabra-crm-backend"
+description = "A simple CRM backend done with Rocket and Diesel(Postgres)"
+license= "MIT OR Apache-2.0"
+keywords = ["crm", "scabra", "backend", "diesel", "rocket"]
+categories = ["web-programming"]
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
