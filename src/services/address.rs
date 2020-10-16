@@ -1,7 +1,6 @@
 use crate::db::CrmDbConn;
 use crate::models::address::{Address, AddressEntity};
 use crate::models::response::ResponseWithStatus;
-use crate::models::Query;
 
 pub fn find_all(conn: &CrmDbConn) -> ResponseWithStatus {
     ResponseWithStatus::ok_with_data(Address::find_all(&**conn))
@@ -22,10 +21,6 @@ pub fn insert(address: &AddressEntity, conn: &CrmDbConn) -> ResponseWithStatus {
     } else {
         ResponseWithStatus::error_insert()
     }
-}
-
-pub fn query(query: &Query, conn: &CrmDbConn) -> ResponseWithStatus {
-    ResponseWithStatus::ok_with_data(Address::query(query, &**conn))
 }
 
 pub fn update(id: i32, new_address: &AddressEntity, conn: &CrmDbConn) -> ResponseWithStatus {

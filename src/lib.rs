@@ -9,9 +9,6 @@ extern crate crypto;
 extern crate rocket_contrib;
 #[macro_use]
 extern crate serde_json;
-extern crate strum;
-#[macro_use]
-extern crate strum_macros;
 #[macro_use]
 extern crate log;
 extern crate anyhow;
@@ -61,18 +58,15 @@ pub fn launch() -> rocket::Rocket {
                 routes::person::insert,
                 routes::person::update,
                 routes::person::delete,
-                routes::person::query,
                 routes::person::find_all_employees_by_company,
                 routes::person::find_all,
                 routes::address::find_by_id,
-                routes::address::query,
                 routes::address::insert,
                 routes::address::update,
                 routes::address::delete,
                 routes::address::find_all,
                 routes::client::find_all,
                 routes::client::find_by_id,
-                routes::client::query,
                 routes::client::insert,
                 routes::client::update,
                 routes::client::delete,
@@ -83,12 +77,10 @@ pub fn launch() -> rocket::Rocket {
                 routes::calendar::get_last_uid,
                 routes::calendar::get_last_event,
                 routes::calendar::get_event_by_id,
-                routes::calendar::query,
                 routes::task::find_all,
                 routes::task::find_by_id,
                 routes::task::find_all_client_tasks,
                 routes::task::find_all_user_tasks,
-                routes::task::query,
                 routes::task::insert,
                 routes::task::update,
                 routes::task::delete,

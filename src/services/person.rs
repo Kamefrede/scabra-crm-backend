@@ -1,7 +1,6 @@
 use crate::db::CrmDbConn;
 use crate::models::person::{Person, PersonEntity};
 use crate::models::response::ResponseWithStatus;
-use crate::models::Query;
 
 pub fn find_all(conn: &CrmDbConn) -> ResponseWithStatus {
     ResponseWithStatus::ok_with_data(Person::find_all(&**conn))
@@ -27,10 +26,6 @@ pub fn find_by_name(name: &str, conn: &CrmDbConn) -> ResponseWithStatus {
 
 pub fn find_all_employees_by_company(company_id: i32, conn: &CrmDbConn) -> ResponseWithStatus {
     ResponseWithStatus::ok_with_data(Person::find_all_employees_by_company(company_id, &**conn))
-}
-
-pub fn query(query: &Query, conn: &CrmDbConn) -> ResponseWithStatus {
-    ResponseWithStatus::ok_with_data(Person::query(query, &**conn))
 }
 
 pub fn insert(person: &PersonEntity, conn: &CrmDbConn) -> ResponseWithStatus {

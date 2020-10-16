@@ -38,11 +38,3 @@ pub struct TaskEntity {
     pub location: Option<String>,
     pub calendar_uid: Option<i32>,
 }
-
-#[derive(Serialize, Deserialize, EnumString, Display)]
-pub enum TaskQueryType {
-    #[strum(serialize = "description")]
-    Description,
-    #[strum(serialize = "status")]
-    Status,
-}

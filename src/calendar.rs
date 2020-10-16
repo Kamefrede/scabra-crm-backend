@@ -1,5 +1,3 @@
-use crate::models::calendar::EventQueryType;
-use crate::models::Query;
 use crate::proxies::event_proxy::EventJson;
 use std::env;
 use web_ical::{Calendar, Events};
@@ -34,54 +32,6 @@ pub fn add_event(calendar: &mut Calendar, event_json: &EventJson) {
     let event = event_json.to_event();
     calendar.add_event(event);
     write_calendar_from_env(calendar);
-}
-
-//Future TODO: See if it's needed to add timestamp stuff
-//Future TODO: implement fuzzy searching
-pub fn query(query: &Query, calendar: &Calendar) -> Vec<Events> {
-    match (*query.query_type).to_string() {
-        x if x == EventQueryType::Status.to_string() => calendar
-            .events
-            .iter()
-            .filter(|event| event.status == query.query_text)
-            .cloned()
-            .collect(),
-        x if x == EventQueryType::Description.to_string() => calendar
-            .events
-            .iter()
-            .filter(|event| event.status == query.query_text)
-            .cloned()
-            .collect(),
-        x if x == EventQueryType::Location.to_string() => calendar
-            .events
-            .iter()
-            .filter(|event| event.status == query.query_text)
-            .cloned()
-            .collect(),
-        x if x == EventQueryType::Summary.to_string() => calendar
-            .events
-            .iter()
-            .filter(|event| event.status == query.query_text)
-            .cloned()
-            .collect(),
-        x if x == EventQueryType::Transp.to_string() => calendar
-            .events
-            .iter()
-            .filter(|event| event.status == query.query_text)
-            .cloned()
-            .collect(),
-        x if x == EventQueryType::Sequence.to_string()
-            && query.query_text.parse::<u32>().is_ok() =>
-        {
-            calendar
-                .events
-                .iter()
-                .filter(|event| event.sequence == query.query_text.parse::<u32>().unwrap())
-                .cloned()
-                .collect()
-        }
-        _ => vec![],
-    }
 }
 
 pub fn get_last_event<'a>(calendar: &'a Calendar) -> Option<&'a Events> {

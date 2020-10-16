@@ -27,13 +27,3 @@ pub struct PersonEntity {
     pub client_id: Option<i32>,
     pub email: Option<String>,
 }
-
-#[derive(Deserialize, Serialize, EnumString, Display)]
-pub enum PersonQueryType {
-    #[strum(serialize = "role")]
-    Role,
-    #[strum(serialize = "phone_number")]
-    PhoneNumber,
-    #[strum(serialize = "address_id")]
-    AddressId,
-}

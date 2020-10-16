@@ -1,6 +1,5 @@
 use crate::schema::address;
 use serde::{Deserialize, Serialize};
-use strum_macros::EnumString;
 
 #[derive(Deserialize, Serialize, Insertable, Queryable, Identifiable)]
 #[table_name = "address"]
@@ -23,20 +22,4 @@ pub struct AddressEntity {
     pub postal_code: String,
     pub country: String,
     pub address_type: String,
-}
-
-#[derive(Deserialize, Serialize, EnumString, Display)]
-pub enum AddressQueryType {
-    #[strum(serialize = "name")]
-    Name,
-    #[strum(serialize = "address_line")]
-    AddressLine,
-    #[strum(serialize = "city")]
-    City,
-    #[strum(serialize = "postal_code")]
-    PostalCode,
-    #[strum(serialize = "country")]
-    Country,
-    #[strum(serialize = "address_type")]
-    AddressType,
 }

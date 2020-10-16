@@ -1,7 +1,6 @@
 use super::{rocket_status_from_response, CustomJsonResponse, JsonWebToken};
 use crate::db::CrmDbConn;
 use crate::models::person::PersonEntity;
-use crate::models::Query;
 use crate::services::person;
 use rocket::http::RawStr;
 use rocket_contrib::json::Json;
@@ -43,15 +42,6 @@ pub fn find_all_employees_by_company(
         return e;
     }
     let response = person::find_all_employees_by_company(id, &conn);
-    rocket_status_from_response(response)
-}
-
-#[post("/person/query", format = "json", data = "<query>")]
-pub fn query(query: Json<Query>, token: JsonWebToken, conn: CrmDbConn) -> CustomJsonResponse {
-    if let Err(e) = token {
-        return e;
-    }
-    let response = person::query(&query.0, &conn);
     rocket_status_from_response(response)
 }
 

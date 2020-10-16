@@ -2,7 +2,6 @@ use crate::db::CrmDbConn;
 use crate::models::calendar::CalendarState;
 use crate::models::response::ResponseWithStatus;
 use crate::models::task::{Task, TaskEntity};
-use crate::models::Query;
 use rocket::State;
 
 pub fn find_all(conn: &CrmDbConn) -> ResponseWithStatus {
@@ -36,10 +35,6 @@ pub fn insert(
     } else {
         ResponseWithStatus::error_insert()
     }
-}
-
-pub fn query(query: &Query, conn: &CrmDbConn) -> ResponseWithStatus {
-    ResponseWithStatus::ok_with_data(Task::query(query, &**conn))
 }
 
 pub fn update(

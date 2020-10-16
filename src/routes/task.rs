@@ -2,7 +2,6 @@ use super::{rocket_status_from_response, CustomJsonResponse, JsonWebToken};
 use crate::db::CrmDbConn;
 use crate::models::calendar::CalendarState;
 use crate::models::task::TaskEntity;
-use crate::models::Query;
 use crate::services::task;
 use rocket::State;
 use rocket_contrib::json::Json;
@@ -40,16 +39,6 @@ pub fn find_all_user_tasks(id: i32, token: JsonWebToken, conn: CrmDbConn) -> Cus
         return e;
     }
     let response = task::find_all_user_tasks(id, &conn);
-    rocket_status_from_response(response)
-}
-
-//TODO: Implement fuzzy searching
-#[post("/task/query", format = "json", data = "<query>")]
-pub fn query(query: Json<Query>, token: JsonWebToken, conn: CrmDbConn) -> CustomJsonResponse {
-    if let Err(e) = token {
-        return e;
-    }
-    let response = task::query(&query.0, &conn);
     rocket_status_from_response(response)
 }
 

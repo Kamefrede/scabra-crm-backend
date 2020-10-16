@@ -1,8 +1,5 @@
-use crate::models::address::{Address, AddressEntity, AddressQueryType};
-use crate::models::Query;
-use crate::schema::address::dsl::{
-    address, address_line, address_type, city, country, id, name, postal_code,
-};
+use crate::models::address::{Address, AddressEntity};
+use crate::schema::address::dsl::{address, id};
 use diesel::prelude::*;
 
 impl Address {
@@ -19,43 +16,6 @@ impl Address {
             .values(new_address)
             .execute(conn)
             .is_ok()
-    }
-
-    //TODO: Fuzzy searching from DB
-    pub fn query(query: &Query, conn: &PgConnection) -> Vec<Self> {
-        match (*query.query_type).to_string() {
-            x if x == AddressQueryType::Name.to_string() => address
-                .filter(name.eq(&query.query_text))
-                .order(id.asc())
-                .load::<Self>(conn)
-                .unwrap(),
-            x if x == AddressQueryType::AddressLine.to_string() => address
-                .filter(address_line.eq(&query.query_text))
-                .order(id.asc())
-                .load::<Self>(conn)
-                .unwrap(),
-            x if x == AddressQueryType::City.to_string() => address
-                .filter(city.eq(&query.query_text))
-                .order(id.asc())
-                .load::<Self>(conn)
-                .unwrap(),
-            x if x == AddressQueryType::PostalCode.to_string() => address
-                .filter(postal_code.eq(&query.query_text))
-                .order(id.asc())
-                .load::<Self>(conn)
-                .unwrap(),
-            x if x == AddressQueryType::Country.to_string() => address
-                .filter(country.eq(&query.query_text))
-                .order(id.asc())
-                .load::<Self>(conn)
-                .unwrap(),
-            x if x == AddressQueryType::AddressType.to_string() => address
-                .filter(address_type.eq(&query.query_text))
-                .order(id.asc())
-                .load::<Self>(conn)
-                .unwrap(),
-            _ => return vec![],
-        }
     }
 
     pub fn update(address_id: i32, updated_address: &AddressEntity, conn: &PgConnection) -> bool {

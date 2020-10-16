@@ -1,7 +1,6 @@
 use super::{rocket_status_from_response, CustomJsonResponse, JsonWebToken};
 use crate::db::CrmDbConn;
 use crate::models::address::AddressEntity;
-use crate::models::Query;
 use crate::services::address;
 use rocket_contrib::json::Json;
 
@@ -20,15 +19,6 @@ pub fn find_by_id(id: i32, token: JsonWebToken, conn: CrmDbConn) -> CustomJsonRe
         return e;
     }
     let response = address::find_by_id(id, &conn);
-    rocket_status_from_response(response)
-}
-
-#[post("/address/query", format = "json", data = "<query>")]
-pub fn query(query: Json<Query>, token: JsonWebToken, conn: CrmDbConn) -> CustomJsonResponse {
-    if let Err(e) = token {
-        return e;
-    }
-    let response = address::query(&query.0, &conn);
     rocket_status_from_response(response)
 }
 

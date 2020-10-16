@@ -1,7 +1,6 @@
 use crate::calendar;
 use crate::models::calendar::CalendarState;
 use crate::models::response::ResponseWithStatus;
-use crate::models::Query;
 use crate::proxies::event_proxy::EventJson;
 use rocket::State;
 
@@ -59,11 +58,6 @@ pub fn get_latest_event(calendar_state: &State<CalendarState>) -> ResponseWithSt
         )),
         ResponseWithStatus::ok_with_data,
     )
-}
-
-pub fn query(query: &Query, calendar_state: &State<CalendarState>) -> ResponseWithStatus {
-    let calendar = calendar_state.calendar.lock().unwrap();
-    ResponseWithStatus::ok_with_data(calendar::query(query, &calendar))
 }
 
 pub fn delete(id: i32, calendar_state: &State<CalendarState>) -> ResponseWithStatus {

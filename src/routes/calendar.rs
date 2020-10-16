@@ -1,5 +1,4 @@
 use crate::models::calendar::CalendarState;
-use crate::models::Query;
 use crate::proxies::event_proxy::EventJson;
 use crate::routes::{rocket_status_from_response, CustomJsonResponse, JsonWebToken};
 use crate::services::calendar;
@@ -28,19 +27,6 @@ pub fn get_event_by_id(
         return e;
     }
     let response = calendar::find_by_id(id, &calendar_state);
-    rocket_status_from_response(response)
-}
-
-#[post("/calendar/query", format = "json", data = "<query>")]
-pub fn query(
-    query: Json<Query>,
-    token: JsonWebToken,
-    calendar_state: State<CalendarState>,
-) -> CustomJsonResponse {
-    if let Err(e) = token {
-        return e;
-    }
-    let response = calendar::query(&query.0, &calendar_state);
     rocket_status_from_response(response)
 }
 

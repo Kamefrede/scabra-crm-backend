@@ -23,15 +23,3 @@ pub struct ClientEntity {
     pub email: Option<String>,
     pub phone_number: Option<String>,
 }
-
-#[derive(Serialize, Deserialize, EnumString, Display)]
-pub enum ClientQueryType {
-    #[strum(serialize = "nif")]
-    Nif,
-    #[strum(serialize = "address_id")]
-    AddressId,
-    #[strum(serialize = "client_type")]
-    ClientType,
-    #[strum(serialize = "name")]
-    Name,
-}

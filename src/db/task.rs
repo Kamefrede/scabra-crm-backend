@@ -1,9 +1,8 @@
 use crate::models::calendar::CalendarState;
-use crate::models::task::{Task, TaskEntity, TaskQueryType};
-use crate::models::Query;
+use crate::models::task::{Task, TaskEntity};
 use crate::proxies::event_proxy::EventJson;
 use crate::proxies::naive_date_form_proxy::NaiveDateForm;
-use crate::schema::task::dsl::{client_id, description, id, status, task, user_id};
+use crate::schema::task::dsl::{client_id, id, task, user_id};
 use diesel::prelude::*;
 use rocket::State;
 
@@ -24,20 +23,6 @@ impl Task {
         task.filter(client_id.eq(id_client))
             .load::<Self>(conn)
             .unwrap()
-    }
-
-    pub fn query(query: &Query, conn: &PgConnection) -> Vec<Self> {
-        match (*query.query_type).to_string() {
-            x if x == TaskQueryType::Description.to_string() => task
-                .filter(description.eq(&query.query_text))
-                .load::<Self>(conn)
-                .unwrap(),
-            x if x == TaskQueryType::Status.to_string() => task
-                .filter(status.eq(&query.query_text))
-                .load::<Self>(conn)
-                .unwrap(),
-            _ => vec![],
-        }
     }
 
     pub fn insert(
