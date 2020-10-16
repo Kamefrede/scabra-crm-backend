@@ -13,6 +13,7 @@ pub struct Person {
     pub role: Option<String>,
     pub address_id: Option<i32>,
     pub client_id: Option<i32>,
+    pub email: Option<String>,
 }
 
 #[derive(Serialize, Deserialize, Insertable, AsChangeset, FromForm)]
@@ -24,6 +25,7 @@ pub struct PersonEntity {
     pub role: Option<String>,
     pub address_id: Option<i32>,
     pub client_id: Option<i32>,
+    pub email: Option<String>,
 }
 
 #[derive(Deserialize, Serialize, EnumString, Display)]

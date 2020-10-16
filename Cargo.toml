@@ -1,55 +1,55 @@
 [package]
-name = "scabra-crm-backend"
-version = "0.2.0"
 authors = ["Kamefrede <kamefrede@gmail.com>"]
-edition = "2018"
-repository = "https://github.com/Kamefrede/scabra-crm-backend"
-description = "A simple CRM backend done with Rocket and Diesel(Postgres)"
-license= "MIT OR Apache-2.0"
-keywords = ["crm", "scabra", "backend", "diesel", "rocket"]
 categories = ["web-programming"]
-
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
-
-[profile.release]
-opt-level = 3
-
+description = "A simple CRM backend done with Rocket and Diesel(Postgres)"
+edition = "2018"
+keywords = ["crm", "scabra", "backend", "diesel", "rocket"]
+license = "MIT OR Apache-2.0"
+name = "scabra-crm-backend"
+repository = "https://github.com/Kamefrede/scabra-crm-backend"
+version = "0.2.0"
 [dependencies]
+anyhow = "1.0.32"
 dotenv = "0.15.0"
-pretty_env_logger = "0.3"
-log = "0.4"
-rust-crypto = "0.2.36"
 jsonwebtoken = "7.2.0"
+log = "0.4"
+pretty_env_logger = "0.3"
+rust-crypto = "0.2.36"
 serde_json = "1.0.57"
 strum = "0.19.2"
 strum_macros = "0.19.2"
-web_ical = {git = "https://github.com/Kamefrede/web_ical"}
-anyhow = "1.0.32"
 
 [dependencies.chrono]
-version = "0.4.18"
 features = ["serde", "rustc-serialize"]
+version = "0.4.18"
 
-[dependencies.uuid]
-version = "0.8.1"
-features = ["serde", "v4"]
+[dependencies.diesel]
+features = ["postgres", "chrono"]
+version = "1.4.5"
 
 [dependencies.postgres]
-version = "0.17.5"
 features = ["with-chrono-0_4"]
-
-[dependencies.serde]
-version = "1.0.115"
-features = ["derive"]
+version = "0.17.5"
 
 [dependencies.rocket]
 version = "0.4.5"
 
-[dependencies.diesel]
-version = "1.4.5"
-features = ["postgres", "chrono"]
-
 [dependencies.rocket_contrib]
-version = "0.4.5"
 default-features = false
 features = ["json", "diesel_postgres_pool", "serve"]
+version = "0.4.5"
+
+[dependencies.serde]
+features = ["derive"]
+version = "1.0.115"
+
+[dependencies.uuid]
+features = ["serde", "v4"]
+version = "0.8.1"
+
+[dependencies.web_ical]
+git = "https://github.com/Kamefrede/web_ical"
+
+[profile]
+[profile.release]
+opt-level = 3

@@ -4,20 +4,24 @@ use serde::{Deserialize, Serialize};
 #[derive(Serialize, Deserialize, Identifiable, Queryable, Insertable, AsChangeset, FromForm)]
 #[table_name = "client"]
 pub struct Client {
-    id: i32,
-    name: String,
-    address_id: i32,
-    client_type: String,
-    nif: String,
+    pub id: i32,
+    pub name: String,
+    pub address_id: i32,
+    pub client_type: String,
+    pub nif: String,
+    pub email: Option<String>,
+    pub phone_number: Option<String>,
 }
 
 #[derive(Serialize, Deserialize, Insertable, FromForm, AsChangeset)]
 #[table_name = "client"]
 pub struct ClientEntity {
-    name: String,
-    address_id: i32,
-    client_type: String,
-    nif: String,
+    pub name: String,
+    pub address_id: i32,
+    pub client_type: String,
+    pub nif: String,
+    pub email: Option<String>,
+    pub phone_number: Option<String>,
 }
 
 #[derive(Serialize, Deserialize, EnumString, Display)]

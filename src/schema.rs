@@ -17,6 +17,8 @@ table! {
         address_id -> Int4,
         client_type -> Varchar,
         nif -> Varchar,
+        email -> Nullable<Varchar>,
+        phone_number -> Nullable<Varchar>,
     }
 }
 
@@ -29,6 +31,7 @@ table! {
         role -> Nullable<Text>,
         address_id -> Nullable<Int4>,
         client_id -> Nullable<Int4>,
+        email -> Nullable<Varchar>,
     }
 }
 
