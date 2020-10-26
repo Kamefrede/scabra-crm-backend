@@ -21,7 +21,7 @@ pub fn signup(user: LoginInfo, conn: &CrmDbConn) -> ResponseWithStatus {
 pub fn login(login: &LoginInfo, conn: &CrmDbConn) -> ResponseWithStatus {
     if let (Some(result), Some(user)) = User::login(login, &**conn) {
         ResponseWithStatus::ok_message_with_data(
-            json!({ "token": generate_jwt_token(&result), "type": "Bearer", "user": user }),
+            json!({ "token": generate_jwt_token(&result), "type": "Bearer", "user": user, "meilisearch_api_key": User::get_meilisearch_api_key() }),
             String::from(MESSAGE_LOGIN_SUCCESS),
         )
     } else {

@@ -49,6 +49,13 @@ impl User {
         })
     }
 
+    pub fn get_meilisearch_api_key() -> Option<String> {
+        env::var("MEILISEARCH_API_KEY").map_or(None, |api_key| {
+            info!("Meilisearch API key not found in .env file");
+            Some(api_key)
+        })
+    }
+
     pub fn get_user_by_id(id_user: i32, conn: &PgConnection) -> Option<Self> {
         user.filter(id.eq(&id_user)).get_result::<Self>(conn).ok()
     }
